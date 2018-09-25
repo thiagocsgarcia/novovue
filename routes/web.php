@@ -18,8 +18,3 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::group(['prefix' => '/v1', 'namespace' => 
-        'Api\V1', 'as' => 'api.'], function () {
-            Route::resource('companies', 'CompaniesController', ['except' => ['create', 'edit']]);
-        });

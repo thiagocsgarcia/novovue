@@ -2,35 +2,37 @@
 <template>
     <div>
         <div class="form-group">
-            <router-link :to="{name: 'createCompany'}" class="btn btn-success">Create new company</router-link>
+            <router-link :to="{name: 'criarEmpresa'}" class="btn btn-success"><ion-icon name="add-circle"></ion-icon> Nova Empresa</router-link>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">Companies list</div>
+        <div class="col-md-12 panel panel-default">
+            <div class="panel-heading alert-dark"> <h4><ion-icon name="list-box"></ion-icon> Lista de empresas</h4></div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped" style='font-size:10px;'>
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Website</th>
+                        <th>Nome</th>
+                        <th>Endereço</th>
                         <th>Email</th>
-                        <th width="100">&nbsp;</th>
+                        <th>Telefone</th>
+                        <th width="100">Ações </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="company, index in companies">
-                        <td>{{ company.name }}</td>
-                        <td>{{ company.address }}</td>
-                        <td>{{ company.website }}</td>
-                        <td>{{ company.email }}</td>
+                    <tr v-for="empresa, index in empresas">
+                        <td>{{ empresa.nome_fantasia }}</td>
+                        <td>{{ empresa.endereco }}</td>
+                        <td>{{ empresa.email }}</td>
+                        <td>{{ empresa.telefone }}</td>
                         <td>
-                            <router-link :to="{name: 'editCompany', params: {id: company.id}}" class="btn btn-xs btn-default">
+                            <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-outline-warning">
                                 Edit
-                            </router-link>
+                            </router-link> 
+                        </td>
+                        <td>
                             <a href="#"
-                               class="btn btn-xs btn-danger"
-                               v-on:click="deleteEntry(company.id, index)">
+                               class="btn btn-outline-danger"
+                               v-on:click="deleteEntry(empresa.id, index)">
                                 Delete
                             </a>
                         </td>
@@ -46,14 +48,14 @@
     export default {
         data: function () {
             return {
-                companies: []
+                empresas: []
             }
         },
         mounted() {
             var app = this;
-            axios.get('/api/v1/companies')
+            axios.get('/api/v1/empresas')
                 .then(function (resp) {
-                    app.companies = resp.data;
+                    app.empresas = resp.data;
                 })
                 .catch(function (resp) {
                     console.log(resp);

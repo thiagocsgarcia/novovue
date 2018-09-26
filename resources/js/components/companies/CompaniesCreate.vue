@@ -10,32 +10,32 @@
             <div class="panel-body">
                 <form v-on:submit="saveForm()">
                     <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label class="control-label">Company name</label>
-                            <input type="text" v-model="empresa.nome_fantasia" class="form-control">
+                        <div class="col-xs-12 col-md-12 form-group">
+                            <label class="control-label">Nome Fantasia</label>
+                            <input type="text" v-model="empresa.nome_fantasia" class="form-control" size='200'>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company address</label>
-                            <input type="text" v-model="empresa.endereco" class="form-control">
+                            <label class="control-label">Endereço</label>
+                            <input type="text" v-model="empresa.endereco" class="form-control" style="width:100%;">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company website</label>
-                            <input type="text" v-model="empresa.email" class="form-control">
+                            <label class="control-label">Email</label>
+                            <input type="text" v-model="empresa.email" class="form-control" style="width:100%;">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company email</label>
-                            <input type="text" v-model="empresa.telefone" class="form-control">
+                            <label class="control-label">Telefone</label>
+                            <input type="text" v-model="empresa.telefone" class="form-control" style="width:100%;">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <button class="btn btn-success">Cadastrar</button>
+                            <button class="btn btn-success">Salvar</button>
                         </div>
                     </div>
                 </form>

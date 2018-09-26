@@ -6,36 +6,42 @@
         </div>
 
         <div class="col-md-12 panel panel-default">
-            <div class="panel-heading">Create new empresa</div>
+            <div class="panel-heading"><h4 class="alert-dark"> <ion-icon name="list-box"></ion-icon> Editar Empresa</h4></div>
             <div class="panel-body">
                 <form v-on:submit="saveForm()">
                     <div class="row">
                         <div class="col-xs-12 form-group">
+                            <label class="control-label">CNPJ</label>
+                            <input type="text" v-model="empresa.cnpj" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
                             <label class="control-label">Nome</label>
-                            <input type="text" v-model="empresa.nome_fantasia" class="form-control">
+                            <input type="text" v-model="empresa.nome_fantasia" class="form-control" size='120'>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company Endereco</label>
-                            <input type="text" v-model="empresa.endereco" class="form-control">
+                            <label class="control-label">Endereco</label>
+                            <input type="text" v-model="empresa.endereco" class="form-control" size='120'>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company Email</label>
-                            <input type="text" v-model="empresa.email" class="form-control">
+                            <label class="control-label">Email</label>
+                            <input type="text" v-model="empresa.email" class="form-control" size='100'>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label class="control-label">Company Telefone</label>
+                            <label class="control-label">Telefone</label>
                             <input type="text" v-model="empresa.telefone" class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <button class="btn btn-success">Create</button>
+                            <button class="btn btn-success">Salvar</button>
                         </div>
                     </div>
                 </form>
@@ -62,6 +68,7 @@
             return {
                 EmpresaId: null,
                 empresa: {
+                    cnpj: '',
                     nome_fantasia: '',
                     endereco: '',
                     email: '',

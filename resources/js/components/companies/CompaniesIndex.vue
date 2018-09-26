@@ -11,6 +11,7 @@
                 <table class="table table-dark table-bordered table-striped" style='font-size:10px;'>
                     <thead>
                     <tr>
+                        <th style="margin-left: auto;margin-right: auto;">CNPJ</th>
                         <th>Nome</th>
                         <th>Endereço</th>
                         <th>Email</th>
@@ -18,22 +19,21 @@
                         <th width="100">Ações </th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr v-for="empresa, index in empresas">
+                    <tbody>                        
+                    <tr v-for="empresa, index in empresas" >
+                        <td style="width:100%;">{{ empresa.cnpj }}</td>
                         <td>{{ empresa.nome_fantasia }}</td>
-                        <td>{{ empresa.endereco }}</td>
+                        <td>{{ empresa.endereco }} - {{empresa.cidade}}</td>
                         <td>{{ empresa.email }}</td>
                         <td>{{ empresa.telefone }}</td>
                         <td>
                             <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-outline-warning">
-                                Edit
+                                Editar
                             </router-link> 
                         </td>
                         <td>
-                            <a href="#"
-                               class="btn btn-outline-danger"
-                               v-on:click="deleteEntry(empresa.id, index)">
-                                Delete
+                            <a href="#" class="btn btn-outline-danger" v-on:click="deleteEntry(empresa.id, index)">
+                                Deletar
                             </a>
                         </td>
                     </tr>

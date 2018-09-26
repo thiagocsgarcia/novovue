@@ -50119,9 +50119,17 @@ var render = function() {
               "tbody",
               _vm._l(_vm.empresas, function(empresa, index) {
                 return _c("tr", [
+                  _c("td", { staticStyle: { width: "100%" } }, [
+                    _vm._v(_vm._s(empresa.cnpj))
+                  ]),
+                  _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(empresa.nome_fantasia))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(empresa.endereco))]),
+                  _c("td", [
+                    _vm._v(
+                      _vm._s(empresa.endereco) + " - " + _vm._s(empresa.cidade)
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(empresa.email))]),
                   _vm._v(" "),
@@ -50143,7 +50151,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                            Edit\n                        "
+                            "\n                            Editar\n                        "
                           )
                         ]
                       )
@@ -50165,7 +50173,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            Delete\n                        "
+                          "\n                            Deletar\n                        "
                         )
                       ]
                     )
@@ -50186,6 +50194,12 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c(
+          "th",
+          { staticStyle: { "margin-left": "auto", "margin-right": "auto" } },
+          [_vm._v("CNPJ")]
+        ),
+        _vm._v(" "),
         _c("th", [_vm._v("Nome")]),
         _vm._v(" "),
         _c("th", [_vm._v("Endereço")]),
@@ -50373,9 +50387,9 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
+              _c("div", { staticClass: "col-xs-12 col-md-12 form-group" }, [
                 _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Company name")
+                  _vm._v("Nome Fantasia")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -50388,7 +50402,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
+                  attrs: { type: "text", size: "200" },
                   domProps: { value: _vm.empresa.nome_fantasia },
                   on: {
                     input: function($event) {
@@ -50409,7 +50423,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-xs-12 form-group" }, [
                 _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Company address")
+                  _vm._v("Endereço")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -50422,6 +50436,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
+                  staticStyle: { width: "100%" },
                   attrs: { type: "text" },
                   domProps: { value: _vm.empresa.endereco },
                   on: {
@@ -50439,7 +50454,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-xs-12 form-group" }, [
                 _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Company website")
+                  _vm._v("Email")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -50452,6 +50467,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
+                  staticStyle: { width: "100%" },
                   attrs: { type: "text" },
                   domProps: { value: _vm.empresa.email },
                   on: {
@@ -50469,7 +50485,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-xs-12 form-group" }, [
                 _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Company email")
+                  _vm._v("Telefone")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -50482,6 +50498,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
+                  staticStyle: { width: "100%" },
                   attrs: { type: "text" },
                   domProps: { value: _vm.empresa.telefone },
                   on: {
@@ -50510,7 +50527,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-xs-12 form-group" }, [
-        _c("button", { staticClass: "btn btn-success" }, [_vm._v("Cadastrar")])
+        _c("button", { staticClass: "btn btn-success" }, [_vm._v("Salvar")])
       ])
     ])
   }
@@ -50623,6 +50640,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -50640,6 +50663,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             EmpresaId: null,
             empresa: {
+                cnpj: '',
                 nome_fantasia: '',
                 endereco: '',
                 email: '',
@@ -50686,7 +50710,15 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col-md-12 panel panel-default" }, [
       _c("div", { staticClass: "panel-heading" }, [
-        _vm._v("Create new empresa")
+        _c(
+          "h4",
+          { staticClass: "alert-dark" },
+          [
+            _c("ion-icon", { attrs: { name: "list-box" } }),
+            _vm._v(" Editar Empresa")
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "panel-body" }, [
@@ -50702,6 +50734,34 @@ var render = function() {
           [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-xs-12 form-group" }, [
+                _c("label", { staticClass: "control-label" }, [_vm._v("CNPJ")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.empresa.cnpj,
+                      expression: "empresa.cnpj"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: _vm.empresa.cnpj },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.empresa, "cnpj", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-xs-12 form-group" }, [
                 _c("label", { staticClass: "control-label" }, [_vm._v("Nome")]),
                 _vm._v(" "),
                 _c("input", {
@@ -50714,7 +50774,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
+                  attrs: { type: "text", size: "120" },
                   domProps: { value: _vm.empresa.nome_fantasia },
                   on: {
                     input: function($event) {
@@ -50735,7 +50795,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-xs-12 form-group" }, [
                 _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Company Endereco")
+                  _vm._v("Endereco")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -50748,7 +50808,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
+                  attrs: { type: "text", size: "120" },
                   domProps: { value: _vm.empresa.endereco },
                   on: {
                     input: function($event) {
@@ -50765,7 +50825,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-xs-12 form-group" }, [
                 _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Company Email")
+                  _vm._v("Email")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -50778,7 +50838,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text" },
+                  attrs: { type: "text", size: "100" },
                   domProps: { value: _vm.empresa.email },
                   on: {
                     input: function($event) {
@@ -50795,7 +50855,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-xs-12 form-group" }, [
                 _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Company Telefone")
+                  _vm._v("Telefone")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -50836,7 +50896,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-xs-12 form-group" }, [
-        _c("button", { staticClass: "btn btn-success" }, [_vm._v("Create")])
+        _c("button", { staticClass: "btn btn-success" }, [_vm._v("Salvar")])
       ])
     ])
   }

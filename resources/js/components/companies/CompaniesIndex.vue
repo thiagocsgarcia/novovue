@@ -11,12 +11,11 @@
             </div>
             <div class="panel-body">
                 <br>
-                <table class="table table-dark table-bordered table-striped">
+                <table id="tabela" class="table table-dark table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>CNPJ</th>
                         <th>Nome</th>
-                        <th>Endereço</th>
                         <th>Email</th>
                         <th>Telefone</th>
                         <th colspan="2">Ações</th>
@@ -26,7 +25,6 @@
                     <tr v-for="(empresa, index) in empresas" :key="index">
                         <td>{{ empresa.cnpj }}</td>
                         <td>{{ empresa.nome_fantasia }}</td>
-                        <td>{{ empresa.endereco }} - {{empresa.cidade}}</td>
                         <td>{{ empresa.email }}</td>
                         <td>{{ empresa.telefone }}</td>
                         <td>
@@ -82,3 +80,10 @@ export default {
     }
 }
 </script>
+
+<style>
+#tabela {
+    font-size: 11px;
+}
+</style>
+

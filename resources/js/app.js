@@ -16,6 +16,14 @@ import IndexEmpresa from './components/companies/CompaniesIndex.vue';
 import CriarEmpresa from './components/companies/CompaniesCreate.vue';
 import EditarEmpresa from './components/companies/CompaniesEdit.vue';
 
+import AddCircle from 'vue-ionicons/dist/md-add-circle'
+import Business from 'vue-ionicons/dist/md-business'
+import ListBox from 'vue-ionicons/dist/md-list-box'
+
+Vue.component('add-circle', AddCircle)
+Vue.component('business', Business)
+Vue.component('list-box', ListBox)
+
 const routes = [
     {
         path: '/',

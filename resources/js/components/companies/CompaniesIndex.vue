@@ -10,7 +10,11 @@
                 <h4><list-box w="25" h="25"/> Lista de Empresas</h4>
             </div>
             <div class="panel-body">
-                <br>
+                <div class="row">
+                    <div class="form-group col-xs-12 col-md-10 col offset-md-1">
+                        <input v-model="search" type="search" placeholder="Pesquisar..." class="form-control">
+                    </div>
+                </div>
                 <table id="tabela" class="table table-dark table-bordered table-striped">
                     <thead>
                     <tr>
@@ -22,18 +26,18 @@
                     </tr>
                     </thead>
                     <tbody>                        
-                    <tr v-for="(empresa, index) in empresas" :key="index">
+                    <tr v-for="(empresa, index) in filteredEmpresa" :key="index">
                         <td>{{ empresa.cnpj }}</td>
                         <td>{{ empresa.nome_fantasia }}</td>
                         <td>{{ empresa.email }}</td>
                         <td>{{ empresa.telefone }}</td>
                         <td>
-                            <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-outline-warning">
+                            <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-sm btn-outline-warning">
                                 Editar
                             </router-link> 
                         </td>
                         <td>
-                            <a href="#" class="btn btn-outline-danger" v-on:click="deleteEntry(empresa.id, index)">
+                            <a href="#" class="btn btn-sm btn-outline-danger" v-on:click="deleteEntry(empresa.id, index)">
                                 Deletar
                             </a>
                         </td>
@@ -49,7 +53,8 @@
 export default {
     data: function () {
         return {
-            empresas: []
+            empresas: [],
+            search: ''
         }
     },
     mounted() {
@@ -77,13 +82,18 @@ export default {
                 });
             }
         }
+    },
+    computed: {
+        filteredEmpresa() {
+            return this.empresas.filter(empresa => {
+                return empresa.nome_fantasia.match(this.search)
+            })
+        }
     }
 }
 </script>
 
 <style>
-#tabela {
-    font-size: 11px;
-}
+    #tabela { font-size: 10px; }
 </style>
 

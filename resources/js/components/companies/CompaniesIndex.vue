@@ -1,47 +1,50 @@
 
 <template>
-    <div>
-        <div class="col-xs-12 col-md-12 form-group">
-            <router-link :to="{name: 'criarEmpresa'}" class="btn btn-success">Nova Empresa</router-link>
+<div>
+    <div class="col-xs-12 col-md-12 panel panel-default">
+        <div class="panel-heading alert-dark">
+            <h3 class="text-center">Lista de Empresas</h3>
         </div>
-
-        <div class="col-xs-12 col-md-12 panel panel-default">
-            <div class="panel-heading alert-dark">
-                <h4>Lista de Empresas</h4>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="form-group col-xs-12 col-md-10 col offset-md-1">
-                        <input v-model="search" type="search" placeholder="Pesquisar..." class="form-control">
+        <div class="panel-body">
+            <div class="form-inline col-xs-10 col-md-10 col offset-1">
+                <router-link :to="{name: 'criarEmpresa'}" class="btn btn-success mb-2">Nova Empresa</router-link>
+                <div class="input-group col-xs-10 col-md-10 mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Pesquisar</div>
                     </div>
+                    <input v-model="search" type="search" placeholder="Pesquisar..." class="form-control">
                 </div>
-                <table id="tabela" class="table table-dark table-bordered table-striped" style="font-size: 10px">
-                    <thead>
+            </div>
+        
+            <table id="tabela" class="table table-dark table-bordered table-striped" style="font-size: 10px">
+                <thead>
                     <tr class="text-center">
                         <th>CNPJ</th>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Telefone</th>
+                        <th>Atualizado</th>
                         <th>Ações</th>
                     </tr>
-                    </thead>
-                    <tbody>                        
+                </thead>
+                <tbody>                        
                     <tr v-for="(empresa, index) in filtered" :key="index">
                         <td>{{ empresa.cnpj }}</td>
                         <td>{{ empresa.nome_fantasia }}</td>
                         <td>{{ empresa.email }}</td>
                         <td>{{ empresa.telefone }}</td>
+                        <td>{{ empresa.status }}</td>
                         <td class="text-center">
                             <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-sm btn-outline-warning">Editar</router-link>
                             <span>&nbsp; | &nbsp;</span>
                             <a href="#" v-on:click="remove(empresa.id, index)" class="btn btn-sm btn-outline-danger">Deletar</a>
                         </td>
                     </tr>
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 </template>
 
 <script>

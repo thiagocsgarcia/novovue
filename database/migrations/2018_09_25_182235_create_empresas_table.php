@@ -30,6 +30,7 @@ class CreateEmpresasTable extends Migration
             $table->string('cep')->nullable();
             $table->string('ramo_atividade')->nullable();
             $table->string('porte')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

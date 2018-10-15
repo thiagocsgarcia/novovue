@@ -9,6 +9,7 @@
                     <div class="panel-body table-responsive">
                         <router-view name="listaEmpresas"></router-view>
                         <router-view></router-view>
+                        <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
                     </div>
                 </div>
             </div>

@@ -9,8 +9,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import VueRouter from 'vue-router';
+import VueTheMask from 'vue-the-mask';
 
 window.Vue.use(VueRouter);
+window.Vue.use(VueTheMask);
 
 import IndexEmpresa from './components/companies/CompaniesIndex.vue';
 import CriarEmpresa from './components/companies/CompaniesCreate.vue';

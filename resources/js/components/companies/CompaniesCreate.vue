@@ -15,7 +15,12 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-4 form-group">
                         <label class="control-label">CNPJ</label>
-                        <input type="text" v-model="empresa.cnpj" class="form-control">
+                        <the-mask type="text" 
+                            :mask="['###.###.###-##', '##.###.###/####-##']"
+                            v-model="empresa.cnpj" 
+                            masked="true" 
+                            class="form-control" 
+                            placeholder="99.999.999/9999-99"></the-mask>
                     </div>
                     <div class="col-xs-12 col-md-4 form-group">
                         <label class="control-label">Inscrição Estadual</label>
@@ -27,21 +32,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col-md-12 form-group">
+                    <div class="col-xs-12 col-md-6 form-group">
                         <label class="control-label">Razão Social</label>
                         <input type="text" v-model="empresa.razao_social" class="form-control">
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-12 form-group">
+                    <div class="col-xs-12 col-md-6 form-group">
                         <label class="control-label">Nome Fantasia</label>
                         <input type="text" v-model="empresa.nome_fantasia" class="form-control">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-12 form-group">
-                        <label class="control-label">Contato</label>
-                        <input type="text" v-model="empresa.contato" class="form-control">
                     </div>
                 </div>
                 <div class="row">
@@ -54,8 +51,13 @@
                         <input type="text" v-model="empresa.ramo_atividade" class="form-control">
                     </div>
                 </div>
+                <hr>
                 <div class="row">
-                    <div class="col-xs-12 col-md-12 form-group">
+                    <div class="col-xs-12 col-md-6 form-group">
+                        <label class="control-label">Contato</label>
+                        <input type="text" v-model="empresa.contato" class="form-control">
+                    </div>
+                    <div class="col-xs-12 col-md-6 form-group">
                         <label class="control-label">E-mail</label>
                         <input type="text" v-model="empresa.email" class="form-control">
                     </div>
@@ -77,17 +79,32 @@
                     </div>
                     <div class="col-xs-12 col-md-4 form-group">
                         <label class="control-label">CEP</label>
-                        <input type="text" v-model="empresa.cep" class="form-control">
+                        <the-mask type="text" 
+                            mask="#####-###"
+                            v-model="empresa.cep" 
+                            masked="true" 
+                            class="form-control" 
+                            placeholder="99999-999"></the-mask>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-6 form-group">
                         <label class="control-label">Telefone</label>
-                        <input type="text" v-model="empresa.telefone" class="form-control">
+                        <the-mask type="text" 
+                            :mask="['(##) ####-####', '(##) #####-####']"
+                            v-model="empresa.telefone" 
+                            masked="true" 
+                            class="form-control" 
+                            placeholder="(99) 9999-9999"></the-mask>
                     </div>
                     <div class="col-xs-12 col-md-6 form-group">
                         <label class="control-label">Celular</label>
-                        <input type="text" v-model="empresa.celular" class="form-control">
+                        <the-mask type="text" 
+                            :mask="['(##) ####-####', '(##) #####-####']"
+                            v-model="empresa.celular" 
+                            masked="true" 
+                            class="form-control" 
+                            placeholder="(99) 99999-9999"></the-mask>
                     </div>
                 </div>
                 <div class="row">

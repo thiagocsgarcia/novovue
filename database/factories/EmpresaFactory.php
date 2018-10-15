@@ -4,6 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Empresa::class, function (Faker $faker) {
     return [
+        'status' => 0,
         'nome_fantasia' => $faker->firstName,
         'razao_social' => $faker->lastName,
         'cnpj' => $faker->numerify('##.###.###/####-##'),

@@ -14,25 +14,15 @@ window.Vue.use(VueRouter);
 
 import IndexEmpresa from './components/companies/CompaniesIndex.vue';
 import CriarEmpresa from './components/companies/CompaniesCreate.vue';
+import DetalheEmpresa from './components/companies/CompaniesView.vue';
 import EditarEmpresa from './components/companies/CompaniesEdit.vue';
 
-import AddCircle from 'vue-ionicons/dist/md-add-circle'
-import Business from 'vue-ionicons/dist/md-business'
-import ListBox from 'vue-ionicons/dist/md-list-box'
-
-Vue.component('add-circle', AddCircle)
-Vue.component('business', Business)
-Vue.component('list-box', ListBox)
-
 const routes = [
-    {
-        path: '/',
-        components: {
-            companiesIndex: IndexEmpresa
-        }
-    },
-    { path: '/admin/companies/create', component: CriarEmpresa, name: 'criarEmpresa' },
-    { path: '/admin/companies/edit/:id', component: EditarEmpresa, name: 'editarEmpresa' },
+    { path: '/', redirect: {name: 'listaEmpresas'} },
+    { path: '/admin/empresas', component: IndexEmpresa, name: 'listaEmpresas' },
+    { path: 'admin/empresas/:id', component: DetalheEmpresa, name:'detalheEmpresa'},
+    { path: '/admin/empresas/cadastro', component: CriarEmpresa, name: 'criarEmpresa' },
+    { path: '/admin/empresas/:id/editar/', component: EditarEmpresa, name: 'editarEmpresa' },
 ]
 
 const router = new VueRouter({ routes })

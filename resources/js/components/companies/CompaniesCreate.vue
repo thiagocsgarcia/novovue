@@ -2,7 +2,7 @@
 <template>
 <div>
     <div class="form-group">
-        <router-link to="/" class="btn btn-lg btn-default">Back</router-link>
+        <router-link :to="{name: 'listaEmpresas'}" class="btn btn-lg btn-default">Voltar</router-link>
     </div>
 
     <div class="col-xs-12 col-md-12 panel panel-default">

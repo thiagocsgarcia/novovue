@@ -1,6 +1,7 @@
 
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
+window.swal = require('sweetalert');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -23,7 +24,7 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = `http://10.171.2.18/empresas`
+//window.axios.defaults.baseURL = `http://10.171.2.18/empresas`
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

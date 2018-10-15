@@ -15,10 +15,9 @@
                         <input v-model="search" type="search" placeholder="Pesquisar..." class="form-control">
                     </div>
                 </div>
-                <table id="tabela" class="table table-dark table-bordered table-striped">
+                <table id="tabela" class="table table-dark table-bordered table-striped" style="font-size: 10px">
                     <thead>
                     <tr class="text-center">
-                        <th>#</th>
                         <th>CNPJ</th>
                         <th>Nome</th>
                         <th>Email</th>
@@ -28,7 +27,6 @@
                     </thead>
                     <tbody>                        
                     <tr v-for="(empresa, index) in filtered" :key="index">
-                        <td>{{ index + 1 }}</td>
                         <td>{{ empresa.cnpj }}</td>
                         <td>{{ empresa.nome_fantasia }}</td>
                         <td>{{ empresa.email }}</td>
@@ -52,37 +50,26 @@ export default {
         return {
             column: 1,
             empresas: [],
-            order: 'asc',
+            order: 1,
             search: '',
         }
     },
     mounted() {
-        this.fetchData()
+        this.loadData()
     },
     computed: {
         filtered() {
-            return this.empresas.filter(e => {
-                localStorage.setItem("search", this.search)
-
-                return e.cnpj.match(this.search) || 
-                       e.telefone.match(this.search) || 
-                       e.nome_fantasia.toLowerCase().match(this.search.toLowerCase()) || 
-                       e.email.toLowerCase().match(this.search.toLowerCase())
-            })
-        },
-        ordered() {
-            localStorage.setItem("column", this.column)
-            localStorage.setItem("order", this.order)
+            return this.filterData()
         }
     },
     methods: {
-        fetchData() {
+        loadData() {
             axios.get('/api/v1/empresas')
             .then(resp => {
-                this.column = localStorage.getItem("column")
+                this.column   = localStorage.getItem("column")
                 this.empresas = resp.data
-                this.order = localStorage.getItem("order")
-                this.search = localStorage.getItem("search")
+                this.order    = localStorage.getItem("order")
+                this.search   = localStorage.getItem("search")
             })
             .catch(resp => { 
                 swal({
@@ -90,6 +77,12 @@ export default {
                     text: resp,
                     icon: "error",
                 })
+            })
+        },
+        filterData() {
+            return this.empresas.filter(empresa => {
+                localStorage.setItem("search", this.search)
+                return empresa.cnpj.match(this.search) || empresa.nome_fantasia.toLowerCase().match(this.search.toLowerCase())
             })
         },
         remove(id, item) {

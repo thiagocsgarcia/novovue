@@ -133,8 +133,11 @@ export default {
                 app.$router.push({path: '/'});
             })
             .catch(function (resp) {
-                console.log(resp)
-                alert("Não foi possivel cadastrar essa empresa.")
+                swal({
+                    title: "Não foi possivel realizar o cadastro.",
+                    text: resp,
+                    icon: "error",
+                })
             });
         }
     }

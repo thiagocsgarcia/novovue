@@ -110,7 +110,11 @@
                     app.empresa = resp.data;
                 })
                 .catch(function () {
-                    alert("Não foi possivel encontrar empresa selecionada.")
+                    swal({
+                        title: "Não foi possivel encontrar empresa selecionada.",
+                        text: resp,
+                        icon: "error",
+                    })
                 });
         },
         data: function () {
@@ -128,8 +132,11 @@
                         app.$router.replace('/');
                     })
                     .catch(function (resp) {
-                        console.log(resp);
-                        alert("Não foi possivel salvar as alterações.");
+                        swal({
+                            title: "Não foi possivel salvar as alterações.",
+                            text: resp,
+                            icon: "error",
+                        })
                     });
             }
         }

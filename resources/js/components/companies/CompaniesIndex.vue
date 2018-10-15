@@ -35,7 +35,7 @@
                         <td>{{ empresa.telefone }}</td>
                         <td class="text-center">
                             <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-sm btn-outline-warning">Editar</router-link> 
-                            <a href="#" v-on:click="remove(empresa.id)" class="btn btn-sm btn-outline-danger">Deletar</a>
+                            <a href="#" v-on:click="remove(empresa.id, index)" class="btn btn-sm btn-outline-danger">Deletar</a>
                         </td>
                     </tr>
                     </tbody>
@@ -91,21 +91,24 @@ export default {
                 })
             })
         },
-        remove(id) {
+        remove(id, item) {
             swal({
                 title: "Atenção",
                 text: "Após excluído as informações não poderão ser recuperadas. Deseja realmente excluir?",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
-            }).then(remove => {
-                if (remove) {
+            })
+            .then(del => {
+                if (del) {
                     axios.delete('/api/v1/empresas/' + id)
                     .then(resp => {
                         swal({
                             text: "Exclusão realizada com sucesso!",
                             icon: "success",
                         })
+                        this.empresas.splice(item, 1)
+                        this.$router.go(this.$router.currentRoute)
                     })
                     .catch(resp => {
                         swal({
@@ -115,13 +118,6 @@ export default {
                         })
                     })
                 }
-            })
-            .catch(remove => {
-                swal({
-                    title: "Falha na exclusão",
-                    text: remove,
-                    icon: "error",
-                })
             })
         }
     }

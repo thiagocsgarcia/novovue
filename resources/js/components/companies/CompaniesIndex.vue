@@ -34,7 +34,8 @@
                         <td>{{ empresa.email }}</td>
                         <td>{{ empresa.telefone }}</td>
                         <td class="text-center">
-                            <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-sm btn-outline-warning">Editar</router-link> 
+                            <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-sm btn-outline-warning">Editar</router-link>
+                            <span>&nbsp; | &nbsp;</span>
                             <a href="#" v-on:click="remove(empresa.id, index)" class="btn btn-sm btn-outline-danger">Deletar</a>
                         </td>
                     </tr>

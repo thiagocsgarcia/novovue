@@ -12,7 +12,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Pesquisar</div>
                     </div>
-                    <input v-model="search" @keyup="filterData" type="search" placeholder="Pesquisar..." class="form-control">
+                    <input v-model="search" @keyup="filterData()" type="search" placeholder="Pesquisar..." class="form-control">
                 </div>
             </div>
         
@@ -20,7 +20,7 @@
                 <thead>
                     <tr class="text-center">
                         <th @click="orderData('cnpj')" class="order">CNPJ</th>
-                        <th @click="orderData('empresa')" class="order">Empresa</th>
+                        <th @click="orderData('empresa')" class="order">Nome Fantasia</th>
                         <th @click="orderData('email')" class="order">Email</th>
                         <th @click="orderData('telefone')" class="order">Telefone</th>
                         <th @click="orderData('status')" class="order">Atualizado</th>
@@ -44,7 +44,7 @@
                         <td class="text-center">
                             <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-sm btn-outline-warning">Editar</router-link>
                             <span>&nbsp; | &nbsp;</span>
-                            <a href="#" v-on:click="remove(empresa.id, index)" class="btn btn-sm btn-outline-danger">Deletar</a>
+                            <a href="#" v-on:click="removeData(empresa.id, index)" class="btn btn-sm btn-outline-danger">Deletar</a>
                         </td>
                     </tr>
                 </tbody>
@@ -56,9 +56,17 @@
 
 <script>
 export default {
+    computed: {
+        filtered() {
+            this.column = window.localStorage.getItem("column")
+            this.order = window.localStorage.getItem("order")
+            this.search = window.localStorage.getItem("search")
+            this.filterData()
+        }
+    },
     data: function () {
         return {
-            column: 1,
+            column: 'cnpj',
             empresas: [],
             order: 1,
             search: '',
@@ -69,35 +77,30 @@ export default {
     },
     methods: {
         filterData() {
-            if (this.search) {
-                console.log(this.search)
+            if (this.search !='') {
+                window.localStorage.setItem("column", this.column)
+                window.localStorage.setItem("order", this.order)
+                window.localStorage.setItem("search", this.search)
+    
                 this.empresas = this.empresas.filter(empresa => {
                     return empresa.cnpj.match(this.search) || empresa.nome_fantasia.toLowerCase().match(this.search.toLowerCase())
                 })
             } else {
-                this.empresas = this.loadData()
+                this.loadData()
             }
         },
         loadData() {
-            axios.get('/api/v1/empresas')
-            .then(resp => {
-                this.empresas = resp.data
-                this.search   = localStorage.getItem("search")
-            })
-            .catch(resp => { 
+            axios.get('/api/v1/empresas').then(response => {
+                this.empresas = response.data
+            }).catch(error => {
                 swal({
-                    title: "Não foi possivel carregar as empresas",
-                    text: resp,
+                    title: "Não foi possivel carregar os dados",
+                    text: error,
                     icon: "error",
                 })
             })
         },
-        orderData(column) {
-            this.order = this.order === 1 ? 0 : 1
-            this.column = column
-            console.log(column, this.order)
-        },
-        remove(id, item) {
+        removeData(id, item) {
             swal({
                 title: "Atenção",
                 text: "Após excluído as informações não poderão ser recuperadas. Deseja realmente excluir?",

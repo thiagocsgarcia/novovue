@@ -15,7 +15,7 @@ class EmpresasController extends Controller
      */
     public function index()
     {
-        return Empresa::all();
+        return Empresa::orderBy('nome_fantasia', 'asc')->get();
     }
  
     public function show($id)

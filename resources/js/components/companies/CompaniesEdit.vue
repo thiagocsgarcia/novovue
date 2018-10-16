@@ -144,17 +144,18 @@
             saveForm() {
                 event.preventDefault()
                 let app = this;
+                this.empresa.status = 1
                 axios.patch('/api/v1/empresas/' + this.empresa.id, this.empresa)
-                    .then(function (resp) {
-                        app.$router.replace('/');
+                .then(function (resp) {
+                    app.$router.replace('/');
+                })
+                .catch(function (resp) {
+                    swal({
+                        title: "Não foi possivel salvar as alterações.",
+                        text: resp,
+                        icon: "error",
                     })
-                    .catch(function (resp) {
-                        swal({
-                            title: "Não foi possivel salvar as alterações.",
-                            text: resp,
-                            icon: "error",
-                        })
-                    });
+                });
             }
         }
     }

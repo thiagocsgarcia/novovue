@@ -12,7 +12,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Pesquisar</div>
                     </div>
-                    <input v-model="search" @keyup="filterData()" type="search" placeholder="Pesquisar..." class="form-control">
+                    <input v-model="search" type="search" @keyup="filterData()" placeholder="Pesquisar..." class="form-control">
                 </div>
             </div>
         
@@ -20,7 +20,7 @@
                 <thead>
                     <tr class="text-center">
                         <th @click="orderData('cnpj')" class="order">CNPJ</th>
-                        <th @click="orderData('empresa')" class="order">Nome Fantasia</th>
+                        <th @click="orderData('nome_fantasia')" class="order">Nome Fantasia</th>
                         <th @click="orderData('email')" class="order">Email</th>
                         <th @click="orderData('telefone')" class="order">Telefone</th>
                         <th @click="orderData('status')" class="order">Atualizado</th>
@@ -28,23 +28,23 @@
                     </tr>
                 </thead>
                 <tbody>                        
-                    <tr v-for="(empresa, index) in empresas" :key="index">
+                    <tr v-for="(empresa, index) in filtered" :key="index">
                         <td>{{ empresa.cnpj }}</td>
                         <td>{{ empresa.nome_fantasia }}</td>
                         <td>{{ empresa.email }}</td>
                         <td>{{ empresa.telefone }}</td>
                         <td class="text-center">
-                            <span v-if="empresa.status === 0" style="color: red">
+                            <span v-if="empresa.status === '0'" style="color: red">
                                 <ion-icon name="close" size="large"></ion-icon>
                             </span>
-                            <span v-if="empresa.status === 1" style="color: green">
+                            <span v-else style="color: green">
                                 <ion-icon name="checkmark" size="large"></ion-icon>
                             </span>
                         </td>
                         <td class="text-center">
                             <router-link :to="{name: 'editarEmpresa', params: {id: empresa.id}}" class="btn btn-sm btn-outline-warning">Editar</router-link>
                             <span>&nbsp; | &nbsp;</span>
-                            <a href="#" v-on:click="removeData(empresa.id, index)" class="btn btn-sm btn-outline-danger">Deletar</a>
+                            <a href="#" v-on:click="deleteData(empresa.id, index)" class="btn btn-sm btn-outline-danger">Deletar</a>
                         </td>
                     </tr>
                 </tbody>
@@ -58,49 +58,29 @@
 export default {
     computed: {
         filtered() {
-            this.column = window.localStorage.getItem("column")
-            this.order = window.localStorage.getItem("order")
-            this.search = window.localStorage.getItem("search")
-            this.filterData()
-        }
-    },
-    data: function () {
-        return {
-            column: 'cnpj',
-            empresas: [],
-            order: 1,
-            search: '',
+            if (this.search !== '') {
+                return this.filterData()
+            } else {
+                return this.empresas
+            }
         }
     },
     mounted() {
+        window.localStorage.getItem("cnpj")
+        window.localStorage.getItem("order")
+        window.localStorage.getItem("search")
         this.loadData()
     },
+    data: function () {
+        return {
+            column:  'cnpj',
+            empresas: [],
+            order:  'asc',
+            search: ''
+        }
+    },
     methods: {
-        filterData() {
-            if (this.search !='') {
-                window.localStorage.setItem("column", this.column)
-                window.localStorage.setItem("order", this.order)
-                window.localStorage.setItem("search", this.search)
-    
-                this.empresas = this.empresas.filter(empresa => {
-                    return empresa.cnpj.match(this.search) || empresa.nome_fantasia.toLowerCase().match(this.search.toLowerCase())
-                })
-            } else {
-                this.loadData()
-            }
-        },
-        loadData() {
-            axios.get('/api/v1/empresas').then(response => {
-                this.empresas = response.data
-            }).catch(error => {
-                swal({
-                    title: "Não foi possivel carregar os dados",
-                    text: error,
-                    icon: "error",
-                })
-            })
-        },
-        removeData(id, item) {
+        deleteData(id, item) {
             swal({
                 title: "Atenção",
                 text: "Após excluído as informações não poderão ser recuperadas. Deseja realmente excluir?",
@@ -126,6 +106,58 @@ export default {
                             icon: "error",
                         })
                     })
+                }
+            })
+        },
+        filterData() {
+            window.localStorage.setItem("search", this.search)
+
+            return this.empresas.filter(empresa => {
+                for (const key in empresa) {
+                    if(empresa[key].toString().toLowerCase().indexOf(this.search.toLowerCase()) > -1) {
+                        return true
+                    }
+                }
+                return false
+            })
+        },
+        loadData() {
+            axios.get('/api/v1/empresas').then(response => {
+                this.empresas = response.data
+            }).catch(error => {
+                swal({
+                    title: "Não foi possivel carregar os dados",
+                    text: error,
+                    icon: "error",
+                })
+            })
+        },
+        orderData(column) {
+            if (this.column === column) {
+                this.order = this.order === 'asc' ? 'desc' : 'asc' 
+                window.localStorage.setItem("order", this.order)
+            } else {
+                this.column = column
+                this.order = 'asc'
+                window.localStorage.setItem("column", this.column)
+            }
+
+            this.empresas.sort((a, b) => {
+                if (this.order === 'asc') {
+                    if (a[this.column] > b[this.column]) {
+                        return 1
+                    } else {
+                        return -1
+                    }
+                    return 0
+                } 
+                if (this.order === 'desc') {
+                    if (a[this.column] < b[this.column]) {
+                        return 1
+                    } else {
+                        return -1
+                    }
+                    return 0
                 }
             })
         }

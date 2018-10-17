@@ -12,6 +12,7 @@ $factory->define(App\Empresa::class, function (Faker $faker) {
         'im' => $faker->numerify('##.##'),
         'contato' => $faker->name,
         'telefone' => $faker->phoneNumber,
+        'telefone2' => $faker->phoneNumber,
         'celular' => $faker->phoneNumber,
         'email' => $faker->companyEmail,
         'endereco' => $faker->streetAddress,
@@ -20,5 +21,7 @@ $factory->define(App\Empresa::class, function (Faker $faker) {
         'cep' => $faker->postcode,
         'ramo_atividade' => $faker->jobTitle,
         'porte' => $faker->randomElement(['pequeno','médio', 'grande']),
+        'observacao' => $faker->text(),
+        'status' => 0,
     ];
 });

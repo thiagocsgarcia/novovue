@@ -22,6 +22,7 @@ class CreateEmpresasTable extends Migration
             $table->string('im')->nullable();
             $table->string('contato')->nullable();
             $table->string('telefone')->nullable();
+            $table->string('telefone2')->nullable();
             $table->string('celular')->nullable();
             $table->string('email')->nullable();
             $table->string('endereco')->nullable();
@@ -31,6 +32,7 @@ class CreateEmpresasTable extends Migration
             $table->string('ramo_atividade')->nullable();
             $table->string('porte')->nullable();
             $table->integer('status')->nullable();
+            $table->text('observacao')->nullable();
             $table->timestamps();
         });
     }

@@ -34,7 +34,7 @@
                         <td>{{ empresa.email }}</td>
                         <td>{{ empresa.telefone }}</td>
                         <td class="text-center">
-                            <span v-if="empresa.status === '0'" style="color: red">
+                            <span v-if="empresa.status === 0" style="color: red">
                                 <ion-icon name="close" size="large"></ion-icon>
                             </span>
                             <span v-else style="color: green">
@@ -114,8 +114,10 @@ export default {
 
             return this.empresas.filter(empresa => {
                 for (const key in empresa) {
-                    if(empresa[key].toString().toLowerCase().indexOf(this.search.toLowerCase()) > -1) {
-                        return true
+                    if (empresa[key] !== null) {
+                        if (empresa[key].toString().toLowerCase().indexOf(this.search.toLowerCase()) > -1) {
+                            return true
+                        }
                     }
                 }
                 return false

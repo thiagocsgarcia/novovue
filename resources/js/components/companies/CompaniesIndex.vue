@@ -66,9 +66,9 @@ export default {
         }
     },
     mounted() {
-        window.localStorage.getItem("cnpj")
-        window.localStorage.getItem("order")
-        window.localStorage.getItem("search")
+        this.column = window.localStorage.getItem("column")
+        this.order = window.localStorage.getItem("order")
+        this.search = window.localStorage.getItem("search")
         this.loadData()
     },
     data: function () {

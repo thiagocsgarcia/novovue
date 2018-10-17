@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-md-4 form-group">
                         <label class="control-label">CNPJ</label>
-                        <the-mask :mask="['###.###.###-##', '##.###.###/####-##']" v-model="empresa.cnpj" class="form-control" placeholder="99.999.999/9999-99"></the-mask>
+                        <the-mask :mask="['###.###.###-##', '##.###.###/####-##']" :masked="true" v-model="empresa.cnpj" class="form-control" placeholder="99.999.999/9999-99"></the-mask>
                     </div>
                     <div class="col-xs-12 col-md-4 form-group">
                         <label class="control-label">Inscrição Estadual</label>
@@ -74,17 +74,21 @@
                     </div>
                     <div class="col-xs-12 col-md-4 form-group">
                         <label class="control-label">CEP</label>
-                        <the-mask mask="#####-###" v-model="empresa.cep" class="form-control" placeholder="99999-999"></the-mask>
+                        <the-mask mask="#####-###" :masked="true" v-model="empresa.cep" class="form-control" placeholder="99999-999"></the-mask>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 col-md-6 form-group">
+                    <div class="col-xs-12 col-md-4 form-group">
                         <label class="control-label">Telefone</label>
-                        <the-mask :mask="['(##) ####-####', '(##) #####-####']" v-model="empresa.telefone" class="form-control" placeholder="(99) 9999-9999"></the-mask>
+                        <the-mask :mask="['(##) ####-####', '(##) #####-####']" :masked="true" v-model="empresa.telefone" class="form-control" placeholder="(99) 9999-9999"></the-mask>
                     </div>
-                    <div class="col-xs-12 col-md-6 form-group">
+                    <div class="col-xs-12 col-md-4 form-group">
+                        <label class="control-label">Telefone 2</label>
+                        <the-mask :mask="['(##) ####-####', '(##) #####-####']" :masked="true" v-model="empresa.telefone2" class="form-control" placeholder="(99) 9999-9999"></the-mask>
+                    </div>
+                    <div class="col-xs-12 col-md-4 form-group">
                         <label class="control-label">Celular</label>
-                        <the-mask :mask="['(##) ####-####', '(##) #####-####']" v-model="empresa.celular" class="form-control" placeholder="(99) 99999-9999"></the-mask>
+                        <the-mask :mask="['(##) ####-####', '(##) #####-####']" :masked="true" v-model="empresa.celular" class="form-control" placeholder="(99) 99999-9999"></the-mask>
                     </div>
                 </div>
                 <hr>
@@ -123,6 +127,7 @@ export default {
                 ramo_atividade: '',
                 razao_social: '',
                 telefone: '',
+                telefone2: '',
                 status: 1
             }
         }

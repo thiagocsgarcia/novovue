@@ -22,9 +22,9 @@ import EditarEmpresa from './components/companies/CompaniesEdit.vue';
 const routes = [
     { path: '/', redirect: {name: 'listaEmpresas'} },
     { path: '/admin/empresas', component: IndexEmpresa, name: 'listaEmpresas' },
-    { path: 'admin/empresas/:id', component: DetalheEmpresa, name:'detalheEmpresa'},
-    { path: '/admin/empresas/cadastro', component: CriarEmpresa, name: 'criarEmpresa' },
-    { path: '/admin/empresas/:id/editar/', component: EditarEmpresa, name: 'editarEmpresa' },
+    { path: '/admin/empresa/:id', component: DetalheEmpresa, name:'detalheEmpresa'},
+    { path: '/admin/empresa/cadastro', component: CriarEmpresa, name: 'criarEmpresa' },
+    { path: '/admin/empresa/:id/editar/', component: EditarEmpresa, name: 'editarEmpresa' },
 ]
 
 const router = new VueRouter({ routes })

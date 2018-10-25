@@ -17,10 +17,39 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/meuapp.css') }}" rel="stylesheet">
 </head>
 <body>
+    <div id="tudo">
     <div id="app">
+        <div id="headerpmsv">
+            <div id="logo1">
+            <img src="..\img\logo2-01.png">
+        </div>
+        <div id="textcenter">
+            <h1>Segunda Feira de Oportunidades - Admin</h1>
+            <p>São Vicente - SP</p>
+        </div>
+        <div class="greybox">
+            <div>
+                <p id="paddingr"> Seja Bem-vindo(a)
+                    <br> Aqui você Cadastra e Pesquisa Vagas e Empresas</p>
+            </div>
+        </div>
+       <div id="logolink0">
+            <a target="_blank" href="http://www.saovicente.sp.gov.br/publico/">
+                <img src="..\img\LogoPMSV-01.png">
+            </a>
+        </div>
+ 
+       <div id="logolink2">
+            <a target="_blank" href="https://www.facebook.com/Secretaria-de-Desenvolvimento-Econ%C3%B4mico-e-Tecnologia-de-S%C3%A3o-Vicente-1147254042064190/">
+                <img src="..\img\sedectlogo-01.png">
+            </a>
+        </div>
+        </div>
+
+        
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 
@@ -30,7 +59,11 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+
                     <ul class="navbar-nav mr-auto">
+                       
+                    <li id="menu2"><a href="">VAGAS</a></li>
+                    <li id="menu1"><a href="">EMPRESAS</a></li>
 
                     </ul>
 
@@ -74,6 +107,13 @@
             @yield('content')
         </main>
     </div>
+</div>
+    <footer id="menuBSdemand2">
+            <div>
+                R. José Bonifácio, 404 - Centro, São Vicente - SP, 11310-080     <a target="_blank" href="https://www.facebook.com/Secretaria-de-Desenvolvimento-Econ%C3%B4mico-e-Tecnologia-de-S%C3%A3o-Vicente-1147254042064190/">DITEC - SEDECT</a>.<br>
+                Dúvidas sobre o sistema? Ligue: 3569-2376 - DITEC, att. Carlos, Felipe, Marcus e Thiago.
+            </div>
+    </footer>
 </body>
 <script src="https://unpkg.com/ionicons@4.4.2/dist/ionicons.js"></script>
 </html>

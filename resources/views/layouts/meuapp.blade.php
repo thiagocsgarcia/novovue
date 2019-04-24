@@ -11,26 +11,26 @@
     <div id="tudo">
         <div id="app">
             <header id="headerpmsv">
-                <div id="logo1">
-                    <img src="{{ asset('img/logo2-01.png') }}" alt="logo feira de oportunidades">
+                <div class='row'>
+                    <div id="logo1" class='col-1'>
+                        <img  class='img-fluid' src="{{ asset('img/sedect_alta.png') }}" alt="logo feira de oportunidades">
+                    </div>
+                    <div id="textcenter" class='col-10'>
+                        <h2>Secretaria de Desenvolvimento Econômico, Ciência, Tecnologia e Relações do Trabalho - Admin</h2>
+                        <p>São Vicente - SP</p>
+                    </div>
                 </div>
-                <div id="textcenter">
-                    <h2>Segunda Feira de Oportunidades - Admin</h2>
-                    <p>São Vicente - SP</p>
-                </div>
-                <div class="greybox">
-                    <p id="paddingr"> Seja Bem-vindo(a)
-                    <br> Aqui você Cadastra e Pesquisa Vagas e Empresas</p>
-                </div>
-                <div id="logolink0">
-                    <a target="_blank" href="http://www.saovicente.sp.gov.br/publico/">
-                        <img src="{{ asset('img/LogoPMSV-01.png') }}" alt="logo pmsv">
-                    </a>
-                </div>
-                <div id="logolink2">
-                    <a target="_blank" href="https://www.facebook.com/Secretaria-de-Desenvolvimento-Econ%C3%B4mico-e-Tecnologia-de-S%C3%A3o-Vicente-1147254042064190/">
-                        <img src="{{ asset('img/sedectlogo-01.png') }}" alt="logo sedect">
-                    </a>
+
+                <div class='row'>
+                    <div class="greybox">
+                        <p id="paddingr"> Seja Bem-vindo(a)
+                        <br> Aqui você encontra serviços essenciais disponibilizados pela Prefeitura de São Vicente através da SEDECT</p>
+                    </div>
+                    <div id="logolink0">
+                        <a target="_blank" href="http://www.saovicente.sp.gov.br/publico/">
+                            <img src="{{ asset('img/LogoPMSV-01.png') }}" alt="logo pmsv">
+                        </a>
+                    </div>                    
                 </div>
             </header>
             <nav class="navbar navbar-expand navbar-light navbar-laravel">

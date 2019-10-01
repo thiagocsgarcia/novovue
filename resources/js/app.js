@@ -9,10 +9,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueTheMask from 'vue-the-mask'
 
-import IndexEmpresa from './components/companies/CompaniesIndex'
-import CriarEmpresa from './components/companies/CompaniesCreate'
-import DetalheEmpresa from './components/companies/CompaniesView'
-import EditarEmpresa from './components/companies/CompaniesEdit'
+import CompaniesCreate from './components/companies/CompaniesCreate'
+import CompaniesEdit from './components/companies/CompaniesEdit'
+import CompaniesIndex from './components/companies/CompaniesIndex'
+import CompaniesView from './components/companies/CompaniesView'
+
+import CursosCreate from './components/cursos/CursosCreate'
+import CursosEdit from './components/cursos/CursosEdit'
+import CursosIndex from './components/cursos/CursosIndex'
+import CursosView from './components/cursos/CursosView'
 
 Vue.use(VueRouter)
 Vue.use(VueTheMask)
@@ -24,23 +29,43 @@ const routes = [
   },
   {
     path: '/admin/empresas',
-    component: IndexEmpresa,
+    component: CompaniesIndex,
     name: 'listaEmpresas'
   },
   {
-    path: '/admin/empresa/:id',
-    component: DetalheEmpresa,
+    path: '/admin/empresas/:id',
+    component: CompaniesView,
     name: 'detalheEmpresa'
   },
   {
-    path: '/admin/empresa/cadastro',
-    component: CriarEmpresa,
+    path: '/admin/empresas/cadastro',
+    component: CompaniesCreate,
     name: 'criarEmpresa'
   },
   {
-    path: '/admin/empresa/:id/editar/',
-    component: EditarEmpresa,
+    path: '/admin/empresas/:id/editar/',
+    component: CompaniesEdit,
     name: 'editarEmpresa'
+  },
+  {
+    path: '/admin/cursos',
+    component: CursosIndex,
+    name: 'cursos.index'
+  },
+  {
+    path: '/admin/cursos/:id',
+    component: CursosView,
+    name: 'cursos.view'
+  },
+  {
+    path: '/admin/cursos/cadastro',
+    component: CursosCreate,
+    name: 'cursos.create'
+  },
+  {
+    path: '/admin/cursos/:id/editar/',
+    component: CursosEdit,
+    name: 'cursos.edit'
   }
 ]
 

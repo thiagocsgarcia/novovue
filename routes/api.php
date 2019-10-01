@@ -34,5 +34,6 @@ Route::group(
         'as' => 'api.'
     ], function () {
         Route::resource('empresas', 'EmpresasController', ['except' => ['create', 'edit']]);
+        Route::resource('cursos', 'CursosController', ['except' => ['create', 'edit']]);
     }
 );

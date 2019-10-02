@@ -30,7 +30,7 @@
                         <a target="_blank" href="http://www.saovicente.sp.gov.br/publico/">
                             <img src="{{ asset('img/LogoPMSV-01.png') }}" alt="logo pmsv">
                         </a>
-                    </div>                    
+                    </div>
                 </div>
             </header>
             <nav class="navbar navbar-expand navbar-light navbar-laravel">
@@ -38,10 +38,14 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarMain">
-                    <!--ul class="navbar-nav">
-                        <li id="menu1"><a href="">EMPRESAS</a></li>
-                        <li id="menu2"><a href="">VAGAS</a></li>
-                    </ul-->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/empresas/#/admin/empresas">EMPRESAS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/empresas/#/admin/inscricoes-cursos">INSCRIÇÕES NOS CURSOS</a>
+                        </li>
+                    </ul>
                     <ul class="navbar-nav ml-auto">
                         @guest
                             <li class="nav-item">

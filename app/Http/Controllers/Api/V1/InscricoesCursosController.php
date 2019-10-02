@@ -4,42 +4,38 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Curso;
+use App\InscricaoCurso;
 
-class CursosController extends Controller
+class InscricoesCursosController extends Controller
 {
     public function index()
     {
-        $cursos = Curso::select("curso_interesse")->distinct()->get();
-        $inscricoes = Curso::all();
+        $inscricoes = InscricaoCurso::all();
 
-        return response()->json([
-            'cursos'     => $cursos,
-            'inscricoes' => $inscricoes,
-        ], 200);
+        return response()->json($inscricoes, 200);
     }
 
     public function show($id)
     {
-        return Curso::findOrFail($id);
+        return InscricaoCurso::findOrFail($id);
     }
 
     public function update(Request $request, $id)
     {
-        $curso = Curso::findOrFail($id);
+        $curso = InscricaoCurso::findOrFail($id);
         $curso->update($request->all());
         return $curso;
     }
 
     public function store(Request $request)
     {
-        $curso = Curso::create($request->all());
+        $curso = InscricaoCurso::create($request->all());
         return $curso;
     }
 
     public function destroy($id)
     {
-        $curso = Curso::findOrFail($id);
+        $curso = InscricaoCurso::findOrFail($id);
         $curso->delete();
         return '';
     }

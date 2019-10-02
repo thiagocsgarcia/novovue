@@ -14,10 +14,8 @@ import CompaniesEdit from './components/companies/CompaniesEdit'
 import CompaniesIndex from './components/companies/CompaniesIndex'
 import CompaniesView from './components/companies/CompaniesView'
 
-import CursosCreate from './components/cursos/CursosCreate'
-import CursosEdit from './components/cursos/CursosEdit'
-import CursosIndex from './components/cursos/CursosIndex'
-import CursosView from './components/cursos/CursosView'
+import InscricoesLista from './components/inscricoes/Lista'
+import InscricoesFicha from './components/inscricoes/Ficha'
 
 Vue.use(VueRouter)
 Vue.use(VueTheMask)
@@ -48,24 +46,14 @@ const routes = [
     name: 'editarEmpresa'
   },
   {
-    path: '/admin/cursos',
-    component: CursosIndex,
-    name: 'cursos.index'
+    path: '/admin/inscricoes-cursos',
+    component: InscricoesLista,
+    name: 'inscricoes.index'
   },
   {
-    path: '/admin/cursos/:id',
-    component: CursosView,
-    name: 'cursos.view'
-  },
-  {
-    path: '/admin/cursos/cadastro',
-    component: CursosCreate,
-    name: 'cursos.create'
-  },
-  {
-    path: '/admin/cursos/:id/editar/',
-    component: CursosEdit,
-    name: 'cursos.edit'
+    path: '/admin/inscricoes-cursos/ficha/:id',
+    component: InscricoesFicha,
+    name: 'inscricoes.ficha'
   }
 ]
 

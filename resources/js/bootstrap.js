@@ -11,17 +11,14 @@ try {
 window.axios = require('axios')
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-// window.axios.defaults.baseURL = 'http://10.171.2.18/empresas'
-window.axios.defaults.baseURL = 'http://feiraoportunidades.test'
+window.axios.defaults.baseURL = 'http://localhost/empresas/api/v1'
 
 let token = document.head.querySelector('meta[name="csrf-token"]')
 
 if (token) {
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
 } else {
-  console.error(
-    'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'
-  )
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token')
 }
 
 // import Echo from 'laravel-echo'

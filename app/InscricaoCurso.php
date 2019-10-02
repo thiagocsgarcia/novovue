@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Curso extends Model
+class InscricaoCurso extends Model
 {
     protected $guarded = [];
 
-    protected $table = 'inscricoes_cursos';
+    protected $table = 'cad_cic';
 }

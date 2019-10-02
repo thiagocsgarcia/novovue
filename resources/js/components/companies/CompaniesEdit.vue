@@ -115,7 +115,7 @@
         mounted() {
             let app = this
             let id = app.$route.params.id
-            axios.get('/api/v1/empresas/' + id)
+            axios.get('/empresas/' + id)
                 .then(function (resp) {
                     app.empresa = resp.data;
                     app.empresa.status = 1

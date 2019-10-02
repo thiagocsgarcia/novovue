@@ -140,7 +140,7 @@ export default {
         saveForm() {
             event.preventDefault()
             let app = this
-            axios.post('/api/v1/empresas', this.empresa)
+            axios.post('/empresas', this.empresa)
             .then(function (resp) {
                 app.$router.push({path: '/'});
             })

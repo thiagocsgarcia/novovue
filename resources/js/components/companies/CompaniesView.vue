@@ -32,7 +32,7 @@ export default {
   methods: {
     loadData(id) {
       axios
-        .get('/api/v1/empresas/' + id)
+        .get('/empresas/' + id)
         .then(response => {
           this.empresa = response.data
         })

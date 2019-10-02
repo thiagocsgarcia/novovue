@@ -104,7 +104,7 @@ export default {
       }).then(del => {
         if (del) {
           axios
-            .delete('/api/v1/empresas/' + id)
+            .delete('/empresas/' + id)
             .then(resp => {
               swal({
                 text: 'Exclusão realizada com sucesso!',

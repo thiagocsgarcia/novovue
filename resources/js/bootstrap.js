@@ -11,9 +11,15 @@ try {
 window.axios = require('axios')
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-window.axios.defaults.baseURL = 'http://desenvolve.saovicente.local/empresas/api/v1' // Desenvolvimento
-// window.axios.defaults.baseURL = 'http://10.171.2.18/empresas/api/v1' // Teste
-// window.axios.defaults.baseURL = 'http://www.desenvolve.saovicente.sp.gov.br/empresas/api/v1' // Produção
+
+// Desenvolvimento
+// window.axios.defaults.baseURL = 'http://desenvolve.saovicente.local/empresas/api/v1'
+
+// Servidor de Teste
+// window.axios.defaults.baseURL = 'http://10.171.2.18/empresas/api/v1'
+
+// Servidor de Produção
+window.axios.defaults.baseURL = 'http://www.desenvolve.saovicente.sp.gov.br/empresas/api/v1'
 
 let token = document.head.querySelector('meta[name="csrf-token"]')
 

@@ -7,12 +7,12 @@
       <h4 class="pt-4">DADOS PESSOAIS</h4>
       <div class="form-group">
         <label for="nome">Nome completo</label>
-        <input readonly type="text" name="nome" id="nome" class="form-control" v-model="inscricao.nome" />
+        <input type="text" name="nome" id="nome" class="form-control" v-model="inscricao.nome" />
       </div>
 
       <div class="form-group">
         <label for="sexo">Sexo</label>
-        <select readonly name="sexo" id="sexo" class="form-control" v-model="inscricao.sexo">
+        <select name="sexo" id="sexo" class="form-control" v-model="inscricao.sexo">
           <option value></option>
           <option value="Feminino">Feminino</option>
           <option value="Masculino">Masculino</option>
@@ -21,13 +21,18 @@
 
       <div class="form-group">
         <label for="estado_civil">Estado Civil</label>
-        <input readonly type="text" name="estado_civil" id="estado_civil" class="form-control" v-model="inscricao.estado_civil" />
+        <input
+          type="text"
+          name="estado_civil"
+          id="estado_civil"
+          class="form-control"
+          v-model="inscricao.estado_civil"
+        />
       </div>
 
       <div class="form-group">
         <label for="dt_nascimento">Data de Nascimento</label>
         <the-mask
-          readonly
           id="dt_nascimento"
           :mask="['##/##/####']"
           :masked="true"
@@ -40,7 +45,7 @@
 
       <div class="form-group">
         <label for="escolaridade">Escolaridade</label>
-        <input readonly
+        <input
           type="text"
           name="escolaridade"
           id="escolaridade"
@@ -51,7 +56,7 @@
 
       <div class="form-group">
         <label for="estrangeiro">Estrangeiro (a)</label>
-        <select readonly
+        <select
           name="estrangeiro"
           id="estrangeiro"
           class="form-control"
@@ -64,7 +69,7 @@
 
       <div class="form-group">
         <label for="deficiencia">Possui Deficiência?</label>
-        <input readonly
+        <input
           type="text"
           name="deficiencia"
           id="deficiencia"
@@ -77,13 +82,12 @@
 
       <div class="form-group">
         <textarea
-          readonly
           type="text"
           name="endereco"
           id="endereco"
           class="form-control"
-          v-model="inscricao.endereco">
-        </textarea>
+          v-model="inscricao.endereco"
+        ></textarea>
       </div>
 
       <h4 class="pt-4">DOCUMENTOS</h4>
@@ -91,7 +95,6 @@
       <div class="form-group">
         <label for="cpf">CPF</label>
         <the-mask
-          readonly
           id="cpf"
           :mask="['###.###.###-##']"
           :masked="true"
@@ -103,30 +106,24 @@
 
       <div class="form-group">
         <label for="rg">RG</label>
-        <input readonly type="text" name="rg" id="rg" class="form-control" v-model="inscricao.rg" />
+        <input type="text" name="rg" id="rg" class="form-control" v-model="inscricao.rg" />
       </div>
 
       <h4 class="pt-4">CURSO DE INTERESSE</h4>
-      <input readonly type="text" name="curso_interesse" id="curso_interesse" class="form-control" v-model="inscricao.curso_interesse" />
+      <div class="form-group">
+        <input
+          type="text"
+          name="curso_interesse"
+          id="curso_interesse"
+          class="form-control"
+          v-model="inscricao.curso_interesse"
+        />
+      </div>
+
+      <div class="form-group pt-4">
+        <button type="submit" class="btn btn-lg btn-primary">Salvar Alterações</button>
+      </div>
     </form>
-
-    <div class="pt-5 d-none d-print-block">
-      <div class="d-flex justify-content-end">
-        <div class="form-group col-md-6 pt-5">
-          <input readonly type="text" placeholder="Assinatura" class="form-control form-control-lg text-center">
-        </div>
-      </div>
-    </div>
-
-    <div class="pt-5 d-print-none">
-      <div class="d-flex justify-content-around">
-        <router-link
-          :to="{ name: 'inscricoes.editar', params: {id: inscricao.id } }"
-          class="btn btn-lg btn-warning"
-        >Editar</router-link>
-        <a href="#" class="btn btn-lg btn-success" @click="imprimir">Imprimir</a>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -150,8 +147,15 @@ export default {
     }
   },
   methods: {
-    imprimir () {
-      window.print();
+    update() {
+      window.axios
+        .patch(`/inscricoes-cursos/${this.inscricao.id}`, this.inscricao)
+        .then(response => {
+          this.$router.replace(`/inscricoes-cursos/${this.inscricao.id}`)
+        })
+        .catch(error => {
+          //
+        })
     }
   }
 }

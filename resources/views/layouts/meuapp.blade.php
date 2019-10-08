@@ -10,20 +10,20 @@
 <body>
     <div id="tudo">
         <div id="app">
-            <header id="headerpmsv">
-                <div class='row'>
-                    <div id="logo1" class='col-1'>
-                        <img  class='img-fluid' src="{{ asset('img/sedect_alta.png') }}" alt="logo feira de oportunidades">
+            <header id="headerpmsv" class="pt-3">
+                <div class="row">
+                    <div id="logo1" class="col-1">
+                        <img  class="img-fluid" src="{{ asset('img/sedect_alta.png') }}" alt="logo feira de oportunidades">
                     </div>
-                    <div id="textcenter" class='col-10'>
-                        <h2>Secretaria de Desenvolvimento Econômico, Ciência, Tecnologia e Relações do Trabalho - Admin</h2>
+                    <div id="textcenter" class="col-9">
+                        <h2>Secretaria de Desenvolvimento Econômico, Ciência, Tecnologia e Relações do Trabalho</h2>
                         <p>São Vicente - SP</p>
                     </div>
                 </div>
 
-                <div class='row'>
+                <div class="row d-print-none">
                     <div class="greybox">
-                        <p id="paddingr"> Seja Bem-vindo(a)
+                        <p id="paddingr">Seja Bem-vindo(a)
                         <br> Aqui você encontra serviços essenciais disponibilizados pela Prefeitura de São Vicente através da SEDECT</p>
                     </div>
                     <div id="logolink0">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </header>
-            <nav class="navbar navbar-expand navbar-light navbar-laravel">
+            <nav class="navbar navbar-expand navbar-light navbar-laravel d-print-none">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

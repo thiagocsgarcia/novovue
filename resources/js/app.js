@@ -14,8 +14,10 @@ import CompaniesEdit from './components/companies/CompaniesEdit'
 import CompaniesIndex from './components/companies/CompaniesIndex'
 import CompaniesView from './components/companies/CompaniesView'
 
-import InscricoesLista from './components/inscricoes/Lista'
+import InscricoesCadastro from './components/inscricoes/Cadastro'
+import InscricoesEditar from './components/inscricoes/Editar'
 import InscricoesFicha from './components/inscricoes/Ficha'
+import InscricoesLista from './components/inscricoes/Lista'
 
 Vue.use(VueRouter)
 Vue.use(VueTheMask)
@@ -51,9 +53,19 @@ const routes = [
     name: 'inscricoes.index'
   },
   {
-    path: '/admin/inscricoes-cursos/ficha/:id',
+    path: '/admin/inscricoes-cursos/cadastro',
+    component: InscricoesCadastro,
+    name: 'inscricoes.cadastro'
+  },
+  {
+    path: '/admin/inscricoes-cursos/:id',
     component: InscricoesFicha,
     name: 'inscricoes.ficha'
+  },
+  {
+    path: '/admin/inscricoes-cursos/:id/editar',
+    component: InscricoesEditar,
+    name: 'inscricoes.editar'
   }
 ]
 

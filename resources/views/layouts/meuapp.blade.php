@@ -10,7 +10,7 @@
 <body>
     <div id="tudo">
         <div id="app">
-            <header id="headerpmsv" class="pt-3">
+            <header id="headerpmsv" class="pt-3 d-print-none">
                 <div class="row">
                     <div id="logo1" class="col-1">
                         <img  class="img-fluid" src="{{ asset('img/sedect_alta.png') }}" alt="logo feira de oportunidades">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <div class="row d-print-none">
+                <div class="row">
                     <div class="greybox">
                         <p id="paddingr">Seja Bem-vindo(a)
                         <br> Aqui você encontra serviços essenciais disponibilizados pela Prefeitura de São Vicente através da SEDECT</p>
@@ -79,7 +79,7 @@
             <main class="py-4">
                 @yield('content')
             </main>
-            <footer id="menuBSdemand2">
+            <footer id="menuBSdemand2" class="d-print-none">
                 <div>
                     R. José Bonifácio, 404 - Centro, São Vicente - SP, 11310-080
                     <a href="https://www.facebook.com/Secretaria-de-Desenvolvimento-Econ%C3%B4mico-e-Tecnologia-de-S%C3%A3o-Vicente-1147254042064190/" target="_blank">DITEC - SEDECT</a>.

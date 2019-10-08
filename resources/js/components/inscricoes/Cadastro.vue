@@ -3,8 +3,9 @@
     <h3 class="text-center">FICHA DE CADASTRO</h3>
     <h4 class="text-center">Pré-matricula</h4>
 
-    <form action="#" method="post">
+    <form action="#" method="post" @submit.prevent="cadastrar">
       <h4 class="pt-4">DADOS PESSOAIS</h4>
+
       <div class="form-group">
         <label for="nome">Nome completo</label>
         <input type="text" name="nome" id="nome" class="form-control" v-model="inscricao.nome" />
@@ -21,7 +22,19 @@
 
       <div class="form-group">
         <label for="estado_civil">Estado Civil</label>
-        <input type="text" name="estado_civil" id="estado_civil" class="form-control" v-model="inscricao.estado_civil" />
+        <select
+          name="estado_civil"
+          id="estado_civil"
+          class="form-control"
+          v-model="inscricao.estado_civil"
+        >
+          <option value></option>
+          <option value="Solteiro (a)">Solteiro (a)</option>
+          <option value="Casado (a)">Casado (a)</option>
+          <option value="Separado (a)">Separado (a)</option>
+          <option value="Divorciado (a)">Divorciado (a)</option>
+          <option value="Viúvo (a)">Viúvo (a)</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -35,6 +48,16 @@
           class="form-control"
           placeholder="31/02/2222"
         ></the-mask>
+      </div>
+
+      <div class="form-group">
+        <label for="mae">Nome da Mãe</label>
+        <input type="text" name="mae" id="mae" class="form-control" v-model="inscricao.mae" />
+      </div>
+
+      <div class="form-group">
+        <label for="pai">Nome do Pai</label>
+        <input type="text" name="pai" id="pai" class="form-control" v-model="inscricao.pai" />
       </div>
 
       <div class="form-group">
@@ -80,8 +103,35 @@
           name="endereco"
           id="endereco"
           class="form-control"
-          v-model="inscricao.endereco">
-        </textarea>
+          v-model="inscricao.endereco"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Endereço de E-mail</label>
+        <input type="text" name="email" id="email" class="form-control" v-model="inscricao.email" />
+      </div>
+
+      <div class="form-group">
+        <label for="celular">Celular</label>
+        <input
+          type="text"
+          name="celular"
+          id="celular"
+          class="form-control"
+          v-model="inscricao.celular"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="telefone">Telefone</label>
+        <input
+          type="text"
+          name="telefone"
+          id="telefone"
+          class="form-control"
+          v-model="inscricao.telefone"
+        />
       </div>
 
       <h4 class="pt-4">DOCUMENTOS</h4>
@@ -105,7 +155,13 @@
 
       <h4 class="pt-4">CURSO DE INTERESSE</h4>
       <div class="form-group">
-        <input type="text" name="curso_interesse" id="curso_interesse" class="form-control" v-model="inscricao.curso_interesse" />
+        <input
+          type="text"
+          name="curso_interesse"
+          id="curso_interesse"
+          class="form-control"
+          v-model="inscricao.curso_interesse"
+        />
       </div>
 
       <div class="form-group pt-4">
@@ -123,15 +179,16 @@ export default {
     }
   },
   methods: {
-    create () {
-      window.axios.post('/inscricoes-cursos', inscricao)
-      .then(response => {
-        this.inscricao = response.data
-        this.$router.replace(`/inscricoes-cursos/${this.inscricao.id}`)
-      })
-      .catch(error => {
-        //
-      })
+    cadastrar() {
+      window.axios
+        .post('/inscricoes-cursos', this.inscricao)
+        .then(response => {
+          this.inscricao = response.data
+          this.$router.replace(`/admin/inscricoes-cursos/${this.inscricao.id}`)
+        })
+        .catch(error => {
+          //
+        })
     }
   }
 }

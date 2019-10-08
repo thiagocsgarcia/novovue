@@ -7,7 +7,14 @@
       <h4 class="pt-4">DADOS PESSOAIS</h4>
       <div class="form-group">
         <label for="nome">Nome completo</label>
-        <input readonly type="text" name="nome" id="nome" class="form-control" v-model="inscricao.nome" />
+        <input
+          readonly
+          type="text"
+          name="nome"
+          id="nome"
+          class="form-control"
+          v-model="inscricao.nome"
+        />
       </div>
 
       <div class="form-group">
@@ -21,7 +28,20 @@
 
       <div class="form-group">
         <label for="estado_civil">Estado Civil</label>
-        <input readonly type="text" name="estado_civil" id="estado_civil" class="form-control" v-model="inscricao.estado_civil" />
+        <select
+          readonly
+          name="estado_civil"
+          id="estado_civil"
+          class="form-control"
+          v-model="inscricao.estado_civil"
+        >
+          <option value></option>
+          <option value="Solteiro (a)">Solteiro (a)</option>
+          <option value="Casado (a)">Casado (a)</option>
+          <option value="Separado (a)">Separado (a)</option>
+          <option value="Divorciado (a)">Divorciado (a)</option>
+          <option value="Viúvo (a)">Viúvo (a)</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -39,8 +59,33 @@
       </div>
 
       <div class="form-group">
+        <label for="mae">Nome da Mãe</label>
+        <input
+          readonly
+          type="text"
+          name="mae"
+          id="mae"
+          class="form-control"
+          v-model="inscricao.mae"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="pai">Nome do Pai</label>
+        <input
+          readonly
+          type="text"
+          name="pai"
+          id="pai"
+          class="form-control"
+          v-model="inscricao.pai"
+        />
+      </div>
+
+      <div class="form-group">
         <label for="escolaridade">Escolaridade</label>
-        <input readonly
+        <input
+          readonly
           type="text"
           name="escolaridade"
           id="escolaridade"
@@ -51,7 +96,8 @@
 
       <div class="form-group">
         <label for="estrangeiro">Estrangeiro (a)</label>
-        <select readonly
+        <select
+          readonly
           name="estrangeiro"
           id="estrangeiro"
           class="form-control"
@@ -64,7 +110,8 @@
 
       <div class="form-group">
         <label for="deficiencia">Possui Deficiência?</label>
-        <input readonly
+        <input
+          readonly
           type="text"
           name="deficiencia"
           id="deficiencia"
@@ -82,8 +129,44 @@
           name="endereco"
           id="endereco"
           class="form-control"
-          v-model="inscricao.endereco">
-        </textarea>
+          v-model="inscricao.endereco"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Endereço de E-mail</label>
+        <input
+          readonly
+          type="text"
+          name="email"
+          id="email"
+          class="form-control"
+          v-model="inscricao.email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="celular">Celular</label>
+        <input
+          readonly
+          type="text"
+          name="celular"
+          id="celular"
+          class="form-control"
+          v-model="inscricao.celular"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="telefone">Telefone</label>
+        <input
+          readonly
+          type="text"
+          name="telefone"
+          id="telefone"
+          class="form-control"
+          v-model="inscricao.telefone"
+        />
       </div>
 
       <h4 class="pt-4">DOCUMENTOS</h4>
@@ -107,13 +190,25 @@
       </div>
 
       <h4 class="pt-4">CURSO DE INTERESSE</h4>
-      <input readonly type="text" name="curso_interesse" id="curso_interesse" class="form-control" v-model="inscricao.curso_interesse" />
+      <input
+        readonly
+        type="text"
+        name="curso_interesse"
+        id="curso_interesse"
+        class="form-control"
+        v-model="inscricao.curso_interesse"
+      />
     </form>
 
     <div class="pt-5 d-none d-print-block">
       <div class="d-flex justify-content-end">
         <div class="form-group col-md-6 pt-5">
-          <input readonly type="text" placeholder="Assinatura" class="form-control form-control-lg text-center">
+          <input
+            readonly
+            type="text"
+            placeholder="Assinatura"
+            class="form-control form-control-lg text-center"
+          />
         </div>
       </div>
     </div>
@@ -121,10 +216,10 @@
     <div class="pt-5 d-print-none">
       <div class="d-flex justify-content-around">
         <router-link
-          :to="{ name: 'inscricoes.editar', params: {id: inscricao.id } }"
+          :to="{ name: 'inscricoes.editar', params: { id: inscricao.id } }"
           class="btn btn-lg btn-warning"
         >Editar</router-link>
-        <a href="#" class="btn btn-lg btn-success" @click="imprimir">Imprimir</a>
+        <a href="#" class="btn btn-lg btn-success" @click.prevent="imprimir">Imprimir</a>
       </div>
     </div>
   </div>
@@ -150,8 +245,8 @@ export default {
     }
   },
   methods: {
-    imprimir () {
-      window.print();
+    imprimir() {
+      window.print()
     }
   }
 }

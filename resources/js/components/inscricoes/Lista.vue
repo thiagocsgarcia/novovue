@@ -6,7 +6,10 @@
       </div>
       <div class="panel-body">
         <div class="form-inline col-xs-10 col-md-10 col offset-1">
-          <router-link :to="{ name: 'inscricoes.cadastro' }" class="btn btn-success mb-2">Nova Cadastro</router-link>
+          <router-link
+            :to="{ name: 'inscricoes.cadastro' }"
+            class="btn btn-success mb-2"
+          >Nova Cadastro</router-link>
           <div class="input-group col-xs-10 col-md-10 mb-2 mr-sm-2">
             <div class="input-group-prepend">
               <div class="input-group-text">Pesquisar</div>
@@ -36,9 +39,9 @@
             <tr v-for="inscricao in filtered" :key="inscricao.id">
               <td>{{ inscricao.id }}</td>
               <td>
-                <router-link :to="{ name: 'inscricoes.ficha', params: { id: inscricao.id } }">
-                  {{ inscricao.nome }}
-                </router-link>
+                <router-link
+                  :to="{ name: 'inscricoes.ficha', params: { id: inscricao.id } }"
+                >{{ inscricao.nome }}</router-link>
               </td>
               <td>{{ inscricao.email }}</td>
               <td>{{ inscricao.cpf }}</td>
@@ -63,16 +66,17 @@ export default {
       }
     }
   },
-  created () {
-    window.axios.get('/inscricoes-cursos')
-    .then(response => {
-      this.inscricoes = response.data
-    })
-    .catch(error => {
-      console.log(error)
-    })
+  created() {
+    window.axios
+      .get('/inscricoes-cursos')
+      .then(response => {
+        this.inscricoes = response.data
+      })
+      .catch(error => {
+        console.log(error)
+      })
   },
-  data () {
+  data() {
     return {
       inscricoes: [],
       search: ''
@@ -83,7 +87,12 @@ export default {
       return this.inscricoes.filter(inscricao => {
         for (const key in inscricao) {
           if (inscricao[key] !== null) {
-            if (inscricao[key].toString().toLowerCase().indexOf(this.search.toLowerCase()) > -1) {
+            if (
+              inscricao[key]
+                .toString()
+                .toLowerCase()
+                .indexOf(this.search.toLowerCase()) > -1
+            ) {
               return true
             }
           }

@@ -2491,6 +2491,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2498,13 +2554,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    create: function create() {
+    cadastrar: function cadastrar() {
       var _this = this;
 
-      window.axios.post('/inscricoes-cursos', inscricao).then(function (response) {
+      window.axios.post('/inscricoes-cursos', this.inscricao).then(function (response) {
         _this.inscricao = response.data;
 
-        _this.$router.replace("/inscricoes-cursos/".concat(_this.inscricao.id));
+        _this.$router.replace("/admin/inscricoes-cursos/".concat(_this.inscricao.id));
       })["catch"](function (error) {//
       });
     }
@@ -2651,6 +2707,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
@@ -2667,11 +2767,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    update: function update() {
+    editar: function editar() {
       var _this2 = this;
 
       window.axios.patch("/inscricoes-cursos/".concat(this.inscricao.id), this.inscricao).then(function (response) {
-        _this2.$router.replace("/inscricoes-cursos/".concat(_this2.inscricao.id));
+        _this2.$router.replace("/admin/inscricoes-cursos/".concat(_this2.inscricao.id));
       })["catch"](function (error) {//
       });
     }
@@ -2689,6 +2789,101 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2854,6 +3049,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -23490,352 +23688,534 @@ var render = function() {
       _vm._v(" "),
       _c("h4", { staticClass: "text-center" }, [_vm._v("Pré-matricula")]),
       _vm._v(" "),
-      _c("form", { attrs: { action: "#", method: "post" } }, [
-        _c("h4", { staticClass: "pt-4" }, [_vm._v("DADOS PESSOAIS")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "nome" } }, [_vm._v("Nome completo")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.nome,
-                expression: "inscricao.nome"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "nome", id: "nome" },
-            domProps: { value: _vm.inscricao.nome },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "nome", $event.target.value)
-              }
+      _c(
+        "form",
+        {
+          attrs: { action: "#", method: "post" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.cadastrar($event)
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "sexo" } }, [_vm._v("Sexo")]),
+          }
+        },
+        [
+          _c("h4", { staticClass: "pt-4" }, [_vm._v("DADOS PESSOAIS")]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "nome" } }, [_vm._v("Nome completo")]),
+            _vm._v(" "),
+            _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.inscricao.sexo,
-                  expression: "inscricao.sexo"
+                  value: _vm.inscricao.nome,
+                  expression: "inscricao.nome"
                 }
               ],
               staticClass: "form-control",
-              attrs: { name: "sexo", id: "sexo" },
+              attrs: { type: "text", name: "nome", id: "nome" },
+              domProps: { value: _vm.inscricao.nome },
               on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.inscricao,
-                    "sexo",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "nome", $event.target.value)
                 }
               }
-            },
-            [
-              _c("option", { attrs: { value: "" } }),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Feminino" } }, [
-                _vm._v("Feminino")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Masculino" } }, [
-                _vm._v("Masculino")
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "estado_civil" } }, [
-            _vm._v("Estado Civil")
+            })
           ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "sexo" } }, [_vm._v("Sexo")]),
+            _vm._v(" "),
+            _c(
+              "select",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.estado_civil,
-                expression: "inscricao.estado_civil"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "estado_civil", id: "estado_civil" },
-            domProps: { value: _vm.inscricao.estado_civil },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.inscricao.sexo,
+                    expression: "inscricao.sexo"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "sexo", id: "sexo" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.inscricao,
+                      "sexo",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-                _vm.$set(_vm.inscricao, "estado_civil", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { attrs: { for: "dt_nascimento" } }, [
-              _vm._v("Data de Nascimento")
+              },
+              [
+                _c("option", { attrs: { value: "" } }),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Feminino" } }, [
+                  _vm._v("Feminino")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Masculino" } }, [
+                  _vm._v("Masculino")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "estado_civil" } }, [
+              _vm._v("Estado Civil")
             ]),
             _vm._v(" "),
-            _c("the-mask", {
-              staticClass: "form-control",
-              attrs: {
-                id: "dt_nascimento",
-                mask: ["##/##/####"],
-                masked: true,
-                name: "dt_nascimento",
-                placeholder: "31/02/2222"
-              },
-              model: {
-                value: _vm.inscricao.dt_nascimento,
-                callback: function($$v) {
-                  _vm.$set(_vm.inscricao, "dt_nascimento", $$v)
-                },
-                expression: "inscricao.dt_nascimento"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "escolaridade" } }, [
-            _vm._v("Escolaridade")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
+            _c(
+              "select",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.escolaridade,
-                expression: "inscricao.escolaridade"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "escolaridade", id: "escolaridade" },
-            domProps: { value: _vm.inscricao.escolaridade },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.inscricao.estado_civil,
+                    expression: "inscricao.estado_civil"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "estado_civil", id: "estado_civil" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.inscricao,
+                      "estado_civil",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-                _vm.$set(_vm.inscricao, "escolaridade", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "estrangeiro" } }, [
-            _vm._v("Estrangeiro (a)")
+              },
+              [
+                _c("option", { attrs: { value: "" } }),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Solteiro (a)" } }, [
+                  _vm._v("Solteiro (a)")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Casado (a)" } }, [
+                  _vm._v("Casado (a)")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Separado (a)" } }, [
+                  _vm._v("Separado (a)")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Divorciado (a)" } }, [
+                  _vm._v("Divorciado (a)")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Viúvo (a)" } }, [
+                  _vm._v("Viúvo (a)")
+                ])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c(
-            "select",
-            {
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "dt_nascimento" } }, [
+                _vm._v("Data de Nascimento")
+              ]),
+              _vm._v(" "),
+              _c("the-mask", {
+                staticClass: "form-control",
+                attrs: {
+                  id: "dt_nascimento",
+                  mask: ["##/##/####"],
+                  masked: true,
+                  name: "dt_nascimento",
+                  placeholder: "31/02/2222"
+                },
+                model: {
+                  value: _vm.inscricao.dt_nascimento,
+                  callback: function($$v) {
+                    _vm.$set(_vm.inscricao, "dt_nascimento", $$v)
+                  },
+                  expression: "inscricao.dt_nascimento"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "mae" } }, [_vm._v("Nome da Mãe")]),
+            _vm._v(" "),
+            _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.inscricao.estrangeiro,
-                  expression: "inscricao.estrangeiro"
+                  value: _vm.inscricao.mae,
+                  expression: "inscricao.mae"
                 }
               ],
               staticClass: "form-control",
-              attrs: { name: "estrangeiro", id: "estrangeiro" },
+              attrs: { type: "text", name: "mae", id: "mae" },
+              domProps: { value: _vm.inscricao.mae },
               on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "mae", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "pai" } }, [_vm._v("Nome do Pai")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.pai,
+                  expression: "inscricao.pai"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "pai", id: "pai" },
+              domProps: { value: _vm.inscricao.pai },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "pai", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "escolaridade" } }, [
+              _vm._v("Escolaridade")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.escolaridade,
+                  expression: "inscricao.escolaridade"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "escolaridade", id: "escolaridade" },
+              domProps: { value: _vm.inscricao.escolaridade },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "escolaridade", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "estrangeiro" } }, [
+              _vm._v("Estrangeiro (a)")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.inscricao.estrangeiro,
+                    expression: "inscricao.estrangeiro"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "estrangeiro", id: "estrangeiro" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.inscricao,
+                      "estrangeiro",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "Não" } }, [_vm._v("Não")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Sim" } }, [_vm._v("Sim")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "deficiencia" } }, [
+              _vm._v("Possui Deficiência?")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.deficiencia,
+                  expression: "inscricao.deficiencia"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "deficiencia", id: "deficiencia" },
+              domProps: { value: _vm.inscricao.deficiencia },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "deficiencia", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("h4", { staticClass: "pt-4" }, [_vm._v("ENDEREÇO")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.endereco,
+                  expression: "inscricao.endereco"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "endereco", id: "endereco" },
+              domProps: { value: _vm.inscricao.endereco },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "endereco", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "email" } }, [
+              _vm._v("Endereço de E-mail")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.email,
+                  expression: "inscricao.email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "email", id: "email" },
+              domProps: { value: _vm.inscricao.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "email", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "celular" } }, [_vm._v("Celular")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.celular,
+                  expression: "inscricao.celular"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "celular", id: "celular" },
+              domProps: { value: _vm.inscricao.celular },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "celular", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "telefone" } }, [_vm._v("Telefone")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.telefone,
+                  expression: "inscricao.telefone"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "telefone", id: "telefone" },
+              domProps: { value: _vm.inscricao.telefone },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "telefone", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("h4", { staticClass: "pt-4" }, [_vm._v("DOCUMENTOS")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "cpf" } }, [_vm._v("CPF")]),
+              _vm._v(" "),
+              _c("the-mask", {
+                staticClass: "form-control",
+                attrs: {
+                  id: "cpf",
+                  mask: ["###.###.###-##"],
+                  masked: true,
+                  placeholder: "123.456.789-01"
+                },
+                model: {
+                  value: _vm.inscricao.cpf,
+                  callback: function($$v) {
+                    _vm.$set(_vm.inscricao, "cpf", $$v)
+                  },
+                  expression: "inscricao.cpf"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "rg" } }, [_vm._v("RG")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.rg,
+                  expression: "inscricao.rg"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "rg", id: "rg" },
+              domProps: { value: _vm.inscricao.rg },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "rg", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("h4", { staticClass: "pt-4" }, [_vm._v("CURSO DE INTERESSE")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.curso_interesse,
+                  expression: "inscricao.curso_interesse"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "curso_interesse",
+                id: "curso_interesse"
+              },
+              domProps: { value: _vm.inscricao.curso_interesse },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
                   _vm.$set(
                     _vm.inscricao,
-                    "estrangeiro",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    "curso_interesse",
+                    $event.target.value
                   )
                 }
               }
-            },
-            [
-              _c("option", { attrs: { value: "Não" } }, [_vm._v("Não")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Sim" } }, [_vm._v("Sim")])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "deficiencia" } }, [
-            _vm._v("Possui Deficiência?")
+            })
           ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.deficiencia,
-                expression: "inscricao.deficiencia"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "deficiencia", id: "deficiencia" },
-            domProps: { value: _vm.inscricao.deficiencia },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "deficiencia", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("h4", { staticClass: "pt-4" }, [_vm._v("ENDEREÇO")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.endereco,
-                expression: "inscricao.endereco"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "endereco", id: "endereco" },
-            domProps: { value: _vm.inscricao.endereco },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "endereco", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("h4", { staticClass: "pt-4" }, [_vm._v("DOCUMENTOS")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { attrs: { for: "cpf" } }, [_vm._v("CPF")]),
-            _vm._v(" "),
-            _c("the-mask", {
-              staticClass: "form-control",
-              attrs: {
-                id: "cpf",
-                mask: ["###.###.###-##"],
-                masked: true,
-                placeholder: "123.456.789-01"
-              },
-              model: {
-                value: _vm.inscricao.cpf,
-                callback: function($$v) {
-                  _vm.$set(_vm.inscricao, "cpf", $$v)
-                },
-                expression: "inscricao.cpf"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "rg" } }, [_vm._v("RG")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.rg,
-                expression: "inscricao.rg"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "rg", id: "rg" },
-            domProps: { value: _vm.inscricao.rg },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "rg", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("h4", { staticClass: "pt-4" }, [_vm._v("CURSO DE INTERESSE")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.curso_interesse,
-                expression: "inscricao.curso_interesse"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "curso_interesse",
-              id: "curso_interesse"
-            },
-            domProps: { value: _vm.inscricao.curso_interesse },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "curso_interesse", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
+          _vm._m(0)
+        ]
+      )
     ]
   )
 }
@@ -23882,352 +24262,534 @@ var render = function() {
       _vm._v(" "),
       _c("h4", { staticClass: "text-center" }, [_vm._v("Pré-matricula")]),
       _vm._v(" "),
-      _c("form", { attrs: { action: "#", method: "post" } }, [
-        _c("h4", { staticClass: "pt-4" }, [_vm._v("DADOS PESSOAIS")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "nome" } }, [_vm._v("Nome completo")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.nome,
-                expression: "inscricao.nome"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "nome", id: "nome" },
-            domProps: { value: _vm.inscricao.nome },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "nome", $event.target.value)
-              }
+      _c(
+        "form",
+        {
+          attrs: { action: "#", method: "post" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.editar($event)
             }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "sexo" } }, [_vm._v("Sexo")]),
+          }
+        },
+        [
+          _c("h4", { staticClass: "pt-4" }, [_vm._v("DADOS PESSOAIS")]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "nome" } }, [_vm._v("Nome completo")]),
+            _vm._v(" "),
+            _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.inscricao.sexo,
-                  expression: "inscricao.sexo"
+                  value: _vm.inscricao.nome,
+                  expression: "inscricao.nome"
                 }
               ],
               staticClass: "form-control",
-              attrs: { name: "sexo", id: "sexo" },
+              attrs: { type: "text", name: "nome", id: "nome" },
+              domProps: { value: _vm.inscricao.nome },
               on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.inscricao,
-                    "sexo",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "nome", $event.target.value)
                 }
               }
-            },
-            [
-              _c("option", { attrs: { value: "" } }),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Feminino" } }, [
-                _vm._v("Feminino")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Masculino" } }, [
-                _vm._v("Masculino")
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "estado_civil" } }, [
-            _vm._v("Estado Civil")
+            })
           ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "sexo" } }, [_vm._v("Sexo")]),
+            _vm._v(" "),
+            _c(
+              "select",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.estado_civil,
-                expression: "inscricao.estado_civil"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "estado_civil", id: "estado_civil" },
-            domProps: { value: _vm.inscricao.estado_civil },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.inscricao.sexo,
+                    expression: "inscricao.sexo"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "sexo", id: "sexo" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.inscricao,
+                      "sexo",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-                _vm.$set(_vm.inscricao, "estado_civil", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { attrs: { for: "dt_nascimento" } }, [
-              _vm._v("Data de Nascimento")
+              },
+              [
+                _c("option", { attrs: { value: "" } }),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Feminino" } }, [
+                  _vm._v("Feminino")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Masculino" } }, [
+                  _vm._v("Masculino")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "estado_civil" } }, [
+              _vm._v("Estado Civil")
             ]),
             _vm._v(" "),
-            _c("the-mask", {
-              staticClass: "form-control",
-              attrs: {
-                id: "dt_nascimento",
-                mask: ["##/##/####"],
-                masked: true,
-                name: "dt_nascimento",
-                placeholder: "31/02/2222"
-              },
-              model: {
-                value: _vm.inscricao.dt_nascimento,
-                callback: function($$v) {
-                  _vm.$set(_vm.inscricao, "dt_nascimento", $$v)
-                },
-                expression: "inscricao.dt_nascimento"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "escolaridade" } }, [
-            _vm._v("Escolaridade")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
+            _c(
+              "select",
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.escolaridade,
-                expression: "inscricao.escolaridade"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "escolaridade", id: "escolaridade" },
-            domProps: { value: _vm.inscricao.escolaridade },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.inscricao.estado_civil,
+                    expression: "inscricao.estado_civil"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "estado_civil", id: "estado_civil" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.inscricao,
+                      "estado_civil",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
                 }
-                _vm.$set(_vm.inscricao, "escolaridade", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "estrangeiro" } }, [
-            _vm._v("Estrangeiro (a)")
+              },
+              [
+                _c("option", { attrs: { value: "" } }),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Solteiro (a)" } }, [
+                  _vm._v("Solteiro (a)")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Casado (a)" } }, [
+                  _vm._v("Casado (a)")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Separado (a)" } }, [
+                  _vm._v("Separado (a)")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Divorciado (a)" } }, [
+                  _vm._v("Divorciado (a)")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Viúvo (a)" } }, [
+                  _vm._v("Viúvo (a)")
+                ])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c(
-            "select",
-            {
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "dt_nascimento" } }, [
+                _vm._v("Data de Nascimento")
+              ]),
+              _vm._v(" "),
+              _c("the-mask", {
+                staticClass: "form-control",
+                attrs: {
+                  id: "dt_nascimento",
+                  mask: ["##/##/####"],
+                  masked: true,
+                  name: "dt_nascimento",
+                  placeholder: "31/02/2222"
+                },
+                model: {
+                  value: _vm.inscricao.dt_nascimento,
+                  callback: function($$v) {
+                    _vm.$set(_vm.inscricao, "dt_nascimento", $$v)
+                  },
+                  expression: "inscricao.dt_nascimento"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "mae" } }, [_vm._v("Nome da Mãe")]),
+            _vm._v(" "),
+            _c("input", {
               directives: [
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.inscricao.estrangeiro,
-                  expression: "inscricao.estrangeiro"
+                  value: _vm.inscricao.mae,
+                  expression: "inscricao.mae"
                 }
               ],
               staticClass: "form-control",
-              attrs: { name: "estrangeiro", id: "estrangeiro" },
+              attrs: { type: "text", name: "mae", id: "mae" },
+              domProps: { value: _vm.inscricao.mae },
               on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "mae", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "pai" } }, [_vm._v("Nome do Pai")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.pai,
+                  expression: "inscricao.pai"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "pai", id: "pai" },
+              domProps: { value: _vm.inscricao.pai },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "pai", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "escolaridade" } }, [
+              _vm._v("Escolaridade")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.escolaridade,
+                  expression: "inscricao.escolaridade"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "escolaridade", id: "escolaridade" },
+              domProps: { value: _vm.inscricao.escolaridade },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "escolaridade", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "estrangeiro" } }, [
+              _vm._v("Estrangeiro (a)")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.inscricao.estrangeiro,
+                    expression: "inscricao.estrangeiro"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { name: "estrangeiro", id: "estrangeiro" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.inscricao,
+                      "estrangeiro",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "Não" } }, [_vm._v("Não")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "Sim" } }, [_vm._v("Sim")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "deficiencia" } }, [
+              _vm._v("Possui Deficiência?")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.deficiencia,
+                  expression: "inscricao.deficiencia"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "deficiencia", id: "deficiencia" },
+              domProps: { value: _vm.inscricao.deficiencia },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "deficiencia", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("h4", { staticClass: "pt-4" }, [_vm._v("ENDEREÇO")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.endereco,
+                  expression: "inscricao.endereco"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "endereco", id: "endereco" },
+              domProps: { value: _vm.inscricao.endereco },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "endereco", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "email" } }, [
+              _vm._v("Endereço de E-mail")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.email,
+                  expression: "inscricao.email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "email", id: "email" },
+              domProps: { value: _vm.inscricao.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "email", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "celular" } }, [_vm._v("Celular")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.celular,
+                  expression: "inscricao.celular"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "celular", id: "celular" },
+              domProps: { value: _vm.inscricao.celular },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "celular", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "telefone" } }, [_vm._v("Telefone")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.telefone,
+                  expression: "inscricao.telefone"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "telefone", id: "telefone" },
+              domProps: { value: _vm.inscricao.telefone },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "telefone", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("h4", { staticClass: "pt-4" }, [_vm._v("DOCUMENTOS")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "cpf" } }, [_vm._v("CPF")]),
+              _vm._v(" "),
+              _c("the-mask", {
+                staticClass: "form-control",
+                attrs: {
+                  id: "cpf",
+                  mask: ["###.###.###-##"],
+                  masked: true,
+                  placeholder: "123.456.789-01"
+                },
+                model: {
+                  value: _vm.inscricao.cpf,
+                  callback: function($$v) {
+                    _vm.$set(_vm.inscricao, "cpf", $$v)
+                  },
+                  expression: "inscricao.cpf"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "rg" } }, [_vm._v("RG")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.rg,
+                  expression: "inscricao.rg"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "rg", id: "rg" },
+              domProps: { value: _vm.inscricao.rg },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.inscricao, "rg", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("h4", { staticClass: "pt-4" }, [_vm._v("CURSO DE INTERESSE")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.curso_interesse,
+                  expression: "inscricao.curso_interesse"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "curso_interesse",
+                id: "curso_interesse"
+              },
+              domProps: { value: _vm.inscricao.curso_interesse },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
                   _vm.$set(
                     _vm.inscricao,
-                    "estrangeiro",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    "curso_interesse",
+                    $event.target.value
                   )
                 }
               }
-            },
-            [
-              _c("option", { attrs: { value: "Não" } }, [_vm._v("Não")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "Sim" } }, [_vm._v("Sim")])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "deficiencia" } }, [
-            _vm._v("Possui Deficiência?")
+            })
           ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.deficiencia,
-                expression: "inscricao.deficiencia"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "deficiencia", id: "deficiencia" },
-            domProps: { value: _vm.inscricao.deficiencia },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "deficiencia", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("h4", { staticClass: "pt-4" }, [_vm._v("ENDEREÇO")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.endereco,
-                expression: "inscricao.endereco"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "endereco", id: "endereco" },
-            domProps: { value: _vm.inscricao.endereco },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "endereco", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("h4", { staticClass: "pt-4" }, [_vm._v("DOCUMENTOS")]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", { attrs: { for: "cpf" } }, [_vm._v("CPF")]),
-            _vm._v(" "),
-            _c("the-mask", {
-              staticClass: "form-control",
-              attrs: {
-                id: "cpf",
-                mask: ["###.###.###-##"],
-                masked: true,
-                placeholder: "123.456.789-01"
-              },
-              model: {
-                value: _vm.inscricao.cpf,
-                callback: function($$v) {
-                  _vm.$set(_vm.inscricao, "cpf", $$v)
-                },
-                expression: "inscricao.cpf"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "rg" } }, [_vm._v("RG")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.rg,
-                expression: "inscricao.rg"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", name: "rg", id: "rg" },
-            domProps: { value: _vm.inscricao.rg },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "rg", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("h4", { staticClass: "pt-4" }, [_vm._v("CURSO DE INTERESSE")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.curso_interesse,
-                expression: "inscricao.curso_interesse"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              name: "curso_interesse",
-              id: "curso_interesse"
-            },
-            domProps: { value: _vm.inscricao.curso_interesse },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.inscricao, "curso_interesse", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
+          _vm._m(0)
+        ]
+      )
     ]
   )
 }
@@ -24356,32 +24918,61 @@ var render = function() {
             _vm._v("Estado Civil")
           ]),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inscricao.estado_civil,
-                expression: "inscricao.estado_civil"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              readonly: "",
-              type: "text",
-              name: "estado_civil",
-              id: "estado_civil"
-            },
-            domProps: { value: _vm.inscricao.estado_civil },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.inscricao.estado_civil,
+                  expression: "inscricao.estado_civil"
                 }
-                _vm.$set(_vm.inscricao, "estado_civil", $event.target.value)
+              ],
+              staticClass: "form-control",
+              attrs: { readonly: "", name: "estado_civil", id: "estado_civil" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.inscricao,
+                    "estado_civil",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
               }
-            }
-          })
+            },
+            [
+              _c("option", { attrs: { value: "" } }),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Solteiro (a)" } }, [
+                _vm._v("Solteiro (a)")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Casado (a)" } }, [
+                _vm._v("Casado (a)")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Separado (a)" } }, [
+                _vm._v("Separado (a)")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Divorciado (a)" } }, [
+                _vm._v("Divorciado (a)")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "Viúvo (a)" } }, [
+                _vm._v("Viúvo (a)")
+              ])
+            ]
+          )
         ]),
         _vm._v(" "),
         _c(
@@ -24413,6 +25004,58 @@ var render = function() {
           ],
           1
         ),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "mae" } }, [_vm._v("Nome da Mãe")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inscricao.mae,
+                expression: "inscricao.mae"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { readonly: "", type: "text", name: "mae", id: "mae" },
+            domProps: { value: _vm.inscricao.mae },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.inscricao, "mae", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "pai" } }, [_vm._v("Nome do Pai")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inscricao.pai,
+                expression: "inscricao.pai"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { readonly: "", type: "text", name: "pai", id: "pai" },
+            domProps: { value: _vm.inscricao.pai },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.inscricao, "pai", $event.target.value)
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "escolaridade" } }, [
@@ -24550,6 +25193,96 @@ var render = function() {
                   return
                 }
                 _vm.$set(_vm.inscricao, "endereco", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "email" } }, [
+            _vm._v("Endereço de E-mail")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inscricao.email,
+                expression: "inscricao.email"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { readonly: "", type: "text", name: "email", id: "email" },
+            domProps: { value: _vm.inscricao.email },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.inscricao, "email", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "celular" } }, [_vm._v("Celular")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inscricao.celular,
+                expression: "inscricao.celular"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              readonly: "",
+              type: "text",
+              name: "celular",
+              id: "celular"
+            },
+            domProps: { value: _vm.inscricao.celular },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.inscricao, "celular", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "telefone" } }, [_vm._v("Telefone")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inscricao.telefone,
+                expression: "inscricao.telefone"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              readonly: "",
+              type: "text",
+              name: "telefone",
+              id: "telefone"
+            },
+            domProps: { value: _vm.inscricao.telefone },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.inscricao, "telefone", $event.target.value)
               }
             }
           })
@@ -24797,13 +25530,7 @@ var render = function() {
                             }
                           }
                         },
-                        [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(inscricao.nome) +
-                              "\n              "
-                          )
-                        ]
+                        [_vm._v(_vm._s(inscricao.nome))]
                       )
                     ],
                     1
@@ -40598,8 +41325,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/omegavinny/Projetos/empresas-sedect/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/omegavinny/Projetos/empresas-sedect/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/omegavinny/Projetos/sedect/empresas/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/omegavinny/Projetos/sedect/empresas/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

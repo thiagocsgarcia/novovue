@@ -9,7 +9,7 @@
           <router-link
             :to="{ name: 'inscricoes.cadastro' }"
             class="btn btn-success mb-2"
-          >Nova Cadastro</router-link>
+          >Nova Inscrição</router-link>
           <div class="input-group col-xs-10 col-md-10 mb-2 mr-sm-2">
             <div class="input-group-prepend">
               <div class="input-group-text">Pesquisar</div>

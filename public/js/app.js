@@ -7623,7 +7623,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.order {\r\n  cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.order {\n  cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -40761,7 +40761,7 @@ try {
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // Desenvolvimento
 
-window.axios.defaults.baseURL = 'http://localhost:8000/api/v1'; // Servidor de Teste
+window.axios.defaults.baseURL = 'http://localhost/empresas/api/v1'; // Servidor de Teste
 // window.axios.defaults.baseURL = 'http://10.171.2.18/empresas/api/v1'
 // Servidor de Produção
 // window.axios.defaults.baseURL = 'http://www.desenvolve.saovicente.sp.gov.br/empresas/api/v1'
@@ -41371,8 +41371,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Desenvolvimento\Projetos\sedect\empresas\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Desenvolvimento\Projetos\sedect\empresas\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/omegavinny/Projetos/sedect/empresas/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/omegavinny/Projetos/sedect/empresas/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

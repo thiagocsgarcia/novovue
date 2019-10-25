@@ -7,7 +7,7 @@
       </div>
       <div class="panel-body">
         <div class="form-inline col-xs-10 col-md-10 col offset-1">
-          <router-link :to="{name: 'criarEmpresa'}" class="btn btn-success mb-2">Nova Empresa</router-link>
+          <router-link :to="{ name: 'criarEmpresa' }" class="btn btn-success mb-2">Nova Empresa</router-link>
           <div class="input-group col-xs-10 col-md-10 mb-2 mr-sm-2">
             <div class="input-group-prepend">
               <div class="input-group-text">Pesquisar</div>
@@ -23,41 +23,28 @@
         </div>
 
         <table class="table table-light table-bordered table-striped" style="font-size: 0.6rem">
-          <thead class="table-dark">
+          <thead class="thead-dark">
             <tr class="text-center">
-              <th @click="orderData('cnpj')" class="order">CNPJ</th>
-              <th @click="orderData('nome_fantasia')" class="order">Nome Fantasia</th>
-              <th @click="orderData('email')" class="order">Email</th>
-              <th @click="orderData('telefone')" class="order">Telefone</th>
-              <th @click="orderData('status')" class="order">Atualizado</th>
-              <th>Ações</th>
+              <th>Nome Fantasia</th>
+              <th>CNPJ</th>
+              <th>Razão Social</th>
+              <th>Email</th>
+              <th>Telefone</th>
+              <th colspan="3">Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(empresa, index) in filtered" :key="index">
-              <td>{{ empresa.cnpj }}</td>
+            <tr v-for="empresa in filtered" :key="empresa.id">
               <td>{{ empresa.nome_fantasia }}</td>
+              <td class="text-center">{{ empresa.cnpj }}</td>
+              <td>{{ empresa.razao_social }}</td>
               <td>{{ empresa.email }}</td>
               <td>{{ empresa.telefone }}</td>
               <td class="text-center">
-                <span v-if="empresa.status === 0" style="color: red">
-                  <ion-icon name="close" size="large"></ion-icon>
-                </span>
-                <span v-else style="color: green">
-                  <ion-icon name="checkmark" size="large"></ion-icon>
-                </span>
+                <router-link :to="{ name: 'editarEmpresa', params: { id: empresa.id } }" class="btn btn-sm btn-outline-warning">Editar</router-link>
               </td>
-              <td class="text-center">
-                <router-link
-                  :to="{name: 'editarEmpresa', params: {id: empresa.id}}"
-                  class="btn btn-sm btn-outline-warning"
-                >Editar</router-link>
-                <span>&nbsp; | &nbsp;</span>
-                <a
-                  href="#"
-                  v-on:click="deleteData(empresa.id, index)"
-                  class="btn btn-sm btn-outline-danger"
-                >Deletar</a>
+              <td>
+                <button @click="excluir(empresa)" class="btn btn-sm btn-outline-danger">Deletar</button>
               </td>
             </tr>
           </tbody>
@@ -69,6 +56,19 @@
 
 <script>
 export default {
+  created () {
+    window.axios.get('/empresas')
+    .then(response => {
+      this.empresas = response.data
+    })
+    .catch(error => {
+      swal({
+        title: 'Não foi possivel carregar os dados',
+        text: error,
+        icon: 'error'
+      })
+    })
+  },
   computed: {
     filtered() {
       if (this.search !== '') {
@@ -78,54 +78,28 @@ export default {
       }
     }
   },
-  mounted() {
-    this.column = window.localStorage.getItem('column')
-    this.order = window.localStorage.getItem('order')
-    this.search = window.localStorage.getItem('search')
-    this.loadData()
-  },
-  data: function() {
+  data () {
     return {
-      column: 'cnpj',
       empresas: [],
-      order: 'asc',
-      search: ''
+      search: '',
     }
   },
   methods: {
-    deleteData(id, item) {
+    excluir (empresa) {
       swal({
         title: 'Atenção',
-        text:
-          'Após excluído as informações não poderão ser recuperadas. Deseja realmente excluir?',
+        text: 'Após excluído as informações não poderão ser recuperadas. Deseja realmente excluir?',
         icon: 'warning',
         buttons: true,
         dangerMode: true
-      }).then(del => {
-        if (del) {
-          axios
-            .delete('/empresas/' + id)
-            .then(resp => {
-              swal({
-                text: 'Exclusão realizada com sucesso!',
-                icon: 'success'
-              })
-              this.empresas.splice(item, 1)
-              this.$router.go(this.$router.currentRoute)
-            })
-            .catch(resp => {
-              swal({
-                title: 'Falha na exclusão',
-                text: resp,
-                icon: 'error'
-              })
-            })
+      })
+      .then(result => {
+        if (result) {
+          this.handlerDelete(empresa)
         }
       })
     },
-    filterData() {
-      window.localStorage.setItem('search', this.search)
-
+    filterData () {
       return this.empresas.filter(empresa => {
         for (const key in empresa) {
           if (empresa[key] !== null) {
@@ -136,56 +110,14 @@ export default {
         }
       })
     },
-    loadData() {
-      axios
-        .get('/empresas')
-        .then(response => {
-          this.empresas = response.data
-        })
-        .catch(error => {
-          swal({
-            title: 'Não foi possivel carregar os dados',
-            text: error,
-            icon: 'error'
-          })
-        })
-    },
-    orderData(column) {
-      if (this.column === column) {
-        this.order = this.order === 'asc' ? 'desc' : 'asc'
-        window.localStorage.setItem('order', this.order)
-      } else {
-        this.column = column
-        this.order = 'asc'
-        window.localStorage.setItem('column', this.column)
-      }
+    handlerDelete (empresa) {
+      window.axios.delete(`/empresas/${empresa.id}`)
+      .then(response => {
 
-      this.empresas.sort((a, b) => {
-        if (this.order === 'asc') {
-          if (a[this.column] > b[this.column]) {
-            return 1
-          } else {
-            return -1
-          }
-          return 0
-        }
-        if (this.order === 'desc') {
-          if (a[this.column] < b[this.column]) {
-            return 1
-          } else {
-            return -1
-          }
-          return 0
-        }
+      }).catch(error => {
+
       })
     }
   }
 }
 </script>
-
-<style>
-.order {
-  cursor: pointer;
-}
-</style>
-

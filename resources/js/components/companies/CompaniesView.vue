@@ -2,14 +2,14 @@
   <div>
     <div class="col-xs-12 col-md-12 panel panel-default">
       <div class="panel-heading alert-dark">
-        <h3 class="text-center">A {{ empresa.nome_fantasia }}</h3>
+        <h3 class="text-center">Nome Fantasia {{ empresa.nome_fantasia }}</h3>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="form-group">
-            <router-link :to="{name: 'listaEmpresas'}" class="btn btn-lg btn-warning">Editar</router-link>
-            <router-link :to="{name: 'listaEmpresas'}" class="btn btn-lg btn-primary">Vagas</router-link>
-            <router-link :to="{name: 'listaEmpresas'}" class="btn btn-lg btn-default">Fechar</router-link>
+            <router-link :to="{ name: 'empresas.index' }" class="btn btn-lg btn-warning">Editar</router-link>
+            <router-link :to="{ name: 'empresas.index' }" class="btn btn-lg btn-primary">Vagas</router-link>
+            <router-link :to="{ name: 'empresas.index' }" class="btn btn-lg btn-default">Fechar</router-link>
           </div>
         </div>
       </div>

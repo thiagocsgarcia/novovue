@@ -1862,47 +1862,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      empresa: {
-        bairro: '',
-        celular: '',
-        cep: '',
-        cidade: '',
-        cnpj: '',
-        contato: '',
-        email: '',
-        endereco: '',
-        ie: '',
-        im: '',
-        nome_fantasia: '',
-        porte: '',
-        ramo_atividade: '',
-        razao_social: '',
-        telefone: '',
-        telefone2: '',
-        status: 1
-      }
+      empresa: {}
     };
   },
   methods: {
-    saveForm: function saveForm() {
-      event.preventDefault();
-      var app = this;
-      axios.post('/empresas', this.empresa).then(function (resp) {
-        app.$router.push({
-          path: '/'
+    handlerCreate: function handlerCreate() {
+      var _this = this;
+
+      axios.post('/empresas', this.empresa).then(function (response) {
+        _this.$router.push({
+          name: 'empresas.index'
         });
-      })["catch"](function (resp) {
+      })["catch"](function (error) {
         swal({
-          title: 'Não foi possivel realizar o cadastro.',
-          text: resp,
+          title: 'Não foi possivel realizar o cadastro!',
+          text: error.response,
           icon: 'error'
         });
       });
@@ -2064,41 +2041,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    var app = this;
-    var id = app.$route.params.id;
-    axios.get('/empresas/' + id).then(function (resp) {
-      app.empresa = resp.data;
-      app.empresa.status = 1;
-    })["catch"](function () {
+    var _this = this;
+
+    var id = this.$route.params.id;
+    axios.get("/empresas/".concat(id)).then(function (response) {
+      _this.empresa = response.data;
+    })["catch"](function (error) {
       swal({
         title: 'Não foi possivel encontrar empresa selecionada.',
-        text: resp,
+        text: error.response,
         icon: 'error'
       });
     });
   },
   data: function data() {
     return {
-      EmpresaId: null,
       empresa: {}
     };
   },
   methods: {
-    saveForm: function saveForm() {
-      event.preventDefault();
-      var app = this;
-      axios.patch('/empresas/' + this.empresa.id, this.empresa).then(function (resp) {
-        app.$router.replace('/');
-      })["catch"](function (resp) {
+    handlerEdit: function handlerEdit() {
+      var _this2 = this;
+
+      axios.patch("/empresas/".concat(this.empresa.id), this.empresa).then(function (response) {
+        _this2.$router.push({
+          name: 'empresas.index'
+        });
+      })["catch"](function (error) {
         swal({
           title: 'Não foi possivel salvar as alterações.',
-          text: resp,
+          text: error.response,
           icon: 'error'
         });
       });
@@ -2117,6 +2091,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2232,64 +2215,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     handlerDelete: function handlerDelete(empresa) {
-      window.axios["delete"]("/empresas/".concat(empresa.id)).then(function (response) {})["catch"](function (error) {});
-    }
-  }
-});
+      var _this4 = this;
 
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/companies/CompaniesView.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/companies/CompaniesView.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    var id = this.$route.params.id;
-    console.log(id);
-    this.loadData(id);
-  },
-  data: function data() {
-    return {
-      empresa: {}
-    };
-  },
-  methods: {
-    loadData: function loadData(id) {
-      var _this = this;
-
-      axios.get('/empresas/' + id).then(function (response) {
-        _this.empresa = response.data;
-      })["catch"](function (error) {
-        swal({
-          title: 'Não foi possivel encontrar empresa selecionada.',
-          text: error,
-          icon: 'error'
+      window.axios["delete"]("/empresas/".concat(empresa.id)).then(function (response) {
+        _this4.$router.push({
+          name: 'empresas.index'
         });
+      })["catch"](function (error) {//
       });
     }
   }
@@ -18164,7 +18096,7 @@ return jQuery;
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.15.0
+ * @version 1.16.0
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -18186,16 +18118,17 @@ __webpack_require__.r(__webpack_exports__);
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && typeof navigator !== 'undefined';
 
-var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
-var timeoutDuration = 0;
-for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
-  if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
-    timeoutDuration = 1;
-    break;
+var timeoutDuration = function () {
+  var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
+  for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
+    if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
+      return 1;
+    }
   }
-}
+  return 0;
+}();
 
 function microtaskDebounce(fn) {
   var called = false;
@@ -18313,6 +18246,17 @@ function getScrollParent(element) {
   }
 
   return getScrollParent(getParentNode(element));
+}
+
+/**
+ * Returns the reference node of the reference object, or the reference object itself.
+ * @method
+ * @memberof Popper.Utils
+ * @param {Element|Object} reference - the reference element (the popper will be relative to this)
+ * @returns {Element} parent
+ */
+function getReferenceNode(reference) {
+  return reference && reference.referenceNode ? reference.referenceNode : reference;
 }
 
 var isIE11 = isBrowser && !!(window.MSInputMethodContext && document.documentMode);
@@ -18623,8 +18567,8 @@ function getBoundingClientRect(element) {
 
   // subtract scrollbar size from sizes
   var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
-  var width = sizes.width || element.clientWidth || result.right - result.left;
-  var height = sizes.height || element.clientHeight || result.bottom - result.top;
+  var width = sizes.width || element.clientWidth || result.width;
+  var height = sizes.height || element.clientHeight || result.height;
 
   var horizScrollbar = element.offsetWidth - width;
   var vertScrollbar = element.offsetHeight - height;
@@ -18776,7 +18720,7 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
   // NOTE: 1 DOM access here
 
   var boundaries = { top: 0, left: 0 };
-  var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
+  var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference));
 
   // Handle viewport case
   if (boundariesElement === 'viewport') {
@@ -18904,7 +18848,7 @@ function computeAutoPlacement(placement, refRect, popper, reference, boundariesE
 function getReferenceOffsets(state, popper, reference) {
   var fixedPosition = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-  var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
+  var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference));
   return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent, fixedPosition);
 }
 
@@ -19166,7 +19110,7 @@ function destroy() {
 
   this.disableEventListeners();
 
-  // remove the popper if user explicity asked for the deletion on destroy
+  // remove the popper if user explicitly asked for the deletion on destroy
   // do not use `remove` because IE11 doesn't support it
   if (this.options.removeOnDestroy) {
     this.popper.parentNode.removeChild(this.popper);
@@ -21266,654 +21210,580 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c(
-          "router-link",
-          {
-            staticClass: "btn btn-lg btn-default",
-            attrs: { to: { name: "listaEmpresas" } }
-          },
-          [_vm._v("Voltar")]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-xs-12 col-md-12 panel panel-default" }, [
-      _vm._m(0),
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c(
+        "div",
+        { staticClass: "d-flex justify-content-between align-items-center" },
+        [
+          _c("h2", [_vm._v("Cadastro de Empresas")]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-secondary",
+              attrs: { to: { name: "empresas.index" } }
+            },
+            [
+              _c("i", { staticClass: "fas fa-arrow-left" }),
+              _vm._v("\n        Voltar\n      ")
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c("br"),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            on: {
-              submit: function($event) {
-                return _vm.saveForm()
-              }
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.handlerCreate($event)
             }
-          },
-          [
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    { staticClass: "control-label", attrs: { for: "cnpj" } },
-                    [_vm._v("CNPJ")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "cnpj",
-                      mask: ["###.###.###-##", "##.###.###/####-##"],
-                      masked: true,
-                      placeholder: "99.999.999/9999-99"
+          }
+        },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "cnpj" } },
+                  [_vm._v("CNPJ")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "cnpj",
+                    mask: ["###.###.###-##", "##.###.###/####-##"],
+                    masked: true,
+                    placeholder: "99.999.999/9999-99"
+                  },
+                  model: {
+                    value: _vm.empresa.cnpj,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "cnpj", $$v)
                     },
-                    model: {
-                      value: _vm.empresa.cnpj,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "cnpj", $$v)
-                      },
-                      expression: "empresa.cnpj"
-                    }
-                  })
-                ],
-                1
+                    expression: "empresa.cnpj"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "ie" } },
+                [_vm._v("Inscrição Estadual")]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-4 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "ie" } },
-                  [_vm._v("Inscrição Estadual")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.ie,
-                      expression: "empresa.ie"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "ie" },
-                  domProps: { value: _vm.empresa.ie },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "ie", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-4 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "im" } },
-                  [_vm._v("Inscrição Municipal")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.im,
-                      expression: "empresa.im"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "im" },
-                  domProps: { value: _vm.empresa.im },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "im", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
+              _c("input", {
+                directives: [
                   {
-                    staticClass: "control-label",
-                    attrs: { for: "razao_social" }
-                  },
-                  [_vm._v("Razão Social")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.razao_social,
-                      expression: "empresa.razao_social"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "razao_social" },
-                  domProps: { value: _vm.empresa.razao_social },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "razao_social", $event.target.value)
-                    }
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.ie,
+                    expression: "empresa.ie"
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "control-label",
-                    attrs: { for: "nome_fantasia" }
-                  },
-                  [_vm._v("Nome Fantasia")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.nome_fantasia,
-                      expression: "empresa.nome_fantasia"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "nome_fantasia" },
-                  domProps: { value: _vm.empresa.nome_fantasia },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.empresa,
-                        "nome_fantasia",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "porte" } },
-                  [_vm._v("Porte")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.porte,
-                      expression: "empresa.porte"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "porte" },
-                  domProps: { value: _vm.empresa.porte },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "porte", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "control-label",
-                    attrs: { for: "ramo_atividade" }
-                  },
-                  [_vm._v("Ramo de Atividade")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.ramo_atividade,
-                      expression: "empresa.ramo_atividade"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "ramo_atividade" },
-                  domProps: { value: _vm.empresa.ramo_atividade },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.empresa,
-                        "ramo_atividade",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "contato" } },
-                  [_vm._v("Contato")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.contato,
-                      expression: "empresa.contato"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "contato" },
-                  domProps: { value: _vm.empresa.contato },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "contato", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "email" } },
-                  [_vm._v("E-mail")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.email,
-                      expression: "empresa.email"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "email", type: "email" },
-                  domProps: { value: _vm.empresa.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "email", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-12 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "endereco" } },
-                  [_vm._v("Endereço")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.endereco,
-                      expression: "empresa.endereco"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "endereco" },
-                  domProps: { value: _vm.empresa.endereco },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "endereco", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-4 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "bairro" } },
-                  [_vm._v("Bairro")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.bairro,
-                      expression: "empresa.bairro"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "bairro" },
-                  domProps: { value: _vm.empresa.bairro },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "bairro", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-4 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "" } },
-                  [_vm._v("Cidade")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.cidade,
-                      expression: "empresa.cidade"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "" },
-                  domProps: { value: _vm.empresa.cidade },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "cidade", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    { staticClass: "control-label", attrs: { for: "cep" } },
-                    [_vm._v("CEP")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "cep",
-                      mask: "#####-###",
-                      masked: true,
-                      placeholder: "99999-999"
-                    },
-                    model: {
-                      value: _vm.empresa.cep,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "cep", $$v)
-                      },
-                      expression: "empresa.cep"
-                    }
-                  })
                 ],
-                1
-              )
+                staticClass: "form-control",
+                attrs: { id: "ie" },
+                domProps: { value: _vm.empresa.ie },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "ie", $event.target.value)
+                  }
+                }
+              })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-4 form-group" }, [
               _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "control-label",
-                      attrs: { for: "telefone" }
-                    },
-                    [_vm._v("Telefone")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "telefone",
-                      mask: ["(##) ####-####", "(##) #####-####"],
-                      masked: true,
-                      placeholder: "(99) 9999-9999"
-                    },
-                    model: {
-                      value: _vm.empresa.telefone,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "telefone", $$v)
-                      },
-                      expression: "empresa.telefone"
-                    }
-                  })
-                ],
-                1
+                "label",
+                { staticClass: "control-label", attrs: { for: "im" } },
+                [_vm._v("Inscrição Municipal")]
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "control-label",
-                      attrs: { for: "telefone2" }
-                    },
-                    [_vm._v("Telefone 2")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "telefone2",
-                      mask: ["(##) ####-####", "(##) #####-####"],
-                      masked: true,
-                      placeholder: "(99) 9999-9999"
-                    },
-                    model: {
-                      value: _vm.empresa.telefone2,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "telefone2", $$v)
-                      },
-                      expression: "empresa.telefone2"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    { staticClass: "control-label", attrs: { for: "celular" } },
-                    [_vm._v("Celular")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "celular",
-                      mask: ["(##) ####-####", "(##) #####-####"],
-                      masked: true,
-                      placeholder: "(99) 99999-9999"
-                    },
-                    model: {
-                      value: _vm.empresa.celular,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "celular", $$v)
-                      },
-                      expression: "empresa.celular"
-                    }
-                  })
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-12 form-group" }, [
-                _c(
-                  "label",
+              _c("input", {
+                directives: [
                   {
-                    staticClass: "control-label",
-                    attrs: { for: "observacoes" }
-                  },
-                  [_vm._v("Observações")]
-                ),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.observacao,
-                      expression: "empresa.observacao"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "observacoes" },
-                  domProps: { value: _vm.empresa.observacao },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "observacao", $event.target.value)
-                    }
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.im,
+                    expression: "empresa.im"
                   }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-6 form-check text-left" },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.empresa.status,
-                        expression: "empresa.status"
-                      }
-                    ],
-                    staticClass: "form-check-input",
-                    attrs: { type: "checkbox", id: "status" },
-                    domProps: {
-                      checked: Array.isArray(_vm.empresa.status)
-                        ? _vm._i(_vm.empresa.status, null) > -1
-                        : _vm.empresa.status
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.empresa.status,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 &&
-                              _vm.$set(_vm.empresa, "status", $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              _vm.$set(
-                                _vm.empresa,
-                                "status",
-                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                              )
-                          }
-                        } else {
-                          _vm.$set(_vm.empresa, "status", $$c)
-                        }
-                      }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "im" },
+                domProps: { value: _vm.empresa.im },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-check-label",
-                      attrs: { for: "status" }
-                    },
-                    [_vm._v("Marcar como atualizado?")]
-                  )
-                ]
-              )
+                    _vm.$set(_vm.empresa, "im", $event.target.value)
+                  }
+                }
+              })
             ])
-          ]
-        )
-      ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "control-label",
+                  attrs: { for: "razao_social" }
+                },
+                [_vm._v("Razão Social")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.razao_social,
+                    expression: "empresa.razao_social"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "razao_social" },
+                domProps: { value: _vm.empresa.razao_social },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "razao_social", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "control-label",
+                  attrs: { for: "nome_fantasia" }
+                },
+                [_vm._v("Nome Fantasia")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.nome_fantasia,
+                    expression: "empresa.nome_fantasia"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "nome_fantasia" },
+                domProps: { value: _vm.empresa.nome_fantasia },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "nome_fantasia", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "porte" } },
+                [_vm._v("Porte")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.porte,
+                    expression: "empresa.porte"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "porte" },
+                domProps: { value: _vm.empresa.porte },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "porte", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "control-label",
+                  attrs: { for: "ramo_atividade" }
+                },
+                [_vm._v("Ramo de Atividade")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.ramo_atividade,
+                    expression: "empresa.ramo_atividade"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "ramo_atividade" },
+                domProps: { value: _vm.empresa.ramo_atividade },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "ramo_atividade", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "contato" } },
+                [_vm._v("Contato")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.contato,
+                    expression: "empresa.contato"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "contato" },
+                domProps: { value: _vm.empresa.contato },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "contato", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "email" } },
+                [_vm._v("E-mail")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.email,
+                    expression: "empresa.email"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "email", type: "email" },
+                domProps: { value: _vm.empresa.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "email", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "endereco" } },
+                [_vm._v("Endereço")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.endereco,
+                    expression: "empresa.endereco"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "endereco" },
+                domProps: { value: _vm.empresa.endereco },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "endereco", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-4 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "bairro" } },
+                [_vm._v("Bairro")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.bairro,
+                    expression: "empresa.bairro"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "bairro" },
+                domProps: { value: _vm.empresa.bairro },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "bairro", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "" } },
+                [_vm._v("Cidade")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.cidade,
+                    expression: "empresa.cidade"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "" },
+                domProps: { value: _vm.empresa.cidade },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "cidade", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "cep" } },
+                  [_vm._v("CEP")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "cep",
+                    mask: "#####-###",
+                    masked: true,
+                    placeholder: "99999-999"
+                  },
+                  model: {
+                    value: _vm.empresa.cep,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "cep", $$v)
+                    },
+                    expression: "empresa.cep"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "telefone" } },
+                  [_vm._v("Telefone")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "telefone",
+                    mask: ["(##) ####-####", "(##) #####-####"],
+                    masked: true,
+                    placeholder: "(99) 9999-9999"
+                  },
+                  model: {
+                    value: _vm.empresa.telefone,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "telefone", $$v)
+                    },
+                    expression: "empresa.telefone"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "telefone2" } },
+                  [_vm._v("Telefone 2")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "telefone2",
+                    mask: ["(##) ####-####", "(##) #####-####"],
+                    masked: true,
+                    placeholder: "(99) 9999-9999"
+                  },
+                  model: {
+                    value: _vm.empresa.telefone2,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "telefone2", $$v)
+                    },
+                    expression: "empresa.telefone2"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "celular" } },
+                  [_vm._v("Celular")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "celular",
+                    mask: ["(##) ####-####", "(##) #####-####"],
+                    masked: true,
+                    placeholder: "(99) 99999-9999"
+                  },
+                  model: {
+                    value: _vm.empresa.celular,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "celular", $$v)
+                    },
+                    expression: "empresa.celular"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "observacoes" } },
+                [_vm._v("Observações")]
+              ),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.observacao,
+                    expression: "empresa.observacao"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "observacoes" },
+                domProps: { value: _vm.empresa.observacao },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "observacao", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      )
     ])
   ])
 }
@@ -21922,25 +21792,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading alert-dark" }, [
-      _c("h3", { staticClass: "text-center" }, [
-        _vm._v("Cadastrar Nova Empresas")
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "offset-md-9 col-md-3 form-group" }, [
+        _c("button", { staticClass: "btn btn-lg btn-block btn-success" }, [
+          _vm._v("Cadastrar")
+        ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-xs-12 col-md-6 form-group text-right" },
-      [
-        _c("button", { staticClass: "btn btn-lg btn-success" }, [
-          _vm._v("Cadastrar Empresa")
-        ])
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -21964,654 +21822,580 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "form-group" },
-      [
-        _c(
-          "router-link",
-          {
-            staticClass: "btn btn-lg btn-default",
-            attrs: { to: { name: "listaEmpresas" } }
-          },
-          [_vm._v("Voltar")]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-xs-12 col-md-12 panel panel-default" }, [
-      _vm._m(0),
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c(
+        "div",
+        { staticClass: "d-flex justify-content-between align-items-center" },
+        [
+          _c("h2", [_vm._v("Edição de Cadastro")]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-secondary",
+              attrs: { to: { name: "empresas.index" } }
+            },
+            [
+              _c("i", { staticClass: "fas fa-arrow-left" }),
+              _vm._v("\n        Voltar\n      ")
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c("br"),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            on: {
-              submit: function($event) {
-                return _vm.saveForm()
-              }
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.handlerEdit($event)
             }
-          },
-          [
-            _c("div", { staticClass: "row" }, [
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    { staticClass: "control-label", attrs: { for: "cnpj" } },
-                    [_vm._v("CNPJ")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "cnpj",
-                      mask: ["###.###.###-##", "##.###.###/####-##"],
-                      masked: true,
-                      placeholder: "99.999.999/9999-99"
+          }
+        },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "cnpj" } },
+                  [_vm._v("CNPJ")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "cnpj",
+                    mask: ["###.###.###-##", "##.###.###/####-##"],
+                    masked: true,
+                    placeholder: "99.999.999/9999-99"
+                  },
+                  model: {
+                    value: _vm.empresa.cnpj,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "cnpj", $$v)
                     },
-                    model: {
-                      value: _vm.empresa.cnpj,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "cnpj", $$v)
-                      },
-                      expression: "empresa.cnpj"
-                    }
-                  })
-                ],
-                1
+                    expression: "empresa.cnpj"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "ie" } },
+                [_vm._v("Inscrição Estadual")]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-4 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "ie" } },
-                  [_vm._v("Inscrição Estadual")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.ie,
-                      expression: "empresa.ie"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "ie" },
-                  domProps: { value: _vm.empresa.ie },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "ie", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-4 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "im" } },
-                  [_vm._v("Inscrição Municipal")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.im,
-                      expression: "empresa.im"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "im" },
-                  domProps: { value: _vm.empresa.im },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "im", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
+              _c("input", {
+                directives: [
                   {
-                    staticClass: "control-label",
-                    attrs: { for: "razao_social" }
-                  },
-                  [_vm._v("Razão Social")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.razao_social,
-                      expression: "empresa.razao_social"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "razao_social" },
-                  domProps: { value: _vm.empresa.razao_social },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "razao_social", $event.target.value)
-                    }
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.ie,
+                    expression: "empresa.ie"
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "control-label",
-                    attrs: { for: "nome_fantasia" }
-                  },
-                  [_vm._v("Nome Fantasia")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.nome_fantasia,
-                      expression: "empresa.nome_fantasia"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "nome_fantasia" },
-                  domProps: { value: _vm.empresa.nome_fantasia },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.empresa,
-                        "nome_fantasia",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "porte" } },
-                  [_vm._v("Porte")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.porte,
-                      expression: "empresa.porte"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "porte" },
-                  domProps: { value: _vm.empresa.porte },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "porte", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "control-label",
-                    attrs: { for: "ramo_atividade" }
-                  },
-                  [_vm._v("Ramo de Atividade")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.ramo_atividade,
-                      expression: "empresa.ramo_atividade"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "ramo_atividade" },
-                  domProps: { value: _vm.empresa.ramo_atividade },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.empresa,
-                        "ramo_atividade",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "contato" } },
-                  [_vm._v("Contato")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.contato,
-                      expression: "empresa.contato"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "contato" },
-                  domProps: { value: _vm.empresa.contato },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "contato", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-6 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "email" } },
-                  [_vm._v("E-mail")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.email,
-                      expression: "empresa.email"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "email", type: "email" },
-                  domProps: { value: _vm.empresa.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "email", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-12 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "endereco" } },
-                  [_vm._v("Endereço")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.endereco,
-                      expression: "empresa.endereco"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "endereco" },
-                  domProps: { value: _vm.empresa.endereco },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "endereco", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-4 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "bairro" } },
-                  [_vm._v("Bairro")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.bairro,
-                      expression: "empresa.bairro"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "bairro" },
-                  domProps: { value: _vm.empresa.bairro },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "bairro", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-xs-12 col-md-4 form-group" }, [
-                _c(
-                  "label",
-                  { staticClass: "control-label", attrs: { for: "" } },
-                  [_vm._v("Cidade")]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.cidade,
-                      expression: "empresa.cidade"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "" },
-                  domProps: { value: _vm.empresa.cidade },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "cidade", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    { staticClass: "control-label", attrs: { for: "cep" } },
-                    [_vm._v("CEP")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "cep",
-                      mask: "#####-###",
-                      masked: true,
-                      placeholder: "99999-999"
-                    },
-                    model: {
-                      value: _vm.empresa.cep,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "cep", $$v)
-                      },
-                      expression: "empresa.cep"
-                    }
-                  })
                 ],
-                1
-              )
+                staticClass: "form-control",
+                attrs: { id: "ie" },
+                domProps: { value: _vm.empresa.ie },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "ie", $event.target.value)
+                  }
+                }
+              })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-4 form-group" }, [
               _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "control-label",
-                      attrs: { for: "telefone" }
-                    },
-                    [_vm._v("Telefone")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "telefone",
-                      mask: ["(##) ####-####", "(##) #####-####"],
-                      masked: true,
-                      placeholder: "(99) 9999-9999"
-                    },
-                    model: {
-                      value: _vm.empresa.telefone,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "telefone", $$v)
-                      },
-                      expression: "empresa.telefone"
-                    }
-                  })
-                ],
-                1
+                "label",
+                { staticClass: "control-label", attrs: { for: "im" } },
+                [_vm._v("Inscrição Municipal")]
               ),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "control-label",
-                      attrs: { for: "telefone2" }
-                    },
-                    [_vm._v("Telefone 2")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "telefone2",
-                      mask: ["(##) ####-####", "(##) #####-####"],
-                      masked: true,
-                      placeholder: "(99) 9999-9999"
-                    },
-                    model: {
-                      value: _vm.empresa.telefone2,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "telefone2", $$v)
-                      },
-                      expression: "empresa.telefone2"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-4 form-group" },
-                [
-                  _c(
-                    "label",
-                    { staticClass: "control-label", attrs: { for: "celular" } },
-                    [_vm._v("Celular")]
-                  ),
-                  _vm._v(" "),
-                  _c("the-mask", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "celular",
-                      mask: ["(##) ####-####", "(##) #####-####"],
-                      masked: true,
-                      placeholder: "(99) 99999-9999"
-                    },
-                    model: {
-                      value: _vm.empresa.celular,
-                      callback: function($$v) {
-                        _vm.$set(_vm.empresa, "celular", $$v)
-                      },
-                      expression: "empresa.celular"
-                    }
-                  })
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 col-md-12 form-group" }, [
-                _c(
-                  "label",
+              _c("input", {
+                directives: [
                   {
-                    staticClass: "control-label",
-                    attrs: { for: "observacoes" }
-                  },
-                  [_vm._v("Observações")]
-                ),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.empresa.observacao,
-                      expression: "empresa.observacao"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "observacoes" },
-                  domProps: { value: _vm.empresa.observacao },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.empresa, "observacao", $event.target.value)
-                    }
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.im,
+                    expression: "empresa.im"
                   }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-xs-12 col-md-6 form-check text-left" },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.empresa.status,
-                        expression: "empresa.status"
-                      }
-                    ],
-                    staticClass: "form-check-input",
-                    attrs: { type: "checkbox", id: "status" },
-                    domProps: {
-                      checked: Array.isArray(_vm.empresa.status)
-                        ? _vm._i(_vm.empresa.status, null) > -1
-                        : _vm.empresa.status
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.empresa.status,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 &&
-                              _vm.$set(_vm.empresa, "status", $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              _vm.$set(
-                                _vm.empresa,
-                                "status",
-                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                              )
-                          }
-                        } else {
-                          _vm.$set(_vm.empresa, "status", $$c)
-                        }
-                      }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "im" },
+                domProps: { value: _vm.empresa.im },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "form-check-label",
-                      attrs: { for: "status" }
-                    },
-                    [_vm._v("Marcar como atualizado?")]
-                  )
-                ]
-              )
+                    _vm.$set(_vm.empresa, "im", $event.target.value)
+                  }
+                }
+              })
             ])
-          ]
-        )
-      ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "control-label",
+                  attrs: { for: "razao_social" }
+                },
+                [_vm._v("Razão Social")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.razao_social,
+                    expression: "empresa.razao_social"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "razao_social" },
+                domProps: { value: _vm.empresa.razao_social },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "razao_social", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "control-label",
+                  attrs: { for: "nome_fantasia" }
+                },
+                [_vm._v("Nome Fantasia")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.nome_fantasia,
+                    expression: "empresa.nome_fantasia"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "nome_fantasia" },
+                domProps: { value: _vm.empresa.nome_fantasia },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "nome_fantasia", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "porte" } },
+                [_vm._v("Porte")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.porte,
+                    expression: "empresa.porte"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "porte" },
+                domProps: { value: _vm.empresa.porte },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "porte", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "control-label",
+                  attrs: { for: "ramo_atividade" }
+                },
+                [_vm._v("Ramo de Atividade")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.ramo_atividade,
+                    expression: "empresa.ramo_atividade"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "ramo_atividade" },
+                domProps: { value: _vm.empresa.ramo_atividade },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "ramo_atividade", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "contato" } },
+                [_vm._v("Contato")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.contato,
+                    expression: "empresa.contato"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "contato" },
+                domProps: { value: _vm.empresa.contato },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "contato", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "email" } },
+                [_vm._v("E-mail")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.email,
+                    expression: "empresa.email"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "email", type: "email" },
+                domProps: { value: _vm.empresa.email },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "email", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "endereco" } },
+                [_vm._v("Endereço")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.endereco,
+                    expression: "empresa.endereco"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "endereco" },
+                domProps: { value: _vm.empresa.endereco },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "endereco", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-4 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "bairro" } },
+                [_vm._v("Bairro")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.bairro,
+                    expression: "empresa.bairro"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "bairro" },
+                domProps: { value: _vm.empresa.bairro },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "bairro", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "" } },
+                [_vm._v("Cidade")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.cidade,
+                    expression: "empresa.cidade"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "" },
+                domProps: { value: _vm.empresa.cidade },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "cidade", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "cep" } },
+                  [_vm._v("CEP")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "cep",
+                    mask: "#####-###",
+                    masked: true,
+                    placeholder: "99999-999"
+                  },
+                  model: {
+                    value: _vm.empresa.cep,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "cep", $$v)
+                    },
+                    expression: "empresa.cep"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "telefone" } },
+                  [_vm._v("Telefone")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "telefone",
+                    mask: ["(##) ####-####", "(##) #####-####"],
+                    masked: true,
+                    placeholder: "(99) 9999-9999"
+                  },
+                  model: {
+                    value: _vm.empresa.telefone,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "telefone", $$v)
+                    },
+                    expression: "empresa.telefone"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "telefone2" } },
+                  [_vm._v("Telefone 2")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "telefone2",
+                    mask: ["(##) ####-####", "(##) #####-####"],
+                    masked: true,
+                    placeholder: "(99) 9999-9999"
+                  },
+                  model: {
+                    value: _vm.empresa.telefone2,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "telefone2", $$v)
+                    },
+                    expression: "empresa.telefone2"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 form-group" },
+              [
+                _c(
+                  "label",
+                  { staticClass: "control-label", attrs: { for: "celular" } },
+                  [_vm._v("Celular")]
+                ),
+                _vm._v(" "),
+                _c("the-mask", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "celular",
+                    mask: ["(##) ####-####", "(##) #####-####"],
+                    masked: true,
+                    placeholder: "(99) 99999-9999"
+                  },
+                  model: {
+                    value: _vm.empresa.celular,
+                    callback: function($$v) {
+                      _vm.$set(_vm.empresa, "celular", $$v)
+                    },
+                    expression: "empresa.celular"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12 form-group" }, [
+              _c(
+                "label",
+                { staticClass: "control-label", attrs: { for: "observacoes" } },
+                [_vm._v("Observações")]
+              ),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.empresa.observacao,
+                    expression: "empresa.observacao"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { id: "observacoes" },
+                domProps: { value: _vm.empresa.observacao },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.empresa, "observacao", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      )
     ])
   ])
 }
@@ -22620,23 +22404,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading alert-dark" }, [
-      _c("h3", { staticClass: "text-center" }, [_vm._v("Editar Empresa")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-xs-12 col-md-6 form-group text-right" },
-      [
-        _c("button", { staticClass: "btn btn-lg btn-success" }, [
-          _vm._v("Salvar Alterações")
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "offset-md-9 col-md-3 form-group" }, [
+        _c("button", { staticClass: "btn btn-lg btn-block btn-success" }, [
+          _vm._v("Salvar")
         ])
-      ]
-    )
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -22660,139 +22434,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "col-xs-12 col-md-12 panel panel-default" }, [
-      _vm._m(0),
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("h2", { staticClass: "text-center py-3" }, [
+        _vm._v("Lista de Empresas")
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "div",
-          { staticClass: "form-inline col-xs-10 col-md-10 col offset-1" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "btn btn-success mb-2",
-                attrs: { to: { name: "criarEmpresa" } }
-              },
-              [_vm._v("Nova Empresa")]
-            ),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "d-flex justify-content-center align-items-center mb-4"
+        },
+        [
+          _c("div", { staticClass: "input-group col-md-8" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "input-group col-xs-10 col-md-10 mb-2 mr-sm-2" },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.search,
-                      expression: "search"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "search", placeholder: "Pesquisar..." },
-                  domProps: { value: _vm.search },
-                  on: {
-                    keyup: function($event) {
-                      return _vm.filterData()
-                    },
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.search = $event.target.value
-                    }
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search,
+                  expression: "search"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "search", placeholder: "Pesquisar..." },
+              domProps: { value: _vm.search },
+              on: {
+                keyup: function($event) {
+                  return _vm.filterData()
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                })
-              ]
-            )
-          ],
-          1
-        ),
+                  _vm.search = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { to: { name: "empresas.create" } }
+            },
+            [
+              _c("i", { staticClass: "fas fa-plus" }),
+              _vm._v(" Nova Empresa\n      ")
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-bordered table-striped" }, [
+        _vm._m(1),
         _vm._v(" "),
         _c(
-          "table",
-          {
-            staticClass: "table table-light table-bordered table-striped",
-            staticStyle: { "font-size": "0.6rem" }
-          },
-          [
-            _vm._m(2),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.filtered, function(empresa) {
-                return _c("tr", { key: empresa.id }, [
-                  _c("td", [_vm._v(_vm._s(empresa.nome_fantasia))]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-center" }, [
-                    _vm._v(_vm._s(empresa.cnpj))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(empresa.razao_social))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(empresa.email))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(empresa.telefone))]),
-                  _vm._v(" "),
+          "tbody",
+          _vm._l(_vm.filtered, function(empresa) {
+            return _c("tr", { key: empresa.id }, [
+              _c("td", [_vm._v(_vm._s(empresa.cnpj))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(empresa.nome_fantasia))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(empresa.razao_social))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(empresa.email))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(empresa.telefone))]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
                   _c(
-                    "td",
-                    { staticClass: "text-center" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-sm btn-outline-warning",
-                          attrs: {
-                            to: {
-                              name: "editarEmpresa",
-                              params: { id: empresa.id }
-                            }
-                          }
-                        },
-                        [_vm._v("Editar")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-sm btn-outline-danger",
-                        on: {
-                          click: function($event) {
-                            return _vm.excluir(empresa)
-                          }
+                    "router-link",
+                    {
+                      staticClass: "btn btn-sm btn-warning",
+                      attrs: {
+                        to: {
+                          name: "empresas.edit",
+                          params: { id: empresa.id }
                         }
-                      },
-                      [_vm._v("Deletar")]
-                    )
-                  ])
-                ])
-              }),
-              0
-            )
-          ]
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-pencil-alt" })]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-danger",
+                    on: {
+                      click: function($event) {
+                        return _vm.excluir(empresa)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-trash" })]
+                )
+              ])
+            ])
+          }),
+          0
         )
       ])
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel-heading alert-dark" }, [
-      _c("h3", { staticClass: "text-center" }, [_vm._v("Lista de Empresas")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -22807,9 +22567,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", { staticClass: "thead-dark" }, [
       _c("tr", { staticClass: "text-center" }, [
-        _c("th", [_vm._v("Nome Fantasia")]),
-        _vm._v(" "),
         _c("th", [_vm._v("CNPJ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Nome Fantasia")]),
         _vm._v(" "),
         _c("th", [_vm._v("Razão Social")]),
         _vm._v(" "),
@@ -22822,76 +22582,6 @@ var staticRenderFns = [
     ])
   }
 ]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/companies/CompaniesView.vue?vue&type=template&id=fc7cb15e&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/companies/CompaniesView.vue?vue&type=template&id=fc7cb15e& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "col-xs-12 col-md-12 panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading alert-dark" }, [
-        _c("h3", { staticClass: "text-center" }, [
-          _vm._v("A " + _vm._s(_vm.empresa.nome_fantasia))
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "form-group" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-lg btn-warning",
-                  attrs: { to: { name: "listaEmpresas" } }
-                },
-                [_vm._v("Editar")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-lg btn-primary",
-                  attrs: { to: { name: "listaEmpresas" } }
-                },
-                [_vm._v("Vagas")]
-              ),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-lg btn-default",
-                  attrs: { to: { name: "listaEmpresas" } }
-                },
-                [_vm._v("Fechar")]
-              )
-            ],
-            1
-          )
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
 render._withStripped = true
 
 
@@ -40147,75 +39837,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/companies/CompaniesView.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/companies/CompaniesView.vue ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CompaniesView_vue_vue_type_template_id_fc7cb15e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CompaniesView.vue?vue&type=template&id=fc7cb15e& */ "./resources/js/components/companies/CompaniesView.vue?vue&type=template&id=fc7cb15e&");
-/* harmony import */ var _CompaniesView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CompaniesView.vue?vue&type=script&lang=js& */ "./resources/js/components/companies/CompaniesView.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CompaniesView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CompaniesView_vue_vue_type_template_id_fc7cb15e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CompaniesView_vue_vue_type_template_id_fc7cb15e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/companies/CompaniesView.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/companies/CompaniesView.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/companies/CompaniesView.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CompaniesView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CompaniesView.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/companies/CompaniesView.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CompaniesView_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/companies/CompaniesView.vue?vue&type=template&id=fc7cb15e&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/companies/CompaniesView.vue?vue&type=template&id=fc7cb15e& ***!
-  \********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CompaniesView_vue_vue_type_template_id_fc7cb15e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CompaniesView.vue?vue&type=template&id=fc7cb15e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/companies/CompaniesView.vue?vue&type=template&id=fc7cb15e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CompaniesView_vue_vue_type_template_id_fc7cb15e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CompaniesView_vue_vue_type_template_id_fc7cb15e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/inscricoes/Cadastro.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/components/inscricoes/Cadastro.vue ***!
@@ -40528,12 +40149,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_companies_CompaniesCreate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/companies/CompaniesCreate */ "./resources/js/components/companies/CompaniesCreate.vue");
 /* harmony import */ var _components_companies_CompaniesEdit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/companies/CompaniesEdit */ "./resources/js/components/companies/CompaniesEdit.vue");
 /* harmony import */ var _components_companies_CompaniesIndex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/companies/CompaniesIndex */ "./resources/js/components/companies/CompaniesIndex.vue");
-/* harmony import */ var _components_companies_CompaniesView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/companies/CompaniesView */ "./resources/js/components/companies/CompaniesView.vue");
-/* harmony import */ var _components_inscricoes_Cadastro__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/inscricoes/Cadastro */ "./resources/js/components/inscricoes/Cadastro.vue");
-/* harmony import */ var _components_inscricoes_Editar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/inscricoes/Editar */ "./resources/js/components/inscricoes/Editar.vue");
-/* harmony import */ var _components_inscricoes_Ficha__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/inscricoes/Ficha */ "./resources/js/components/inscricoes/Ficha.vue");
-/* harmony import */ var _components_inscricoes_Lista__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/inscricoes/Lista */ "./resources/js/components/inscricoes/Lista.vue");
-
+/* harmony import */ var _components_inscricoes_Cadastro__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/inscricoes/Cadastro */ "./resources/js/components/inscricoes/Cadastro.vue");
+/* harmony import */ var _components_inscricoes_Editar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/inscricoes/Editar */ "./resources/js/components/inscricoes/Editar.vue");
+/* harmony import */ var _components_inscricoes_Ficha__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/inscricoes/Ficha */ "./resources/js/components/inscricoes/Ficha.vue");
+/* harmony import */ var _components_inscricoes_Lista__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/inscricoes/Lista */ "./resources/js/components/inscricoes/Lista.vue");
 
 
 
@@ -40544,39 +40163,35 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '/',
   redirect: {
-    name: 'listaEmpresas'
+    name: 'empresas.index'
   }
 }, {
   path: '/admin/empresas',
   component: _components_companies_CompaniesIndex__WEBPACK_IMPORTED_MODULE_2__["default"],
-  name: 'listaEmpresas'
-}, {
-  path: '/admin/empresas/:id',
-  component: _components_companies_CompaniesView__WEBPACK_IMPORTED_MODULE_3__["default"],
-  name: 'detalheEmpresa'
+  name: 'empresas.index'
 }, {
   path: '/admin/empresas/cadastro',
   component: _components_companies_CompaniesCreate__WEBPACK_IMPORTED_MODULE_0__["default"],
-  name: 'criarEmpresa'
+  name: 'empresas.create'
 }, {
   path: '/admin/empresas/:id/editar/',
   component: _components_companies_CompaniesEdit__WEBPACK_IMPORTED_MODULE_1__["default"],
-  name: 'editarEmpresa'
+  name: 'empresas.edit'
 }, {
   path: '/admin/inscricoes-cursos',
-  component: _components_inscricoes_Lista__WEBPACK_IMPORTED_MODULE_7__["default"],
+  component: _components_inscricoes_Lista__WEBPACK_IMPORTED_MODULE_6__["default"],
   name: 'inscricoes.index'
 }, {
   path: '/admin/inscricoes-cursos/cadastro',
-  component: _components_inscricoes_Cadastro__WEBPACK_IMPORTED_MODULE_4__["default"],
+  component: _components_inscricoes_Cadastro__WEBPACK_IMPORTED_MODULE_3__["default"],
   name: 'inscricoes.cadastro'
 }, {
   path: '/admin/inscricoes-cursos/:id',
-  component: _components_inscricoes_Ficha__WEBPACK_IMPORTED_MODULE_6__["default"],
+  component: _components_inscricoes_Ficha__WEBPACK_IMPORTED_MODULE_5__["default"],
   name: 'inscricoes.ficha'
 }, {
   path: '/admin/inscricoes-cursos/:id/editar',
-  component: _components_inscricoes_Editar__WEBPACK_IMPORTED_MODULE_5__["default"],
+  component: _components_inscricoes_Editar__WEBPACK_IMPORTED_MODULE_4__["default"],
   name: 'inscricoes.editar'
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
@@ -40601,8 +40216,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Desenvolvimento\Projetos\sedect\empresas\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Desenvolvimento\Projetos\sedect\empresas\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/marcus/Projetos/sedect/empresas/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/marcus/Projetos/sedect/empresas/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

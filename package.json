@@ -10,6 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.11.2",
         "axios": "^0.18.1",
         "bootstrap": "^4.3.1",
         "cross-env": "^5.2.1",
@@ -22,9 +23,9 @@
         "eslint-plugin-vue": "^5.2.3",
         "jquery": "^3.4.1",
         "laravel-mix": "^4.1.4",
-        "popper.js": "^1.15.0",
+        "popper.js": "^1.16.0",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.22.12",
+        "sass": "^1.23.1",
         "sass-loader": "^7.3.1",
         "sweetalert": "^2.1.2",
         "vue": "^2.6.10",

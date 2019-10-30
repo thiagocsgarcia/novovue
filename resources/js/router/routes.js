@@ -1,7 +1,6 @@
 import CompaniesCreate from '../components/companies/CompaniesCreate'
 import CompaniesEdit from '../components/companies/CompaniesEdit'
 import CompaniesIndex from '../components/companies/CompaniesIndex'
-import CompaniesView from '../components/companies/CompaniesView'
 
 import InscricoesCadastro from '../components/inscricoes/Cadastro'
 import InscricoesEditar from '../components/inscricoes/Editar'
@@ -11,27 +10,22 @@ import InscricoesLista from '../components/inscricoes/Lista'
 const routes = [
   {
     path: '/',
-    redirect: { name: 'listaEmpresas' }
+    redirect: { name: 'empresas.index' }
   },
   {
     path: '/admin/empresas',
     component: CompaniesIndex,
-    name: 'listaEmpresas'
-  },
-  {
-    path: '/admin/empresas/:id',
-    component: CompaniesView,
-    name: 'detalheEmpresa'
+    name: 'empresas.index'
   },
   {
     path: '/admin/empresas/cadastro',
     component: CompaniesCreate,
-    name: 'criarEmpresa'
+    name: 'empresas.create'
   },
   {
     path: '/admin/empresas/:id/editar/',
     component: CompaniesEdit,
-    name: 'editarEmpresa'
+    name: 'empresas.edit'
   },
   {
     path: '/admin/inscricoes-cursos',

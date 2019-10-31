@@ -8,40 +8,48 @@ use App\Empresa;
 
 class EmpresasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return Empresa::orderBy('nome_fantasia', 'asc')->get();
+        $empresas = Empresa::orderBy('nome_fantasia', 'asc')->get();
+
+        return response()->json([
+            "empresas" => $empresas
+        ], 200);
     }
- 
+
     public function show($id)
     {
-        return Empresa::findOrFail($id);
+        $empresa = Empresa::findOrFail($id);
+
+        return response()->json([
+            "empresa" => $empresa
+        ], 200);
     }
- 
+
+    public function store(Request $request)
+    {
+        $empresa = Empresa::create($request->all());
+
+        return response()->json([
+            "empresa" => $empresa
+        ], 201);
+    }
+
     public function update(Request $request, $id)
     {
         $empresa = Empresa::findOrFail($id);
         $empresa->update($request->all());
- 
-        return $empresa;
+
+        return response()->json([
+            "empresa" => $empresa
+        ], 202);
     }
- 
-    public function store(Request $request)
-    {
-        $empresa = Empresa::create($request->all());
-        return $empresa;
-    }
- 
+
     public function destroy($id)
     {
         $empresa = Empresa::findOrFail($id);
         $empresa->delete();
-        return '';
+
+        return response()->json(null, 204);
     }
 }
-

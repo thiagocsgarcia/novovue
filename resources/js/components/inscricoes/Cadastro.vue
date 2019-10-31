@@ -181,13 +181,27 @@ export default {
   methods: {
     cadastrar() {
       window.axios
-        .post('/inscricoes-cursos', this.inscricao)
+        .post('api/v1/inscricoes-cursos', this.inscricao)
         .then(response => {
-          this.inscricao = response.data
-          this.$router.replace(`/admin/inscricoes-cursos/${this.inscricao.id}`)
+          if (response.status === 201) {
+            this.inscricao = response.data.inscricao
+            swal({
+              title: 'Cadastro realizado!',
+              icon: 'success'
+            })
+
+            this.$router.replace(
+              `/admin/inscricoes-cursos/${this.inscricao.id}`
+            )
+          } else {
+            swal({
+              title: 'Não foi possivel realizar o cadastro',
+              icon: 'error'
+            })
+          }
         })
         .catch(error => {
-          //
+          console.log(error.response)
         })
     }
   }

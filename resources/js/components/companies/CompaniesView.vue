@@ -19,30 +19,27 @@
 
 <script>
 export default {
-  mounted() {
+  created() {
     let id = this.$route.params.id
-    console.log(id)
-    this.loadData(id)
-  },
-  data: function() {
-    return {
-      empresa: {}
-    }
-  },
-  methods: {
-    loadData(id) {
-      axios
-        .get('/empresas/' + id)
-        .then(response => {
-          this.empresa = response.data
-        })
-        .catch(error => {
+    window.axios
+      .get(`api/v1/empresas/${id}`)
+      .then(response => {
+        if (response.status === 200) {
+          this.empresa = response.data.empresa
+        } else {
           swal({
             title: 'Não foi possivel encontrar empresa selecionada.',
-            text: error,
             icon: 'error'
           })
-        })
+        }
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
+  },
+  data() {
+    return {
+      empresa: {}
     }
   }
 }

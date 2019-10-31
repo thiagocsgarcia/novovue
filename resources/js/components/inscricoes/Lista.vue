@@ -68,12 +68,19 @@ export default {
   },
   created() {
     window.axios
-      .get('/inscricoes-cursos')
+      .get('api/v1/inscricoes-cursos')
       .then(response => {
-        this.inscricoes = response.data
+        if (response.status === 200) {
+          this.inscricoes = response.data.inscricoes
+        } else {
+          swal({
+            title: 'Não foi possivel carregar os dados',
+            icon: 'error'
+          })
+        }
       })
       .catch(error => {
-        console.log(error)
+        console.log(error.response)
       })
   },
   data() {

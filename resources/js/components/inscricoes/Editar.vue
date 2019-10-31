@@ -177,12 +177,19 @@ export default {
     let id = this.$route.params.id
 
     window.axios
-      .get(`/inscricoes-cursos/${id}`)
+      .get(`api/v1/inscricoes-cursos/${id}`)
       .then(response => {
-        this.inscricao = response.data
+        if (response.status === 200) {
+          this.inscricao = response.data.inscricao
+        } else {
+          swal({
+            title: 'Não foi possivel encontar a inscrição selecionada.',
+            icon: 'error'
+          })
+        }
       })
       .catch(error => {
-        //
+        console.log(error.response)
       })
   },
   data() {
@@ -193,12 +200,26 @@ export default {
   methods: {
     editar() {
       window.axios
-        .patch(`/inscricoes-cursos/${this.inscricao.id}`, this.inscricao)
+        .patch(`api/v1/inscricoes-cursos/${this.inscricao.id}`, this.inscricao)
         .then(response => {
-          this.$router.replace(`/admin/inscricoes-cursos/${this.inscricao.id}`)
+          if (response.status === 202) {
+            swal({
+              title: 'Alterações salvas!',
+              icon: 'success'
+            })
+
+            this.$router.replace(
+              `/admin/inscricoes-cursos/${this.inscricao.id}`
+            )
+          } else {
+            swal({
+              title: 'Não foi possivel salvar as alterações',
+              icon: 'error'
+            })
+          }
         })
         .catch(error => {
-          //
+          console.log(error.response)
         })
     }
   }

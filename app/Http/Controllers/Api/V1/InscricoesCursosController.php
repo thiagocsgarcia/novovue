@@ -12,31 +12,45 @@ class InscricoesCursosController extends Controller
     {
         $inscricoes = InscricaoCurso::all();
 
-        return response()->json($inscricoes, 200);
+        return response()->json([
+            "inscricoes" => $inscricoes
+        ], 200);
     }
 
     public function show($id)
     {
-        return InscricaoCurso::findOrFail($id);
-    }
+        $inscricao = InscricaoCurso::findOrFail($id);
 
-    public function update(Request $request, $id)
-    {
-        $curso = InscricaoCurso::findOrFail($id);
-        $curso->update($request->all());
-        return $curso;
+        return response()->json([
+            "inscricao" => $inscricao
+        ], 200);
     }
 
     public function store(Request $request)
     {
-        $curso = InscricaoCurso::create($request->all());
-        return $curso;
+        $inscricao = InscricaoCurso::create($request->all());
+
+        return response()->json([
+            "inscricao" => $inscricao
+        ], 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $inscricao = InscricaoCurso::findOrFail($id);
+
+        $inscricao->update($request->all());
+
+        return response()->json([
+            "inscricao" => $inscricao
+        ], 202);
     }
 
     public function destroy($id)
     {
-        $curso = InscricaoCurso::findOrFail($id);
-        $curso->delete();
-        return '';
+        $inscricao = InscricaoCurso::findOrFail($id);
+        $inscricao->delete();
+
+        return response()->json(null, 204);
     }
 }

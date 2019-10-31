@@ -13,7 +13,7 @@ window.axios = require('axios')
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 // URL de Desenvolvimento e Testes
-window.axios.defaults.baseURL = 'http://localhost/empresas/api/v1'
+// window.axios.defaults.baseURL = 'http://localhost/empresas/api/v1'
 
 // URL de Produção
 // window.axios.defaults.baseURL = 'http://www.desenvolve.saovicente.sp.gov.br/empresas/api/v1'
@@ -23,7 +23,9 @@ let token = document.head.querySelector('meta[name="csrf-token"]')
 if (token) {
   window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token')
+  console.error(
+    'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token'
+  )
 }
 
 // import Echo from 'laravel-echo'

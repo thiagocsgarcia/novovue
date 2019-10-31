@@ -82,9 +82,17 @@
                     </ul>
                 </div>
             </nav>
+
             <main class="py-4">
-                @yield('content')
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="app"></div>
+                        </div>
+                    </div>
+                </div>
             </main>
+
             <footer id="menuBSdemand2" class="d-print-none">
                 <div>
                     R. José Bonifácio, 404 - Centro, São Vicente - SP, 11310-080

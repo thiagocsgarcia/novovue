@@ -67,16 +67,19 @@
 export default {
   created() {
     window.axios
-      .get('/empresas')
+      .get('api/v1/empresas')
       .then(response => {
-        this.empresas = response.data
+        if (response.status === 200) {
+          this.empresas = response.data.empresas
+        } else {
+          swal({
+            title: 'Não foi possivel carregar os dados',
+            icon: 'error'
+          })
+        }
       })
       .catch(error => {
-        swal({
-          title: 'Não foi possivel carregar os dados',
-          text: error,
-          icon: 'error'
-        })
+        console.error(error.response)
       })
   },
   computed: {
@@ -127,12 +130,24 @@ export default {
     },
     handlerDelete(empresa) {
       window.axios
-        .delete(`/empresas/${empresa.id}`)
+        .delete(`api/v1/empresas/${empresa.id}`)
         .then(response => {
-          this.$router.push({ name: 'empresas.index' })
+          if (response.status === 204) {
+            swal({
+              title: 'Registro excluído!',
+              icon: 'success'
+            })
+
+            this.empresas.splice(this.empresas.indexOf(empresa), 1)
+          } else {
+            swal({
+              title: 'Não foi possivel remover a empresa selecionada.',
+              icon: 'error'
+            })
+          }
         })
         .catch(error => {
-          //
+          console.log(error.response)
         })
     }
   }

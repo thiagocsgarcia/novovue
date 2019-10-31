@@ -1710,6 +1710,25 @@ module.exports = function isBuffer (obj) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/App.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'application'
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/companies/CompaniesCreate.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/companies/CompaniesCreate.vue?vue&type=script&lang=js& ***!
@@ -1719,6 +1738,16 @@ module.exports = function isBuffer (obj) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1872,16 +1901,24 @@ __webpack_require__.r(__webpack_exports__);
     handlerCreate: function handlerCreate() {
       var _this = this;
 
-      axios.post('/empresas', this.empresa).then(function (response) {
-        _this.$router.push({
-          name: 'empresas.index'
-        });
+      axios.post('api/v1/empresas', this.empresa).then(function (response) {
+        if (response.status === 201) {
+          swal({
+            title: 'Cadastro realizado!',
+            icon: 'success'
+          });
+
+          _this.$router.push({
+            name: 'empresas.index'
+          });
+        } else {
+          swal({
+            title: 'Não foi possivel realizar o cadastro!',
+            icon: 'error'
+          });
+        }
       })["catch"](function (error) {
-        swal({
-          title: 'Não foi possivel realizar o cadastro!',
-          text: error.response,
-          icon: 'error'
-        });
+        console.log(error.response);
       });
     }
   }
@@ -2042,18 +2079,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
+  created: function created() {
     var _this = this;
 
     var id = this.$route.params.id;
-    axios.get("/empresas/".concat(id)).then(function (response) {
-      _this.empresa = response.data;
+    axios.get("api/v1/empresas/".concat(id)).then(function (response) {
+      if (response.status === 200) {
+        _this.empresa = response.data.empresa;
+      } else {
+        swal({
+          title: 'Não foi possivel encontrar empresa selecionada.',
+          icon: 'error'
+        });
+      }
     })["catch"](function (error) {
-      swal({
-        title: 'Não foi possivel encontrar empresa selecionada.',
-        text: error.response,
-        icon: 'error'
-      });
+      console.log(error.response);
     });
   },
   data: function data() {
@@ -2065,16 +2105,24 @@ __webpack_require__.r(__webpack_exports__);
     handlerEdit: function handlerEdit() {
       var _this2 = this;
 
-      axios.patch("/empresas/".concat(this.empresa.id), this.empresa).then(function (response) {
-        _this2.$router.push({
-          name: 'empresas.index'
-        });
+      axios.patch("api/v1/empresas/".concat(this.empresa.id), this.empresa).then(function (response) {
+        if (response.status === 202) {
+          swal({
+            title: 'Alterações salvas!',
+            icon: 'success'
+          });
+
+          _this2.$router.push({
+            name: 'empresas.index'
+          });
+        } else {
+          swal({
+            title: 'Não foi possivel salvar as alterações.',
+            icon: 'error'
+          });
+        }
       })["catch"](function (error) {
-        swal({
-          title: 'Não foi possivel salvar as alterações.',
-          text: error.response,
-          icon: 'error'
-        });
+        console.log(error.response);
       });
     }
   }
@@ -2160,14 +2208,17 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    window.axios.get('/empresas').then(function (response) {
-      _this.empresas = response.data;
+    window.axios.get('api/v1/empresas').then(function (response) {
+      if (response.status === 200) {
+        _this.empresas = response.data.empresas;
+      } else {
+        swal({
+          title: 'Não foi possivel carregar os dados',
+          icon: 'error'
+        });
+      }
     })["catch"](function (error) {
-      swal({
-        title: 'Não foi possivel carregar os dados',
-        text: error,
-        icon: 'error'
-      });
+      console.error(error.response);
     });
   },
   computed: {
@@ -2217,11 +2268,22 @@ __webpack_require__.r(__webpack_exports__);
     handlerDelete: function handlerDelete(empresa) {
       var _this4 = this;
 
-      window.axios["delete"]("/empresas/".concat(empresa.id)).then(function (response) {
-        _this4.$router.push({
-          name: 'empresas.index'
-        });
-      })["catch"](function (error) {//
+      window.axios["delete"]("api/v1/empresas/".concat(empresa.id)).then(function (response) {
+        if (response.status === 204) {
+          swal({
+            title: 'Registro excluído!',
+            icon: 'success'
+          });
+
+          _this4.empresas.splice(_this4.empresas.indexOf(empresa), 1);
+        } else {
+          swal({
+            title: 'Não foi possivel remover a empresa selecionada.',
+            icon: 'error'
+          });
+        }
+      })["catch"](function (error) {
+        console.log(error.response);
       });
     }
   }
@@ -2421,11 +2483,23 @@ __webpack_require__.r(__webpack_exports__);
     cadastrar: function cadastrar() {
       var _this = this;
 
-      window.axios.post('/inscricoes-cursos', this.inscricao).then(function (response) {
-        _this.inscricao = response.data;
+      window.axios.post('api/v1/inscricoes-cursos', this.inscricao).then(function (response) {
+        if (response.status === 201) {
+          _this.inscricao = response.data.inscricao;
+          swal({
+            title: 'Cadastro realizado!',
+            icon: 'success'
+          });
 
-        _this.$router.replace("/admin/inscricoes-cursos/".concat(_this.inscricao.id));
-      })["catch"](function (error) {//
+          _this.$router.replace("/admin/inscricoes-cursos/".concat(_this.inscricao.id));
+        } else {
+          swal({
+            title: 'Não foi possivel realizar o cadastro',
+            icon: 'error'
+          });
+        }
+      })["catch"](function (error) {
+        console.log(error.response);
       });
     }
   }
@@ -2620,9 +2694,17 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     var id = this.$route.params.id;
-    window.axios.get("/inscricoes-cursos/".concat(id)).then(function (response) {
-      _this.inscricao = response.data;
-    })["catch"](function (error) {//
+    window.axios.get("api/v1/inscricoes-cursos/".concat(id)).then(function (response) {
+      if (response.status === 200) {
+        _this.inscricao = response.data.inscricao;
+      } else {
+        swal({
+          title: 'Não foi possivel encontar a inscrição selecionada.',
+          icon: 'error'
+        });
+      }
+    })["catch"](function (error) {
+      console.log(error.response);
     });
   },
   data: function data() {
@@ -2634,9 +2716,22 @@ __webpack_require__.r(__webpack_exports__);
     editar: function editar() {
       var _this2 = this;
 
-      window.axios.patch("/inscricoes-cursos/".concat(this.inscricao.id), this.inscricao).then(function (response) {
-        _this2.$router.replace("/admin/inscricoes-cursos/".concat(_this2.inscricao.id));
-      })["catch"](function (error) {//
+      window.axios.patch("api/v1/inscricoes-cursos/".concat(this.inscricao.id), this.inscricao).then(function (response) {
+        if (response.status === 202) {
+          swal({
+            title: 'Alterações salvas!',
+            icon: 'success'
+          });
+
+          _this2.$router.replace("/admin/inscricoes-cursos/".concat(_this2.inscricao.id));
+        } else {
+          swal({
+            title: 'Não foi possivel salvar as alterações',
+            icon: 'error'
+          });
+        }
+      })["catch"](function (error) {
+        console.log(error.response);
       });
     }
   }
@@ -2901,9 +2996,17 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     var id = this.$route.params.id;
-    window.axios.get("/inscricoes-cursos/".concat(id)).then(function (response) {
-      _this.inscricao = response.data;
-    })["catch"](function (error) {//
+    window.axios.get("api/v1/inscricoes-cursos/".concat(id)).then(function (response) {
+      if (response.status === 200) {
+        _this.inscricao = response.data.inscricao;
+      } else {
+        swal({
+          title: 'Não foi possivel encontrar a inscrição selecionada.',
+          icon: 'error'
+        });
+      }
+    })["catch"](function (error) {
+      console.log(error.response);
     });
   },
   data: function data() {
@@ -2999,10 +3102,17 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    window.axios.get('/inscricoes-cursos').then(function (response) {
-      _this.inscricoes = response.data;
+    window.axios.get('api/v1/inscricoes-cursos').then(function (response) {
+      if (response.status === 200) {
+        _this.inscricoes = response.data.inscricoes;
+      } else {
+        swal({
+          title: 'Não foi possivel carregar os dados',
+          icon: 'error'
+        });
+      }
     })["catch"](function (error) {
-      console.log(error);
+      console.log(error.response);
     });
   },
   data: function data() {
@@ -21192,6 +21302,30 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (this && this.clearImmediate);
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=template&id=f348271a&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/App.vue?vue&type=template&id=f348271a& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("router-view")
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
@@ -39557,6 +39691,75 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./resources/js/App.vue":
+/*!******************************!*\
+  !*** ./resources/js/App.vue ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=f348271a& */ "./resources/js/App.vue?vue&type=template&id=f348271a&");
+/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ "./resources/js/App.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/App.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/App.vue?vue&type=script&lang=js&":
+/*!*******************************************************!*\
+  !*** ./resources/js/App.vue?vue&type=script&lang=js& ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/babel-loader/lib??ref--4-0!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/App.vue?vue&type=template&id=f348271a&":
+/*!*************************************************************!*\
+  !*** ./resources/js/App.vue?vue&type=template&id=f348271a& ***!
+  \*************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=template&id=f348271a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App.vue?vue&type=template&id=f348271a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_f348271a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -39570,22 +39773,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_bootstrap__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./resources/js/App.vue");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
 /* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_3__);
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
+
 
 
 
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_the_mask__WEBPACK_IMPORTED_MODULE_3___default.a);
 new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
-  router: _router__WEBPACK_IMPORTED_MODULE_2__["default"]
-}).$mount('#app');
+  el: '#app',
+  render: function render(h) {
+    return h(_App__WEBPACK_IMPORTED_MODULE_2__["default"]);
+  },
+  router: _router__WEBPACK_IMPORTED_MODULE_4__["default"]
+});
 
 /***/ }),
 
@@ -39609,8 +39813,8 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // URL de Desenvolvimento e Testes
-
-window.axios.defaults.baseURL = 'http://localhost/empresas/api/v1'; // URL de Produção
+// window.axios.defaults.baseURL = 'http://localhost/empresas/api/v1'
+// URL de Produção
 // window.axios.defaults.baseURL = 'http://www.desenvolve.saovicente.sp.gov.br/empresas/api/v1'
 
 var token = document.head.querySelector('meta[name="csrf-token"]');
@@ -40162,9 +40366,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var routes = [{
   path: '/',
-  redirect: {
-    name: 'empresas.index'
-  }
+  component: _components_companies_CompaniesIndex__WEBPACK_IMPORTED_MODULE_2__["default"],
+  name: 'home'
 }, {
   path: '/admin/empresas',
   component: _components_companies_CompaniesIndex__WEBPACK_IMPORTED_MODULE_2__["default"],

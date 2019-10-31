@@ -247,12 +247,19 @@ export default {
     let id = this.$route.params.id
 
     window.axios
-      .get(`/inscricoes-cursos/${id}`)
+      .get(`api/v1/inscricoes-cursos/${id}`)
       .then(response => {
-        this.inscricao = response.data
+        if (response.status === 200) {
+          this.inscricao = response.data.inscricao
+        } else {
+          swal({
+            title: 'Não foi possivel encontrar a inscrição selecionada.',
+            icon: 'error'
+          })
+        }
       })
       .catch(error => {
-        //
+        console.log(error.response)
       })
   },
   data() {

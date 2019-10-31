@@ -10,7 +10,8 @@ import InscricoesLista from '../components/inscricoes/Lista'
 const routes = [
   {
     path: '/',
-    redirect: { name: 'empresas.index' }
+    component: CompaniesIndex,
+    name: 'home'
   },
   {
     path: '/admin/empresas',

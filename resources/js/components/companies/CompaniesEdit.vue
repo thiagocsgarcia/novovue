@@ -143,19 +143,22 @@
 
 <script>
 export default {
-  mounted() {
+  created() {
     let id = this.$route.params.id
     axios
-      .get(`/empresas/${id}`)
+      .get(`api/v1/empresas/${id}`)
       .then(response => {
-        this.empresa = response.data
+        if (response.status === 200) {
+          this.empresa = response.data.empresa
+        } else {
+          swal({
+            title: 'Não foi possivel encontrar empresa selecionada.',
+            icon: 'error'
+          })
+        }
       })
       .catch(error => {
-        swal({
-          title: 'Não foi possivel encontrar empresa selecionada.',
-          text: error.response,
-          icon: 'error'
-        })
+        console.log(error.response)
       })
   },
   data() {
@@ -166,16 +169,23 @@ export default {
   methods: {
     handlerEdit() {
       axios
-        .patch(`/empresas/${this.empresa.id}`, this.empresa)
+        .patch(`api/v1/empresas/${this.empresa.id}`, this.empresa)
         .then(response => {
-          this.$router.push({ name: 'empresas.index' })
+          if (response.status === 202) {
+            swal({
+              title: 'Alterações salvas!',
+              icon: 'success'
+            })
+            this.$router.push({ name: 'empresas.index' })
+          } else {
+            swal({
+              title: 'Não foi possivel salvar as alterações.',
+              icon: 'error'
+            })
+          }
         })
         .catch(error => {
-          swal({
-            title: 'Não foi possivel salvar as alterações.',
-            text: error.response,
-            icon: 'error'
-          })
+          console.log(error.response)
         })
     }
   }

@@ -24,15 +24,18 @@
               placeholder="99.999.999/9999-99"
             ></the-mask>
           </div>
+
           <div class="col-md-4 form-group">
             <label for="ie" class="control-label">Inscrição Estadual</label>
             <input id="ie" v-model="empresa.ie" class="form-control" />
           </div>
+
           <div class="col-md-4 form-group">
             <label for="im" class="control-label">Inscrição Municipal</label>
             <input id="im" v-model="empresa.im" class="form-control" />
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="razao_social" class="control-label">Razão Social</label>
@@ -43,6 +46,7 @@
             <input id="nome_fantasia" v-model="empresa.nome_fantasia" class="form-control" />
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="porte" class="control-label">Porte</label>
@@ -53,6 +57,7 @@
             <input id="ramo_atividade" v-model="empresa.ramo_atividade" class="form-control" />
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-6 form-group">
             <label for="contato" class="control-label">Contato</label>
@@ -63,6 +68,7 @@
             <input id="email" type="email" v-model="empresa.email" class="form-control" />
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-12 form-group">
             <label for="endereco" class="control-label">Endereço</label>
@@ -90,6 +96,7 @@
             ></the-mask>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-4 form-group">
             <label for="telefone" class="control-label">Telefone</label>
@@ -113,6 +120,7 @@
               placeholder="(99) 9999-9999"
             ></the-mask>
           </div>
+
           <div class="col-md-4 form-group">
             <label for="celular" class="control-label">Celular</label>
             <the-mask
@@ -125,12 +133,14 @@
             ></the-mask>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-12 form-group">
             <label for="observacoes" class="control-label">Observações</label>
             <textarea id="observacoes" v-model="empresa.observacao" class="form-control"></textarea>
           </div>
         </div>
+
         <div class="row">
           <div class="offset-md-9 col-md-3 form-group">
             <button class="btn btn-lg btn-block btn-success">Cadastrar</button>
@@ -151,16 +161,24 @@ export default {
   methods: {
     handlerCreate() {
       axios
-        .post('/empresas', this.empresa)
+        .post('api/v1/empresas', this.empresa)
         .then(response => {
-          this.$router.push({ name: 'empresas.index' })
+          if (response.status === 201) {
+            swal({
+              title: 'Cadastro realizado!',
+              icon: 'success'
+            })
+
+            this.$router.push({ name: 'empresas.index' })
+          } else {
+            swal({
+              title: 'Não foi possivel realizar o cadastro!',
+              icon: 'error'
+            })
+          }
         })
         .catch(error => {
-          swal({
-            title: 'Não foi possivel realizar o cadastro!',
-            text: error.response,
-            icon: 'error'
-          })
+          console.log(error.response)
         })
     }
   }

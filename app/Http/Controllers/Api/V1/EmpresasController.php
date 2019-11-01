@@ -21,8 +21,14 @@ class EmpresasController extends Controller
     {
         $empresa = Empresa::findOrFail($id);
 
+        $audits = $empresa->audits()
+            ->join('users', 'users.id', '=', 'audits.user_id')
+            ->select('audits.*', 'users.name', 'users.email')
+            ->get();
+
         return response()->json([
-            "empresa" => $empresa
+            "empresa" => $empresa,
+            "audits" => $audits,
         ], 200);
     }
 
@@ -38,7 +44,27 @@ class EmpresasController extends Controller
     public function update(Request $request, $id)
     {
         $empresa = Empresa::findOrFail($id);
-        $empresa->update($request->all());
+
+        $empresa->nome_fantasia  = $request->nome_fantasia;
+        $empresa->razao_social   = $request->razao_social;
+        $empresa->cnpj           = $request->cnpj;
+        $empresa->ie             = $request->ie;
+        $empresa->im             = $request->im;
+        $empresa->contato        = $request->contato;
+        $empresa->telefone       = $request->telefone;
+        $empresa->telefone2      = $request->telefone2;
+        $empresa->celular        = $request->celular;
+        $empresa->email          = $request->email;
+        $empresa->endereco       = $request->endereco;
+        $empresa->bairro         = $request->bairro;
+        $empresa->cidade         = $request->cidade;
+        $empresa->cep            = $request->cep;
+        $empresa->ramo_atividade = $request->ramo_atividade;
+        $empresa->porte          = $request->porte;
+        $empresa->status         = $request->status;
+        $empresa->observacao     = $request->observacao;
+
+        $empresa->save();
 
         return response()->json([
             "empresa" => $empresa

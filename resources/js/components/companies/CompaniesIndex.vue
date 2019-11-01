@@ -45,6 +45,14 @@
             <td>{{ empresa.telefone }}</td>
             <td class="text-center">
               <router-link
+                :to="{ name: 'empresas.show', params: { id: empresa.id } }"
+                class="btn btn-sm btn-success"
+              >
+                <i class="fas fa-eye"></i>
+              </router-link>
+            </td>
+            <td class="text-center">
+              <router-link
                 :to="{ name: 'empresas.edit', params: { id: empresa.id } }"
                 class="btn btn-sm btn-warning"
               >

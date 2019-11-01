@@ -1,6 +1,7 @@
 import CompaniesCreate from '../components/companies/CompaniesCreate'
 import CompaniesEdit from '../components/companies/CompaniesEdit'
 import CompaniesIndex from '../components/companies/CompaniesIndex'
+import CompaniesShow from '../components/companies/CompaniesView'
 
 import InscricoesCadastro from '../components/inscricoes/Cadastro'
 import InscricoesEditar from '../components/inscricoes/Editar'
@@ -27,6 +28,11 @@ const routes = [
     path: '/admin/empresas/:id/editar/',
     component: CompaniesEdit,
     name: 'empresas.edit'
+  },
+  {
+    path: '/admin/empresas/:id',
+    component: CompaniesShow,
+    name: 'empresas.show'
   },
   {
     path: '/admin/inscricoes-cursos',

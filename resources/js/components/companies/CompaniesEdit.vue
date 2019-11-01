@@ -169,7 +169,7 @@ export default {
   methods: {
     handlerEdit() {
       axios
-        .patch(`api/v1/empresas/${this.empresa.id}`, this.empresa)
+        .put(`api/v1/empresas/${this.empresa.id}`, this.empresa)
         .then(response => {
           if (response.status === 202) {
             swal({

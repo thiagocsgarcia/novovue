@@ -19,5 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['auth:api']], function () {
     Route::resource('empresas', 'EmpresasController', ['except' => ['create', 'edit']]);
+    Route::get('audits', 'AuditsController@index');
     Route::resource('inscricoes-cursos', 'InscricoesCursosController', ['except' => ['create', 'edit']]);
 });

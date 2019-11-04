@@ -1,3 +1,5 @@
+import AuditsList from '../components/audits/List'
+
 import CompaniesCreate from '../components/companies/CompaniesCreate'
 import CompaniesEdit from '../components/companies/CompaniesEdit'
 import CompaniesIndex from '../components/companies/CompaniesIndex'
@@ -53,6 +55,11 @@ const routes = [
     path: '/admin/inscricoes-cursos/:id/editar',
     component: InscricoesEditar,
     name: 'inscricoes.editar'
+  },
+  {
+    path: '/admin/auditoria',
+    component: AuditsList,
+    name: 'audits.list'
   }
 ]
 

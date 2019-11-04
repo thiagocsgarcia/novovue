@@ -2,23 +2,29 @@
   <div class="card">
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped" style="font-size: 0.8em">
+        <table class="table table-bordered table-hover table-striped">
           <thead class="thead-dark">
             <tr class="text-center">
-              <th>Data/Hora</th>
+              <th style="max-width: 4em">Data/Hora</th>
+              <th style="max-width: 3em">Ação</th>
+              <th style="max-width: 7em">Usuário</th>
               <th>Empresa</th>
-              <th>Ação</th>
-              <th>De</th>
-              <th>Para</th>
-              <th>Usuário</th>
+              <th style="max-width: 9em">De</th>
+              <th style="max-width: 9em">Para</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="audit in audits" :key="audit.id">
-              <td class="text-center align-middle">
+              <td class="text-center align-middle" style="max-width: 4em">
                 {{ moment(audit.created_at).format('DD/MM/YYYY') }}
                 <br />
                 {{ moment(audit.created_at).format('H:M') }}h
+              </td>
+              <td class="text-center align-middle" style="max-width: 3em">{{ eventos(audit.event) }}</td>
+              <td class="text-center align-middle" style="max-width: 7em">
+                {{ audit.name }}
+                <br />
+                {{ audit.email }}
               </td>
               <td class="text-center align-middle">
                 {{ audit.cnpj}}
@@ -27,14 +33,8 @@
                 <br />
                 {{ audit.nome_fantasia }}
               </td>
-              <td class="align-middle">{{ eventos(audit.event) }}</td>
-              <td class="align-middle">{{ audit.old_values }}</td>
-              <td class="align-middle">{{ audit.new_values }}</td>
-              <td class="text-center align-middle">
-                {{ audit.name }}
-                <br />
-                {{ audit.email }}
-              </td>
+              <td class="text-justify" style="max-width: 9em">{{ audit.old_values }}</td>
+              <td class="text-justify" style="max-width: 9em">{{ audit.new_values }}</td>
             </tr>
           </tbody>
         </table>
@@ -70,7 +70,7 @@ export default {
   methods: {
     eventos(event) {
       if (event.toString() === 'created') return 'Cadastro'
-      if (event.toString() === 'deleted') return 'Excluído'
+      if (event.toString() === 'deleted') return 'Exclusão'
       if (event.toString() === 'updated') return 'Alteração'
     }
   }

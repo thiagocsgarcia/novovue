@@ -1761,6 +1761,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'audits-list',
@@ -1786,8 +1788,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     eventos: function eventos(event) {
-      console.log(event);
       if (event.toString() === 'created') return 'Cadastro';
+      if (event.toString() === 'deleted') return 'Excluído';
       if (event.toString() === 'updated') return 'Alteração';
     }
   }
@@ -39179,80 +39181,88 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-body" }, [
-      _c(
-        "table",
-        {
-          staticClass: "table table-bordered table-hover table-striped",
-          staticStyle: { "font-size": "0.8em" }
-        },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.audits, function(audit) {
-              return _c("tr", { key: audit.id }, [
-                _c("td", { staticClass: "text-center align-middle" }, [
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(
-                        _vm.moment(audit.created_at).format("DD/MM/YYYY")
-                      ) +
-                      "\n            "
-                  ),
-                  _c("br"),
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(_vm.moment(audit.created_at).format("H:M")) +
-                      "h\n          "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center align-middle" }, [
-                  _vm._v(
-                    "\n            " + _vm._s(audit.cnpj) + "\n            "
-                  ),
-                  _c("br"),
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(audit.razao_social) +
-                      "\n            "
-                  ),
-                  _c("br"),
-                  _vm._v(
-                    "\n            " +
-                      _vm._s(audit.nome_fantasia) +
-                      "\n          "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "align-middle" }, [
-                  _vm._v(_vm._s(_vm.eventos(audit.event)))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "align-middle" }, [
-                  _vm._v(_vm._s(audit.old_values))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "align-middle" }, [
-                  _vm._v(_vm._s(audit.new_values))
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-center align-middle" }, [
-                  _vm._v(
-                    "\n            " + _vm._s(audit.name) + "\n            "
-                  ),
-                  _c("br"),
-                  _vm._v(
-                    "\n            " + _vm._s(audit.email) + "\n          "
-                  )
+      _c("div", { staticClass: "table-responsive" }, [
+        _c(
+          "table",
+          {
+            staticClass: "table table-bordered table-hover table-striped",
+            staticStyle: { "font-size": "0.8em" }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.audits, function(audit) {
+                return _c("tr", { key: audit.id }, [
+                  _c("td", { staticClass: "text-center align-middle" }, [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(
+                          _vm.moment(audit.created_at).format("DD/MM/YYYY")
+                        ) +
+                        "\n              "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(_vm.moment(audit.created_at).format("H:M")) +
+                        "h\n            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center align-middle" }, [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(audit.cnpj) +
+                        "\n              "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(audit.razao_social) +
+                        "\n              "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(audit.nome_fantasia) +
+                        "\n            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "align-middle" }, [
+                    _vm._v(_vm._s(_vm.eventos(audit.event)))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "align-middle" }, [
+                    _vm._v(_vm._s(audit.old_values))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "align-middle" }, [
+                    _vm._v(_vm._s(audit.new_values))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-center align-middle" }, [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(audit.name) +
+                        "\n              "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(audit.email) +
+                        "\n            "
+                    )
+                  ])
                 ])
-              ])
-            }),
-            0
-          )
-        ]
-      )
+              }),
+              0
+            )
+          ]
+        )
+      ])
     ])
   ])
 }

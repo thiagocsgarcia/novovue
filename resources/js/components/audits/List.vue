@@ -5,23 +5,23 @@
         <table class="table table-bordered table-hover table-striped">
           <thead class="thead-dark">
             <tr class="text-center">
-              <th style="max-width: 4em">Data/Hora</th>
-              <th style="max-width: 3em">Ação</th>
-              <th style="max-width: 7em">Usuário</th>
+              <th>Data/Hora</th>
+              <th>Ação</th>
+              <th>Usuário</th>
               <th>Empresa</th>
-              <th style="max-width: 9em">De</th>
-              <th style="max-width: 9em">Para</th>
+              <th>De</th>
+              <th>Para</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style="font-size: 0.8em">
             <tr v-for="audit in audits" :key="audit.id">
-              <td class="text-center align-middle" style="max-width: 4em">
+              <td class="text-center align-middle">
                 {{ moment(audit.created_at).format('DD/MM/YYYY') }}
                 <br />
                 {{ moment(audit.created_at).format('H:M') }}h
               </td>
-              <td class="text-center align-middle" style="max-width: 3em">{{ eventos(audit.event) }}</td>
-              <td class="text-center align-middle" style="max-width: 7em">
+              <td class="text-center align-middle">{{ eventos(audit.event) }}</td>
+              <td class="text-center align-middle">
                 {{ audit.name }}
                 <br />
                 {{ audit.email }}
@@ -33,8 +33,8 @@
                 <br />
                 {{ audit.nome_fantasia }}
               </td>
-              <td class="text-justify" style="max-width: 9em">{{ audit.old_values }}</td>
-              <td class="text-justify" style="max-width: 9em">{{ audit.new_values }}</td>
+              <td class="text-justify">{{ audit.old_values }}</td>
+              <td class="text-justify">{{ audit.new_values }}</td>
             </tr>
           </tbody>
         </table>

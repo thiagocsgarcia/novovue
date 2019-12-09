@@ -48,6 +48,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/empresas/#/admin/inscricoes-cursos">INSCRIÇÕES NOS CURSOS</a>
                     </li>
+                    @if(Auth::user()->email == 'ricardo.sedect@gmail.com' || Auth::user()->email == 'omegavinny@gmail.com')
+                    <li class="nav-item">
+                        <a href="/empresas/#/admin/auditoria" class="nav-link">AUDITORIA</a>
+                    </li>
+                    @endif
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     @guest

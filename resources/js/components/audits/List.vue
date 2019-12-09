@@ -1,44 +1,42 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
-          <thead class="thead-dark">
-            <tr class="text-center">
-              <th>Data/Hora</th>
-              <th>Ação</th>
-              <th>Usuário</th>
-              <th>Empresa</th>
-              <th>De</th>
-              <th>Para</th>
-            </tr>
-          </thead>
-          <tbody style="font-size: 0.8em">
-            <tr v-for="audit in audits" :key="audit.id">
-              <td class="text-center align-middle">
-                {{ moment(audit.created_at).format('DD/MM/YYYY') }}
-                <br />
-                {{ moment(audit.created_at).format('H:M') }}h
-              </td>
-              <td class="text-center align-middle">{{ eventos(audit.event) }}</td>
-              <td class="text-center align-middle">
-                {{ audit.name }}
-                <br />
-                {{ audit.email }}
-              </td>
-              <td class="text-center align-middle">
-                {{ audit.cnpj}}
-                <br />
-                {{ audit.razao_social }}
-                <br />
-                {{ audit.nome_fantasia }}
-              </td>
-              <td class="text-justify">{{ audit.old_values }}</td>
-              <td class="text-justify">{{ audit.new_values }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="table table-bordered table-hover table-striped">
+        <thead class="thead-dark">
+          <tr class="text-center">
+            <th>Data/Hora</th>
+            <th>Ação</th>
+            <th>Usuário</th>
+            <th>Empresa</th>
+            <th>De</th>
+            <th>Para</th>
+          </tr>
+        </thead>
+        <tbody style="font-size: 0.7em">
+          <tr v-for="audit in audits" :key="audit.id">
+            <td class="text-center align-middle">
+              {{ moment(audit.created_at).format('DD/MM/YYYY') }}
+              <br />
+              {{ moment(audit.created_at).format('H:M') }}h
+            </td>
+            <td class="text-center align-middle">{{ eventos(audit.event) }}</td>
+            <td class="text-center align-middle">
+              {{ audit.name }}
+              <br />
+              {{ audit.email }}
+            </td>
+            <td class="text-center align-middle">
+              {{ audit.cnpj}}
+              <br />
+              {{ audit.razao_social }}
+              <br />
+              {{ audit.nome_fantasia }}
+            </td>
+            <td class="text-justify">{{ audit.old_values }}</td>
+            <td class="text-justify">{{ audit.new_values }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>

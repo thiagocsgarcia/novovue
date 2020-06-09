@@ -10,6 +10,11 @@ import InscricoesEditar from '../components/inscricoes/Editar'
 import InscricoesFicha from '../components/inscricoes/Ficha'
 import InscricoesLista from '../components/inscricoes/Lista'
 
+import VagasCreate from '../components/vagas/Create'
+import VagasEdit from '../components/vagas/Edit'
+import VagasIndex from '../components/vagas/List'
+import VagasShow from '../components/vagas/View'
+
 const routes = [
   {
     path: '/',
@@ -60,6 +65,26 @@ const routes = [
     path: '/admin/auditoria',
     component: AuditsList,
     name: 'audits.list'
+  },
+  {
+    path: '/admin/vagas',
+    component: VagasIndex,
+    name: 'vagas.index'
+  },
+  {
+    path: '/admin/vagas/cadastro',
+    component: VagasCreate,
+    name: 'vagas.create'
+  },
+  {
+    path: '/admin/vagas/:id/editar/',
+    component: VagasEdit,
+    name: 'vagas.edit'
+  },
+  {
+    path: '/admin/vagas/:id',
+    component: VagasShow,
+    name: 'vagas.show'
   }
 ]
 

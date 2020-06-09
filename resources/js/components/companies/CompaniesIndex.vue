@@ -1,4 +1,3 @@
-
 <template>
   <div class="card">
     <div class="card-body">
@@ -28,7 +27,6 @@
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr class="text-center">
-            <th>CNPJ</th>
             <th>Nome Fantasia</th>
             <th>Razão Social</th>
             <th>Email</th>
@@ -38,7 +36,6 @@
         </thead>
         <tbody>
           <tr v-for="empresa in filtered" :key="empresa.id">
-            <td>{{ empresa.cnpj }}</td>
             <td>{{ empresa.nome_fantasia }}</td>
             <td>{{ empresa.razao_social }}</td>
             <td>{{ empresa.email }}</td>
@@ -109,8 +106,7 @@ export default {
     excluir(empresa) {
       swal({
         title: 'Atenção',
-        text:
-          'Após excluído as informações não poderão ser recuperadas. Deseja realmente excluir?',
+        text: 'Após excluído as informações não poderão ser recuperadas. Deseja realmente excluir?',
         icon: 'warning',
         buttons: true,
         dangerMode: true

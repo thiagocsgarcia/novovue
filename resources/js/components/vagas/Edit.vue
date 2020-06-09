@@ -2,140 +2,243 @@
   <div class="card">
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Edição de Cadastro</h2>
-        <router-link :to="{ name: 'empresas.index' }" class="btn btn-secondary">
+        <h2>Edição de Vaga</h2>
+        <router-link :to="{ name: 'vagas.index' }" class="btn btn-secondary">
           <i class="fas fa-arrow-left"></i>
           Voltar
         </router-link>
       </div>
 
       <hr />
+      <form action="#" method="post" @submit.prevent="update">
+        <h4>Contratante</h4>
 
-      <form @submit.prevent="handlerEdit">
-        <div class="row">
-          <div class="col-md-4 form-group">
-            <label for="cnpj" class="control-label">CNPJ</label>
-            <the-mask
-              id="cnpj"
-              :mask="['###.###.###-##', '##.###.###/####-##']"
-              :masked="true"
-              v-model="empresa.cnpj"
-              class="form-control"
-              placeholder="99.999.999/9999-99"
-            ></the-mask>
-          </div>
-          <div class="col-md-4 form-group">
-            <label for="ie" class="control-label">Inscrição Estadual</label>
-            <input id="ie" v-model="empresa.ie" class="form-control" />
-          </div>
-          <div class="col-md-4 form-group">
-            <label for="im" class="control-label">Inscrição Municipal</label>
-            <input id="im" v-model="empresa.im" class="form-control" />
-          </div>
+        <div class="form-group">
+          <select class="form-control" v-model="vaga.empresa_id">
+            <option value="" disabled selected>Selecione a Empresa</option>
+            <option :value="empresa.id" v-for="empresa in empresas" :key="empresa.id"
+              >{{ empresa.nome_fantasia }} - {{ empresa.razao_social }}
+            </option>
+          </select>
         </div>
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <label for="razao_social" class="control-label">Razão Social</label>
-            <input id="razao_social" v-model="empresa.razao_social" class="form-control" />
-          </div>
-          <div class="col-md-6 form-group">
-            <label for="nome_fantasia" class="control-label">Nome Fantasia</label>
-            <input id="nome_fantasia" v-model="empresa.nome_fantasia" class="form-control" />
-          </div>
+
+        <h4>Vaga</h4>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Título da Vaga"
+            class="form-control"
+            v-model="vaga.vaga"
+          />
         </div>
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <label for="porte" class="control-label">Porte</label>
-            <input id="porte" v-model="empresa.porte" class="form-control" />
-          </div>
-          <div class="col-md-6 form-group">
-            <label for="ramo_atividade" class="control-label">Ramo de Atividade</label>
-            <input id="ramo_atividade" v-model="empresa.ramo_atividade" class="form-control" />
-          </div>
+
+        <div class="form-group">
+          <input
+            type="number"
+            placeholder="Quantidade de vagas"
+            class="form-control"
+            v-model="vaga.quantidade"
+          />
         </div>
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <label for="contato" class="control-label">Contato</label>
-            <input id="contato" v-model="empresa.contato" class="form-control" />
-          </div>
-          <div class="col-md-6 form-group">
-            <label for="email" class="control-label">E-mail</label>
-            <input id="email" type="email" v-model="empresa.email" class="form-control" />
-          </div>
+
+        <div class="form-group">
+          <textarea
+            placeholder="Descrição da vaga"
+            class="form-control"
+            v-model="vaga.descricao"
+          ></textarea>
         </div>
-        <div class="row">
-          <div class="col-md-12 form-group">
-            <label for="endereco" class="control-label">Endereço</label>
-            <input id="endereco" v-model="empresa.endereco" class="form-control" />
-          </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Responsável pela Vaga"
+            class="form-control"
+            v-model="vaga.responsavel"
+          />
         </div>
-        <div class="row">
-          <div class="col-md-4 form-group">
-            <label for="bairro" class="control-label">Bairro</label>
-            <input id="bairro" v-model="empresa.bairro" class="form-control" />
-          </div>
-          <div class="col-md-4 form-group">
-            <label for class="control-label">Cidade</label>
-            <input id v-model="empresa.cidade" class="form-control" />
-          </div>
-          <div class="col-md-4 form-group">
-            <label for="cep" class="control-label">CEP</label>
-            <the-mask
-              id="cep"
-              mask="#####-###"
-              :masked="true"
-              v-model="empresa.cep"
-              class="form-control"
-              placeholder="99999-999"
-            ></the-mask>
-          </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Contato do Responsável"
+            class="form-control"
+            v-model="vaga.telefone"
+          />
         </div>
-        <div class="row">
-          <div class="col-md-4 form-group">
-            <label for="telefone" class="control-label">Telefone</label>
-            <the-mask
-              id="telefone"
-              :mask="['(##) ####-####', '(##) #####-####']"
-              :masked="true"
-              v-model="empresa.telefone"
-              class="form-control"
-              placeholder="(99) 9999-9999"
-            ></the-mask>
-          </div>
-          <div class="col-md-4 form-group">
-            <label for="telefone2" class="control-label">Telefone 2</label>
-            <the-mask
-              id="telefone2"
-              :mask="['(##) ####-####', '(##) #####-####']"
-              :masked="true"
-              v-model="empresa.telefone2"
-              class="form-control"
-              placeholder="(99) 9999-9999"
-            ></the-mask>
-          </div>
-          <div class="col-md-4 form-group">
-            <label for="celular" class="control-label">Celular</label>
-            <the-mask
-              id="celular"
-              :mask="['(##) ####-####', '(##) #####-####']"
-              :masked="true"
-              v-model="empresa.celular"
-              class="form-control"
-              placeholder="(99) 99999-9999"
-            ></the-mask>
-          </div>
+
+        <div class="form-group">
+          <input type="text" placeholder="Salário" class="form-control" v-model="vaga.salario" />
         </div>
-        <div class="row">
-          <div class="col-md-12 form-group">
-            <label for="observacoes" class="control-label">Observações</label>
-            <textarea id="observacoes" v-model="empresa.observacao" class="form-control"></textarea>
-          </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Benefícios"
+            class="form-control"
+            v-model="vaga.beneficios"
+          />
         </div>
-        <div class="row">
-          <div class="offset-md-9 col-md-3 form-group">
-            <button class="btn btn-lg btn-block btn-success">Salvar</button>
-          </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Jornada de Trabalho"
+            class="form-control"
+            v-model="vaga.jornada"
+          />
         </div>
+
+        <div class="form-group">
+          <textarea
+            placeholder="Endereço do local de trabalho"
+            class="form-control"
+            v-model="vaga.endereco_trabalho"
+          ></textarea>
+        </div>
+
+        <h4>Candidato</h4>
+
+        <div class="form-group">
+          <select class="form-control" v-model="vaga.experiencia">
+            <option value="" disabled selected>Necessita experiência?</option>
+            <option value="Não necessita de experiência">Não necessita de experiência</option>
+            <option value="Sim necessita de experiência">Sim necessita de experiência</option>
+            <option value="Sim necessita de experiência com comprovação em carteira"
+              >Sim necessita de experiência com comprovação em carteira</option
+            >
+          </select>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="number"
+            placeholder="Quantidade de experiência (meses)"
+            class="form-control"
+            v-model="vaga.qtd_experiencia"
+          />
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" v-model="vaga.escolaridade">
+            <option value="" disabled selected>Escolaridade Mínima</option>
+            <option value="Fundamental (DESEJÁVEL)">Fundamental (DESEJÁVEL)</option>
+            <option value="Fundamental (IMPRESCINDÍVEL)">Fundamental (IMPRESCINDÍVEL)</option>
+            <option value="Médio (DESEJÁVEL)">Médio (DESEJÁVEL)</option>
+            <option value="Médio (IMPRESCINDÍVEL)">Médio (IMPRESCINDÍVEL)</option>
+            <option value="Superior (DESEJÁVEL)">Superior (DESEJÁVEL)</option>
+            <option value="Superior (IMPRESCINDÍVEL)">Superior (IMPRESCINDÍVEL)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" v-model="vaga.pcd">
+            <option value="" disabled selected>Aceita Pessoa com Deficiência?</option>
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Tipo de Deficiência"
+            class="form-control"
+            v-model="vaga.deficiencia"
+          />
+        </div>
+
+        <div class="form-group">
+          <select class="form-control" v-model="vaga.cnh">
+            <option value="" disabled selected
+              >Necessita CNH (Carteira Nacional de Habilitação)?</option
+            >
+            <option value="Não">Não necessita de CNH</option>
+            <option value="Sim na Categoria A">Sim na Categoria A</option>
+            <option value="Sim na Categoria B">Sim na Categoria B</option>
+            <option value="Sim na Categoria C">Sim na Categoria C</option>
+            <option value="Sim na Categoria D">Sim na Categoria D</option>
+            <option value="Sim na Categoria E">Sim na Categoria E</option>
+            <option value="Sim nas Categorias A + B">Sim nas Categorias A + B</option>
+            <option value="Sim nas Categorias A + C">Sim nas Categorias A + C</option>
+            <option value="Sim nas Categorias A + D">Sim nas Categorias A + D</option>
+            <option value="Sim nas Categorias A + E">Sim nas Categorias A + E</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Aceita candidatos de quais cidades?"
+            class="form-control"
+            v-model="vaga.cidades"
+          />
+        </div>
+
+        <h4>Entrevista</h4>
+
+        <div class="form-group">
+          <textarea
+            placeholder="Endereço do local de entrevistamento"
+            class="form-control"
+            v-model="vaga.endereco_entrevista"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <textarea
+            placeholder="Dias de entrevista"
+            class="form-control"
+            v-model="vaga.dias_entrevista"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <textarea
+            placeholder="Horários de entrevista"
+            class="form-control"
+            v-model="vaga.horarios_entrevista"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="number"
+            placeholder="Quantidade MÉDIA de candidatos que deseja entrevistar?"
+            class="form-control"
+            v-model="vaga.qtd_candidatos"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="number"
+            placeholder="Quantidade de candidatos deseja entrevistar por DIA?"
+            class="form-control"
+            v-model="vaga.qtd_candidatos_dias"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="number"
+            placeholder="Quantidade de candidatos deseja entrevistar por PERÍODO?"
+            class="form-control"
+            v-model="vaga.qtd_candidatos_periodo"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="Nome do selecionador"
+            class="form-control"
+            v-model="vaga.selecionador"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-warning">Salvar Alterações</button>
       </form>
     </div>
   </div>
@@ -145,38 +248,57 @@
 export default {
   created() {
     let id = this.$route.params.id
-    axios
-      .get(`api/v1/empresas/${id}`)
-      .then(response => {
-        if (response.status === 200) {
-          this.empresa = response.data.empresa
-        } else {
-          swal({
-            title: 'Não foi possivel encontrar empresa selecionada.',
-            icon: 'error'
-          })
-        }
-      })
-      .catch(error => {
-        console.log(error.response)
-      })
+
+    axios.get(`api/v1/vagas/${id}`).then(response => {
+      this.vaga = response.data.vaga
+    })
+
+    axios.get('api/v1/empresas').then(response => {
+      this.empresas = response.data.empresas
+    })
   },
   data() {
     return {
-      empresa: {}
+      empresas: [],
+      vaga: {
+        empresa_id: '',
+        vaga: '',
+        descricao: '',
+        quantidade: '',
+        responsavel: '',
+        telefone: '',
+        experiencia: '',
+        qtd_experiencia: '',
+        escolaridade: '',
+        pcd: '',
+        deficiencia: '',
+        cnh: '',
+        salario: '',
+        beneficios: '',
+        jornada: '',
+        endereco_trabalho: '',
+        cidades: '',
+        qtd_candidatos: '',
+        endereco_entrevista: '',
+        dias_entrevista: '',
+        horarios_entrevista: '',
+        qtd_candidatos_dias: '',
+        qtd_candidatos_periodo: '',
+        selecionador: ''
+      }
     }
   },
   methods: {
-    handlerEdit() {
+    update() {
       axios
-        .put(`api/v1/empresas/${this.empresa.id}`, this.empresa)
+        .put(`api/v1/vagas/${this.vaga.id}`, this.vaga)
         .then(response => {
           if (response.status === 202) {
             swal({
               title: 'Alterações salvas!',
               icon: 'success'
             })
-            this.$router.push({ name: 'empresas.index' })
+            this.$router.push({ name: 'vagas.index' })
           } else {
             swal({
               title: 'Não foi possivel salvar as alterações.',

@@ -22,11 +22,12 @@ class CreateVagasTable extends Migration
             $table->string('responsavel');
             $table->string('telefone');
             $table->string('experiencia');
+            $table->string('qtd_experiencia')->nullable();
             $table->string('escolaridade');
-            $table->boolean('pcd');
+            $table->string('pcd');
             $table->string('deficiencia')->nullable();
             $table->string('cnh');
-            $table->double('salario', 8, 2);
+            $table->string('salario');
             $table->string('beneficios');
             $table->string('jornada');
             $table->string('endereco_trabalho');

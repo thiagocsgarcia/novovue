@@ -46,6 +46,9 @@
                         <a class="nav-link" href="/empresas/#/admin/empresas">EMPRESAS</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/empresas/#/admin/vagas">VAGAS</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/empresas/#/admin/inscricoes-cursos">INSCRIÇÕES NOS CURSOS</a>
                     </li>
                     @if(Auth::user()->email == 'ricardo.sedect@gmail.com' || Auth::user()->email == 'omegavinny@gmail.com')

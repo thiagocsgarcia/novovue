@@ -24,7 +24,9 @@
         </router-link>
       </div>
 
-      <table class="table table-bordered table-striped">
+      <h1 class="text-center" v-if="empresas.length == 0">Carregando as informações...</h1>
+
+      <table class="table table-bordered table-striped" v-else>
         <thead class="thead-dark">
           <tr class="text-center">
             <th>Nome Fantasia</th>

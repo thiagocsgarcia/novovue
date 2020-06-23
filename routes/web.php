@@ -13,6 +13,8 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::view('/vagas/cadastro', 'vagas.cadastro');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();

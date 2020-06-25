@@ -54,74 +54,75 @@
                     <div class="card-body">
                         <h2>Cadastro de Vaga</h2>
                         <hr />
-                        <form id="form" action="#" method="post">
+                        <form id="form" action="/empresas/vagas" method="post">
                             <h4>Contratante</h4>
+
                             <div class="form-group">
-                                <input type="text" id="empresa_cnpj" name="empresa_cnpj" placeholder="CNPJ" class="form-control" />
+                                <input type="text" id="empresa_cnpj" placeholder="CNPJ" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="empresa_nome" name="empresa_nome" placeholder="Nome da Empresa" class="form-control" />
+                                <input type="text" id="empresa_nome" placeholder="Nome da Empresa" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="empresa_responsavel" name="empresa_responsavel" placeholder="Nome do Responsavel pela Empresa" class="form-control" />
+                                <input type="text" id="empresa_responsavel" placeholder="Nome do Responsavel pela Empresa" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="empresa_email" name="empresa_email" placeholder="E-mail da Empresa" class="form-control" />
+                                <input type="text" id="empresa_email" placeholder="E-mail da Empresa" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="empresa_telefone" name="empresa_telefone" placeholder="Telefone da Empresa" class="form-control" />
+                                <input type="text" id="empresa_telefone" placeholder="Telefone da Empresa" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <textarea id="empresa_endereco" name="empresa_endereco" placeholder="Endereço da Empresa" class="form-control"></textarea>
+                                <textarea id="empresa_endereco" placeholder="Endereço da Empresa" class="form-control"></textarea>
                             </div>
 
                             <h4>Vaga</h4>
 
                             <div class="form-group">
-                                <input type="text" id="vaga_titulo" name="vaga_titulo" placeholder="Título da Vaga" class="form-control" />
+                                <input type="text" id="vaga_titulo" placeholder="Título da Vaga" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="number" id="vaga_quantidade" name="vaga_quantidade" placeholder="Quantidade de vagas" class="form-control" />
+                                <input type="number" id="vaga_quantidade" placeholder="Quantidade de vagas" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <textarea id="vaga_descricao" name="vaga_descricao" placeholder="Descrição da vaga" class="form-control"></textarea>
+                                <textarea id="vaga_descricao" placeholder="Descrição da vaga" class="form-control"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="vaga_salario" name="vaga_salario" placeholder="Salário" class="form-control" />
+                                <input type="text" id="vaga_salario" placeholder="Salário" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="vaga_beneficios" name="vaga_beneficios" placeholder="Benefícios" class="form-control" />
+                                <input type="text" id="vaga_beneficios" placeholder="Benefícios" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="vaga_jornada" name="vaga_jornada" placeholder="Jornada de Trabalho" class="form-control" />
+                                <input type="text" id="vaga_jornada" placeholder="Jornada de Trabalho" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <textarea id="vaga_endereco_trabalho" name="vaga_endereco_trabalho" placeholder="Endereço do local de trabalho" class="form-control"></textarea>
+                                <textarea id="vaga_endereco_trabalho" placeholder="Endereço do local de trabalho" class="form-control"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="vaga_responsavel" name="vaga_responsavel" placeholder="Responsável pela Vaga" class="form-control" />
+                                <input type="text" id="vaga_responsavel" placeholder="Responsável pela Vaga" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="vaga_contato_responsavel" name="vaga_contato_responsavel" placeholder="Contato do Responsável" class="form-control" />
+                                <input type="text" id="vaga_contato_responsavel" placeholder="Contato do Responsável" class="form-control" />
                             </div>
 
                             <h4>Candidato</h4>
 
                             <div class="form-group">
-                                <select id="candidato_experiencia" name="candidato_experiencia" class="form-control">
+                                <select id="candidato_experiencia" class="form-control">
                                     <option value="" disabled selected>Necessita experiência?</option>
                                     <option value="Não necessita de experiência">Não necessita de experiência</option>
                                     <option value="Sim necessita de experiência">Sim necessita de experiência</option>
@@ -130,11 +131,11 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="number" id="candidato_qtd_experiencia" name="candidato_qtd_experiencia" placeholder="Quantidade de experiência (meses)" class="form-control" />
+                                <input type="number" id="candidato_qtd_experiencia" placeholder="Quantidade de experiência (meses)" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <select id="candidato_escolaridade" name="candidato_escolaridade" class="form-control">
+                                <select id="candidato_escolaridade" class="form-control">
                                     <option value="" disabled selected>Escolaridade Mínima</option>
                                     <option value="Fundamental (DESEJÁVEL)">Fundamental (DESEJÁVEL)</option>
                                     <option value="Fundamental (IMPRESCINDÍVEL)">Fundamental (IMPRESCINDÍVEL)</option>
@@ -146,7 +147,7 @@
                             </div>
 
                             <div class="form-group">
-                                <select id="candidato_pcd" name="candidato_pcd" class="form-control">
+                                <select id="candidato_pcd" class="form-control">
                                     <option value="" disabled selected>Aceita Pessoa com Deficiência?</option>
                                     <option value="Não, aceita pessoa com deficiência.">Não</option>
                                     <option value="Sim, aceita pessoa com deficiência.">Sim</option>
@@ -154,11 +155,11 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="candidato_deficiencia" name="candidato_deficiencia" placeholder="Tipo de Deficiência" class="form-control"/>
+                                <input type="text" id="candidato_deficiencia" placeholder="Tipo de Deficiência" class="form-control"/>
                             </div>
 
                             <div class="form-group">
-                                <select id="candidato_cnh" name="candidato_cnh" class="form-control">
+                                <select id="candidato_cnh" class="form-control">
                                     <option value="" disabled selected>Necessita CNH (Carteira Nacional de Habilitação)?</option>
                                     <option value="Não, necessita de CNH">Não necessita de CNH</option>
                                     <option value="Sim CNH na Categoria A">Sim CNH na Categoria A</option>
@@ -174,46 +175,49 @@
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="candidato_cidades" name="candidato_cidades" placeholder="Aceita candidatos de quais cidades?" class="form-control" />
+                                <input type="text" id="candidato_cidades" placeholder="Aceita candidatos de quais cidades?" class="form-control" />
                             </div>
 
                             <h4>Entrevista</h4>
 
                             <div class="form-group">
-                                <textarea id="entrevista_endereco" name="entrevista_endereco" placeholder="Endereço do local de entrevistamento" class="form-control"></textarea>
+                                <textarea id="entrevista_endereco" placeholder="Endereço do local de entrevistamento" class="form-control"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <textarea id="entrevista_datas" name="entrevista_datas" placeholder="Dias de entrevista" class="form-control"></textarea>
+                                <textarea id="entrevista_datas" placeholder="Dias de entrevista" class="form-control"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <textarea id="entrevista_horarios" name="entrevista_horarios" placeholder="Horários de entrevista" class="form-control"></textarea>
+                                <textarea id="entrevista_horarios" placeholder="Horários de entrevista" class="form-control"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <input type="number" id="entrevista_qtd_candidatos" name="entrevista_qtd_candidatos" placeholder="Quantidade MÉDIA de candidatos que deseja entrevistar?" class="form-control" />
+                                <input type="number" id="entrevista_qtd_candidatos" placeholder="Quantidade MÉDIA de candidatos que deseja entrevistar?" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="number" id="entrevista_qtd_dia" name="entrevista_qtd_dia" placeholder="Quantidade de candidatos deseja entrevistar por DIA?" class="form-control" />
+                                <input type="number" id="entrevista_qtd_dia" placeholder="Quantidade de candidatos deseja entrevistar por DIA?" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="number" id="entrevista_qtd_periodos" name="entrevista_qtd_periodos" placeholder="Quantidade de candidatos deseja entrevistar por PERÍODO?" class="form-control" />
+                                <input type="number" id="entrevista_qtd_periodos" placeholder="Quantidade de candidatos deseja entrevistar por PERÍODO?" class="form-control" />
                             </div>
 
                             <div class="form-group">
-                                <input type="text" id="entrevista_selecionador" name="entrevista_selecionador" placeholder="Nome do selecionador" class="form-control" />
+                                <input type="text" id="entrevista_selecionador" placeholder="Nome do selecionador" class="form-control" />
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <div class="offset-md-9 col-md-3 form-group">
+                                <button type="submit" class="btn btn-lg btn-block btn-primary">Cadastrar</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </main>
 
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
             const form = document.getElementById('form');
@@ -221,7 +225,7 @@
             form.addEventListener('submit', (event) => {
                 event.preventDefault()
                 let vaga = {
-                    empresa_id: 1,
+                    empresa_id: 862,
                     empresa_cnpj: document.getElementById('empresa_cnpj').value,
                     empresa_nome: document.getElementById('empresa_nome').value,
                     empresa_responsavel: document.getElementById('empresa_responsavel').value,
@@ -257,9 +261,14 @@
                 }
 
                 axios.post('/empresas/vagas', vaga).then(response => {
-                    console.log(response)
+                    if (response.status === 201) {
+                        swal({title: 'Cadastro realizado!', icon: 'success'})
+                        form.reset();
+                    } else {
+                        swal({title: 'Não foi possivel realizar o cadastro!', icon: 'error'})
+                    }
                 }).catch(response => {
-                    console.error(response)
+                    console.log(response.error)
                 })
             })
         </script>

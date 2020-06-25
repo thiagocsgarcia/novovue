@@ -14,12 +14,36 @@
         <h4>Contratante</h4>
 
         <div class="form-group">
-          <select class="form-control" v-model="vaga.empresa_id">
+          <select class="form-control" v-model="vaga.empresa_id" @change="empresa">
             <option value="" disabled selected>Selecione a Empresa</option>
             <option :value="empresa.id" v-for="empresa in empresas" :key="empresa.id"
               >{{ empresa.nome_fantasia }} - {{ empresa.razao_social }}
             </option>
           </select>
+        </div>
+
+        <div class="form-group">
+          <input type="text" readonly placeholder="CNPJ" class="form-control" v-model="vaga.empresa_cnpj" />
+        </div>
+
+        <div class="form-group">
+          <input type="text" readonly placeholder="Nome da Empresa" class="form-control" v-model="vaga.empresa_nome" />
+        </div>
+
+        <div class="form-group">
+          <input type="text" readonly placeholder="Nome do Responsavel pela Empresa" class="form-control" v-model="vaga.empresa_responsavel" />
+        </div>
+
+        <div class="form-group">
+          <input type="text" readonly placeholder="E-mail da Empresa" class="form-control" v-model="vaga.empresa_email" />
+        </div>
+
+        <div class="form-group">
+          <input type="text" readonly placeholder="Telefone da Empresa" class="form-control" v-model="vaga.empresa_telefone" />
+        </div>
+
+        <div class="form-group">
+          <textarea readonly placeholder="Endereço da Empresa" class="form-control" v-model="vaga.empresa_endereco"></textarea>
         </div>
 
         <h4>Vaga</h4>
@@ -29,7 +53,7 @@
             type="text"
             placeholder="Título da Vaga"
             class="form-control"
-            v-model="vaga.vaga"
+            v-model="vaga.vaga_titulo"
           />
         </div>
 
@@ -38,7 +62,7 @@
             type="number"
             placeholder="Quantidade de vagas"
             class="form-control"
-            v-model="vaga.quantidade"
+            v-model="vaga.vaga_quantidade"
           />
         </div>
 
@@ -46,7 +70,7 @@
           <textarea
             placeholder="Descrição da vaga"
             class="form-control"
-            v-model="vaga.descricao"
+            v-model="vaga.vaga_descricao"
           ></textarea>
         </div>
 
@@ -55,7 +79,7 @@
             type="text"
             placeholder="Responsável pela Vaga"
             class="form-control"
-            v-model="vaga.responsavel"
+            v-model="vaga.vaga_responsavel"
           />
         </div>
 
@@ -64,12 +88,12 @@
             type="text"
             placeholder="Contato do Responsável"
             class="form-control"
-            v-model="vaga.telefone"
+            v-model="vaga.vaga_contato_responsavel"
           />
         </div>
 
         <div class="form-group">
-          <input type="text" placeholder="Salário" class="form-control" v-model="vaga.salario" />
+          <input type="text" placeholder="Salário" class="form-control" v-model="vaga.vaga_salario" />
         </div>
 
         <div class="form-group">
@@ -77,7 +101,7 @@
             type="text"
             placeholder="Benefícios"
             class="form-control"
-            v-model="vaga.beneficios"
+            v-model="vaga.vaga_beneficios"
           />
         </div>
 
@@ -86,7 +110,7 @@
             type="text"
             placeholder="Jornada de Trabalho"
             class="form-control"
-            v-model="vaga.jornada"
+            v-model="vaga.vaga_jornada"
           />
         </div>
 
@@ -94,14 +118,14 @@
           <textarea
             placeholder="Endereço do local de trabalho"
             class="form-control"
-            v-model="vaga.endereco_trabalho"
+            v-model="vaga.vaga_endereco_trabalho"
           ></textarea>
         </div>
 
         <h4>Candidato</h4>
 
         <div class="form-group">
-          <select class="form-control" v-model="vaga.experiencia">
+          <select class="form-control" v-model="vaga.candidato_experiencia">
             <option value="" disabled selected>Necessita experiência?</option>
             <option value="Não necessita de experiência">Não necessita de experiência</option>
             <option value="Sim necessita de experiência">Sim necessita de experiência</option>
@@ -116,12 +140,12 @@
             type="number"
             placeholder="Quantidade de experiência (meses)"
             class="form-control"
-            v-model="vaga.qtd_experiencia"
+            v-model="vaga.candidato_qtd_experiencia"
           />
         </div>
 
         <div class="form-group">
-          <select class="form-control" v-model="vaga.escolaridade">
+          <select class="form-control" v-model="vaga.candidato_escolaridade">
             <option value="" disabled selected>Escolaridade Mínima</option>
             <option value="Fundamental (DESEJÁVEL)">Fundamental (DESEJÁVEL)</option>
             <option value="Fundamental (IMPRESCINDÍVEL)">Fundamental (IMPRESCINDÍVEL)</option>
@@ -133,10 +157,10 @@
         </div>
 
         <div class="form-group">
-          <select class="form-control" v-model="vaga.pcd">
+          <select class="form-control" v-model="vaga.candidato_pcd">
             <option value="" disabled selected>Aceita Pessoa com Deficiência?</option>
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
+            <option value="Não, aceita candidato com deficiência">Não</option>
+            <option value="Sim, aceita candidato com deficiência">Sim</option>
           </select>
         </div>
 
@@ -145,12 +169,12 @@
             type="text"
             placeholder="Tipo de Deficiência"
             class="form-control"
-            v-model="vaga.deficiencia"
+            v-model="vaga.candidato_deficiencia"
           />
         </div>
 
         <div class="form-group">
-          <select class="form-control" v-model="vaga.cnh">
+          <select class="form-control" v-model="vaga.candidato_cnh">
             <option value="" disabled selected
               >Necessita CNH (Carteira Nacional de Habilitação)?</option
             >
@@ -172,7 +196,7 @@
             type="text"
             placeholder="Aceita candidatos de quais cidades?"
             class="form-control"
-            v-model="vaga.cidades"
+            v-model="vaga.candidato_cidades"
           />
         </div>
 
@@ -182,7 +206,7 @@
           <textarea
             placeholder="Endereço do local de entrevistamento"
             class="form-control"
-            v-model="vaga.endereco_entrevista"
+            v-model="vaga.entrevista_endereco"
           ></textarea>
         </div>
 
@@ -190,7 +214,7 @@
           <textarea
             placeholder="Dias de entrevista"
             class="form-control"
-            v-model="vaga.dias_entrevista"
+            v-model="vaga.entrevista_datas"
           ></textarea>
         </div>
 
@@ -198,7 +222,7 @@
           <textarea
             placeholder="Horários de entrevista"
             class="form-control"
-            v-model="vaga.horarios_entrevista"
+            v-model="vaga.entrevista_horarios"
           ></textarea>
         </div>
 
@@ -207,7 +231,7 @@
             type="number"
             placeholder="Quantidade MÉDIA de candidatos que deseja entrevistar?"
             class="form-control"
-            v-model="vaga.qtd_candidatos"
+            v-model="vaga.entrevista_qtd_candidatos"
           />
         </div>
 
@@ -216,7 +240,7 @@
             type="number"
             placeholder="Quantidade de candidatos deseja entrevistar por DIA?"
             class="form-control"
-            v-model="vaga.qtd_candidatos_dias"
+            v-model="vaga.entrevista_qtd_dia"
           />
         </div>
 
@@ -225,7 +249,7 @@
             type="number"
             placeholder="Quantidade de candidatos deseja entrevistar por PERÍODO?"
             class="form-control"
-            v-model="vaga.qtd_candidatos_periodo"
+            v-model="vaga.entrevista_qtd_periodos"
           />
         </div>
 
@@ -234,7 +258,7 @@
             type="text"
             placeholder="Nome do selecionador"
             class="form-control"
-            v-model="vaga.selecionador"
+            v-model="vaga.entrevista_selecionador"
           />
         </div>
 
@@ -300,6 +324,25 @@ export default {
     }
   },
   methods: {
+    empresa() {
+      if (this.vaga.empresa_id !== undefined) {
+        let empresa = this.empresas.find(empresa => empresa.id == this.vaga.empresa_id)
+
+        this.vaga.empresa_cnpj = empresa.cnpj
+        this.vaga.empresa_nome = `${empresa.nome_fantasia} (${empresa.razao_social})`
+        this.vaga.empresa_responsavel = empresa.contato
+        this.vaga.empresa_email = empresa.email
+        this.vaga.empresa_telefone = `${empresa.telefone}, ${empresa.telefone2}, ${empresa.celular}`
+        this.vaga.empresa_endereco = `${empresa.endereco}, ${empresa.bairro}, ${empresa.cidade}, ${empresa.cep}`
+      } else {
+        this.vaga.empresa_cnpj = ''
+        this.vaga.empresa_nome = ''
+        this.vaga.empresa_responsavel = ''
+        this.vaga.empresa_email = ''
+        this.vaga.empresa_telefone = ''
+        this.vaga.empresa_endereco = ''
+      }
+    },
     update() {
       axios
         .put(`api/v1/vagas/${this.vaga.id}`, this.vaga)

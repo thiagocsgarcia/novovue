@@ -238,7 +238,9 @@
           />
         </div>
 
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <div class="offset-md-9 col-md-3 form-group">
+          <button type="submit" class="btn btn-lg btn-block btn-primary">Cadastrar</button>
+        </div>
       </form>
     </div>
   </div>
@@ -256,36 +258,45 @@ export default {
       empresas: [],
       vaga: {
         empresa_id: '',
-        vaga: '',
-        descricao: '',
-        quantidade: '',
-        responsavel: '',
-        telefone: '',
-        experiencia: '',
-        qtd_experiencia: '',
-        escolaridade: '',
-        pcd: '',
-        deficiencia: '',
-        cnh: '',
-        salario: '',
-        beneficios: '',
-        jornada: '',
-        endereco_trabalho: '',
-        cidades: '',
-        qtd_candidatos: '',
-        endereco_entrevista: '',
-        dias_entrevista: '',
-        horarios_entrevista: '',
-        qtd_candidatos_dias: '',
-        qtd_candidatos_periodo: '',
-        selecionador: ''
+        empresa_cnpj: '',
+        empresa_nome: '',
+        empresa_responsavel: '',
+        empresa_email: '',
+        empresa_telefone: '',
+        empresa_endereco: '',
+
+        vaga_titulo: '',
+        vaga_quantidade: '',
+        vaga_descricao: '',
+        vaga_salario: '',
+        vaga_beneficios: '',
+        vaga_jornada: '',
+        vaga_endereco_trabalho: '',
+        vaga_responsavel: '',
+        vaga_contato_responsavel: '',
+
+        candidato_experiencia: '',
+        candidato_qtd_experiencia: '',
+        candidato_escolaridade: '',
+        candidato_pcd: '',
+        candidato_deficiencia: '',
+        candidato_cnh: '',
+        candidato_cidades: '',
+
+        entrevista_endereco: '',
+        entrevista_datas: '',
+        entrevista_horarios: '',
+        entrevista_qtd_candidatos: '',
+        entrevista_qtd_dia: '',
+        entrevista_qtd_periodos: '',
+        entrevista_selecionador: ''
       }
     }
   },
   methods: {
     create() {
       axios
-        .post('api/v1/vagas', this.vaga)
+        .post('/empresas/api/v1/vagas', this.vaga)
         .then(response => {
           if (response.status === 201) {
             swal({

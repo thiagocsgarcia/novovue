@@ -143,7 +143,7 @@
 
         <div class="row">
           <div class="offset-md-9 col-md-3 form-group">
-            <button class="btn btn-lg btn-block btn-success">Cadastrar</button>
+            <button type="submit" class="btn btn-lg btn-block btn-success">Cadastrar</button>
           </div>
         </div>
       </form>

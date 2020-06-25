@@ -15,6 +15,8 @@ Route::get('/', 'HomeController@index');
 
 Route::view('/vagas/cadastro', 'vagas.cadastro');
 
+Route::post('/vagas', 'Api\V1\VagasController@store');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();

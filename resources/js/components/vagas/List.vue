@@ -29,7 +29,7 @@
       <table class="table table-bordered table-striped" v-else>
         <thead class="thead-dark">
           <tr class="text-center">
-            <th>Vaga</th>
+            <th>Título da Vaga</th>
             <th>Quantidade</th>
             <th>Empresa</th>
             <th colspan="3">Ações</th>
@@ -39,7 +39,7 @@
           <tr v-for="vaga in filtered" :key="vaga.id">
             <td>{{ vaga.vaga }}</td>
             <td>{{ vaga.quantidade }}</td>
-            <td>{{ empresaName(vaga.empresa_id) }}</td>
+            <td>{{ vaga.empresa_nome }}</td>
             <td class="text-center">
               <router-link
                 :to="{ name: 'vagas.show', params: { id: vaga.id } }"
@@ -71,10 +71,6 @@
 <script>
 export default {
   created() {
-    axios.get('api/v1/empresas').then(response => {
-      this.empresas = response.data.empresas
-    })
-
     axios
       .get('api/v1/vagas')
       .then(response => {
@@ -102,16 +98,11 @@ export default {
   },
   data() {
     return {
-      empresas: [],
       vagas: [],
       search: ''
     }
   },
   methods: {
-    empresaName(id) {
-      let empresa = this.empresas.find(empresa => empresa.id == id)
-      return `${empresa.razao_social} - ${empresa.nome_fantasia}`
-    },
     excluir(vaga) {
       swal({
         title: 'Atenção',

@@ -176,10 +176,6 @@ export default {
       .then(response => {
         if (response.status === 200) {
           this.vaga = response.data.vaga
-
-          axios.get(`api/v1/empresas/${this.vaga.empresa_id}`).then(response => {
-            this.empresa = response.data.empresa
-          })
         } else {
           swal({
             title: 'Não foi possivel encontrar a vaga selecionada.',
@@ -193,7 +189,6 @@ export default {
   },
   data() {
     return {
-      empresa: {},
       vaga: {}
     }
   }
